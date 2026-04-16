@@ -1,0 +1,128 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Research Tools",
+  "description": "JSON Schema definitions for research and web search tools available to the Ideas-Brillantes LLM assistant. These tools support web searches, fetching and extracting web content, summarising text, and producing structured research reports.",
+  "tools": [
+    {
+      "name": "web_search",
+      "description": "Perform a web search using a natural language query and return a list of results.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "The search query string."
+          },
+          "num_results": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50,
+            "default": 10,
+            "description": "The number of search results to return. Defaults to 10."
+          },
+          "date_range": {
+            "type": "string",
+            "enum": ["any", "past_day", "past_week", "past_month", "past_year"],
+            "default": "any",
+            "description": "Restrict results to a recency window. Defaults to 'any' (no date restriction)."
+          }
+        },
+        "required": ["query"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "fetch_url",
+      "description": "Fetch the content of a URL and return it in the specified extraction mode.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of the page or resource to fetch."
+          },
+          "extract_mode": {
+            "type": "string",
+            "enum": ["full_html", "main_content", "markdown", "raw_text"],
+            "default": "main_content",
+            "description": "How to process the fetched page. 'main_content' strips navigation/ads and returns the article body. Defaults to main_content."
+          }
+        },
+        "required": ["url"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "extract_content",
+      "description": "Extract specific pieces of content from a web page using CSS selectors.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of the web page to extract content from."
+          },
+          "selectors": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Optional list of CSS selectors identifying the elements to extract. If omitted, the full page text is returned."
+          }
+        },
+        "required": ["url"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "summarize_content",
+      "description": "Produce a concise summary of a given text using the assistant's language capabilities.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The text content to summarize."
+          },
+          "format": {
+            "type": "string",
+            "enum": ["paragraph", "bullet_points", "tldr", "structured"],
+            "default": "paragraph",
+            "description": "The desired output format for the summary. Defaults to a paragraph."
+          },
+          "length": {
+            "type": "string",
+            "enum": ["short", "medium", "long"],
+            "default": "medium",
+            "description": "The approximate length of the summary. Defaults to medium."
+          }
+        },
+        "required": ["content"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "create_research_report",
+      "description": "Compile a structured research report on a topic from a list of source URLs or text excerpts.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string",
+            "description": "The subject or question the research report should address."
+          },
+          "sources": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of source URLs or text excerpts to use as the evidence base for the report."
+          }
+        },
+        "required": ["topic", "sources"],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

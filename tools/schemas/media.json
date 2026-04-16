@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Media Generation Tools",
+  "description": "JSON Schema definitions for media generation and capture tools available to the ideas-brillantes assistant. Supports AI image generation, video generation, text-to-speech synthesis, screen recording, and audio transcription.",
+  "tools": [
+    {
+      "name": "generate_image",
+      "description": "Generate an image from a text prompt using the configured AI image generation backend.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description of the image to generate."
+          },
+          "style": {
+            "type": "string",
+            "description": "Optional stylistic modifier (e.g. 'photorealistic', 'oil painting', 'anime', 'sketch')."
+          },
+          "size": {
+            "type": "string",
+            "enum": ["256x256", "512x512", "1024x1024", "1024x1792", "1792x1024"],
+            "default": "1024x1024",
+            "description": "Output image dimensions. Defaults to '1024x1024'."
+          },
+          "output_path": {
+            "type": "string",
+            "description": "Optional file path to save the generated image (e.g. '/home/user/images/output.png'). If omitted, a temporary path is returned."
+          }
+        },
+        "required": ["prompt"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "generate_video",
+      "description": "Generate a short video clip from a text prompt using the configured AI video generation backend.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description of the video to generate."
+          },
+          "duration": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 60,
+            "default": 5,
+            "description": "Desired duration of the generated video in seconds. Defaults to 5."
+          },
+          "output_path": {
+            "type": "string",
+            "description": "Optional file path to save the generated video (e.g. '/home/user/videos/clip.mp4'). If omitted, a temporary path is returned."
+          }
+        },
+        "required": ["prompt"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "text_to_speech",
+      "description": "Convert text to speech audio using the configured TTS engine.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "Text to convert to spoken audio."
+          },
+          "voice": {
+            "type": "string",
+            "description": "Optional voice identifier to use (depends on the configured TTS engine, e.g. 'alloy', 'nova', 'onyx')."
+          },
+          "language": {
+            "type": "string",
+            "description": "Optional BCP-47 language tag (e.g. 'en-US', 'es-ES', 'fr-FR'). Defaults to the system locale."
+          },
+          "output_path": {
+            "type": "string",
+            "description": "Optional file path to save the audio file (e.g. '/tmp/speech.mp3'). If omitted, a temporary path is returned."
+          }
+        },
+        "required": ["text"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "record_screen",
+      "description": "Record the desktop screen for a given duration and save it as a video file.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "duration": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 10,
+            "description": "Duration to record in seconds. Defaults to 10. If 0 is passed, recording continues until stop_recording is called."
+          },
+          "output_path": {
+            "type": "string",
+            "description": "Optional file path to save the recorded video (e.g. '/home/user/recordings/session.mp4'). If omitted, a temporary path is returned."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "transcribe_audio",
+      "description": "Transcribe speech from an audio or video file to text using the configured speech recognition engine.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Absolute path to the audio or video file to transcribe (e.g. '/home/user/recordings/meeting.mp3')."
+          }
+        },
+        "required": ["path"],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

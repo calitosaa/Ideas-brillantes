@@ -1,0 +1,147 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "claude-mem MCP Server Configuration",
+  "description": "Configuration for the claude-mem MCP server, which provides a persistent hybrid memory store using SQLite (structured metadata) and ChromaDB (vector embeddings for semantic search). Communicates via stdio transport on port 37777.",
+  "server": {
+    "name": "memory",
+    "version": "0.2.0",
+    "command": "claude-mem",
+    "args": [
+      "serve",
+      "--port",
+      "37777",
+      "--transport",
+      "stdio"
+    ],
+    "env": {
+      "CLAUDE_MEM_SQLITE_PATH": "/home/user/.local/share/ideas-brillantes/memory/memories.db",
+      "CLAUDE_MEM_CHROMA_PATH": "/home/user/.local/share/ideas-brillantes/memory/chroma",
+      "CLAUDE_MEM_EMBEDDING_MODEL": "all-MiniLM-L6-v2",
+      "CLAUDE_MEM_LOG_LEVEL": "INFO"
+    },
+    "transport": "stdio",
+    "port": 37777,
+    "restart_policy": "always",
+    "max_restarts": 5,
+    "storage": {
+      "sqlite": {
+        "path": "/home/user/.local/share/ideas-brillantes/memory/memories.db",
+        "description": "SQLite database for structured memory metadata: IDs, timestamps, categories, tags."
+      },
+      "chroma": {
+        "path": "/home/user/.local/share/ideas-brillantes/memory/chroma",
+        "description": "ChromaDB vector store for semantic embedding of memory content, used for similarity search."
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "search_memory",
+      "description": "Perform a semantic similarity search over stored memories using a natural language query.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "A natural language query to search for semantically similar memories."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 10,
+            "description": "Maximum number of results to return."
+          },
+          "threshold": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0,
+            "default": 0.5,
+            "description": "Minimum cosine similarity score (0.0–1.0) for inclusion in results."
+          }
+        },
+        "required": ["query"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "save_memory",
+      "description": "Persist a piece of information to the memory store with optional tags and category.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The text content of the memory to store."
+          },
+          "tags": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Optional keyword tags for filtering."
+          },
+          "category": {
+            "type": "string",
+            "description": "Optional category label (e.g. 'projects', 'preferences', 'facts')."
+          }
+        },
+        "required": ["content"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_memory_timeline",
+      "description": "Retrieve memories in chronological order within an optional date range and category filter.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Optional ISO 8601 start datetime filter."
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Optional ISO 8601 end datetime filter."
+          },
+          "category": {
+            "type": "string",
+            "description": "Optional category to restrict the timeline."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "delete_memory",
+      "description": "Permanently delete a specific memory entry by its unique ID.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the memory entry to delete."
+          }
+        },
+        "required": ["id"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "clear_memory",
+      "description": "Delete all memories or all memories in a specific category.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Optional category name. If omitted, ALL memories are deleted."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

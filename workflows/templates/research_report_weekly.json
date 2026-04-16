@@ -1,0 +1,121 @@
+{
+  "name": "research-report-weekly",
+  "description": "Every Friday at 6pm, research weekly news on configured topics, generate PDF report, save and notify",
+  "version": "1.0",
+  "active": true,
+  "variables": {
+    "topics": ["inteligencia artificial", "ciberseguridad", "Linux", "desarrollo de software"],
+    "output_dir": "~/Reports/weekly",
+    "language": "es",
+    "sources_per_topic": 5
+  },
+  "trigger": {
+    "type": "schedule",
+    "config": {
+      "cron": "0 18 * * 5",
+      "timezone": "Europe/Madrid",
+      "description": "Every Friday at 6:00 PM"
+    }
+  },
+  "nodes": [
+    {
+      "id": "research_ai",
+      "name": "Research: AI news",
+      "type": "web_search",
+      "config": {
+        "query": "{{variables.topics[0]}} noticias semana site:news.ycombinator.com OR site:techcrunch.com OR site:wired.com",
+        "limit": "{{variables.sources_per_topic}}",
+        "extract_content": true
+      },
+      "output_var": "ai_news",
+      "next": "research_security"
+    },
+    {
+      "id": "research_security",
+      "name": "Research: Security news",
+      "type": "web_search",
+      "config": {
+        "query": "{{variables.topics[1]}} últimas vulnerabilidades amenazas semana",
+        "limit": "{{variables.sources_per_topic}}",
+        "extract_content": true
+      },
+      "output_var": "security_news",
+      "next": "research_linux"
+    },
+    {
+      "id": "research_linux",
+      "name": "Research: Linux news",
+      "type": "web_search",
+      "config": {
+        "query": "{{variables.topics[2]}} kernel release updates esta semana",
+        "limit": "{{variables.sources_per_topic}}",
+        "extract_content": true
+      },
+      "output_var": "linux_news",
+      "next": "research_dev"
+    },
+    {
+      "id": "research_dev",
+      "name": "Research: Dev news",
+      "type": "web_search",
+      "config": {
+        "query": "{{variables.topics[3]}} tendencias herramientas novedades semana",
+        "limit": "{{variables.sources_per_topic}}",
+        "extract_content": true
+      },
+      "output_var": "dev_news",
+      "next": "generate_report"
+    },
+    {
+      "id": "generate_report",
+      "name": "AI: Compile weekly report",
+      "type": "ai_process",
+      "config": {
+        "prompt": "Compile a comprehensive weekly tech report in Spanish from these news sources.\n\n## AI & ML News:\n{{ai_news}}\n\n## Security News:\n{{security_news}}\n\n## Linux News:\n{{linux_news}}\n\n## Software Development:\n{{dev_news}}\n\nFormat as professional Markdown report:\n# Informe Semanal Tech — Semana {{week_number}}, {{year}}\n\n## Resumen Ejecutivo (3-5 bullets clave)\n\n## 🤖 Inteligencia Artificial\n(top 3 historias con análisis)\n\n## 🔒 Ciberseguridad\n(vulnerabilidades críticas, patches urgentes)\n\n## 🐧 Linux & Open Source\n(actualizaciones relevantes)\n\n## 💻 Desarrollo de Software\n(herramientas, frameworks, mejores prácticas)\n\n## 📊 Tendencias de la Semana\n\n## 🔮 Qué Vigilar la Próxima Semana",
+        "output_var": "report_md",
+        "max_tokens": 3000
+      },
+      "next": "save_markdown"
+    },
+    {
+      "id": "save_markdown",
+      "name": "Save Markdown report",
+      "type": "write_file",
+      "config": {
+        "path": "{{variables.output_dir}}/weekly_{{date}}.md",
+        "content": "{{report_md}}",
+        "mode": "create"
+      },
+      "next": "convert_to_pdf"
+    },
+    {
+      "id": "convert_to_pdf",
+      "name": "Convert to PDF",
+      "type": "exec_command",
+      "config": {
+        "command": "pandoc {{variables.output_dir}}/weekly_{{date}}.md -o {{variables.output_dir}}/weekly_{{date}}.pdf --pdf-engine=wkhtmltopdf -V geometry:margin=2cm 2>/dev/null || echo 'PDF_SKIPPED'",
+        "timeout": 30
+      },
+      "output_var": "pdf_result",
+      "next": "notify_complete"
+    },
+    {
+      "id": "notify_complete",
+      "name": "Notify: Report ready",
+      "type": "send_notification",
+      "config": {
+        "title": "📰 Informe Semanal listo — {{date}}",
+        "message": "Informe guardado en:\n{{variables.output_dir}}/weekly_{{date}}.md\n\nTopics: {{variables.topics}}",
+        "urgency": "normal"
+      }
+    }
+  ],
+  "on_error": {
+    "type": "send_notification",
+    "config": {
+      "title": "❌ Error en informe semanal",
+      "message": "Falló en: {{error.node}}\n{{error.message}}",
+      "urgency": "high"
+    }
+  }
+}

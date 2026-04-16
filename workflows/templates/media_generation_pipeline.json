@@ -1,0 +1,102 @@
+{
+  "name": "media-generation-pipeline",
+  "description": "Given a topic, generate an image prompt, script, TTS audio, and assemble video automatically",
+  "version": "1.0",
+  "active": true,
+  "variables": {
+    "topic": "Inteligencia Artificial en 2025",
+    "output_dir": "~/Videos/generated",
+    "voice": "es-ES-AlvaroNeural",
+    "image_style": "cinematic, high quality, 4k",
+    "duration_seconds": 60
+  },
+  "trigger": {
+    "type": "manual",
+    "config": {
+      "description": "Triggered manually with a topic parameter"
+    }
+  },
+  "nodes": [
+    {
+      "id": "generate_script",
+      "name": "AI: Generate video script",
+      "type": "ai_process",
+      "config": {
+        "prompt": "Write a {{variables.duration_seconds}}-second video script about: {{variables.topic}}\n\nFormat:\n- Narration text (for TTS)\n- Scene descriptions (for image generation)\n- Keep it engaging and informative\n- Output as JSON: {\"narration\": \"...\", \"scenes\": [{\"time\": 0, \"description\": \"...\"}]}",
+        "output_var": "script",
+        "max_tokens": 1000
+      },
+      "next": "generate_images"
+    },
+    {
+      "id": "generate_images",
+      "name": "Generate scene images",
+      "type": "generate_image",
+      "config": {
+        "prompts": "{{script.scenes}}",
+        "style": "{{variables.image_style}}",
+        "width": 1920,
+        "height": 1080,
+        "output_dir": "{{variables.output_dir}}/frames"
+      },
+      "output_var": "images",
+      "next": "generate_audio"
+    },
+    {
+      "id": "generate_audio",
+      "name": "TTS: Generate narration audio",
+      "type": "text_to_speech",
+      "config": {
+        "text": "{{script.narration}}",
+        "voice": "{{variables.voice}}",
+        "output_path": "{{variables.output_dir}}/narration.mp3",
+        "speed": 1.0,
+        "format": "mp3"
+      },
+      "output_var": "audio_path",
+      "next": "assemble_video"
+    },
+    {
+      "id": "assemble_video",
+      "name": "Assemble video with ffmpeg",
+      "type": "exec_command",
+      "config": {
+        "command": "ffmpeg -y -framerate 1/5 -pattern_type glob -i '{{variables.output_dir}}/frames/*.png' -i {{audio_path}} -c:v libx264 -c:a aac -pix_fmt yuv420p -shortest {{variables.output_dir}}/video_{{datetime}}.mp4",
+        "timeout": 120
+      },
+      "output_var": "video_path",
+      "next": "generate_thumbnail"
+    },
+    {
+      "id": "generate_thumbnail",
+      "name": "Generate thumbnail",
+      "type": "generate_image",
+      "config": {
+        "prompt": "Thumbnail for video about: {{variables.topic}}. Bold text overlay, eye-catching, YouTube style. {{variables.image_style}}",
+        "width": 1280,
+        "height": 720,
+        "output_path": "{{variables.output_dir}}/thumbnail_{{datetime}}.png"
+      },
+      "output_var": "thumbnail_path",
+      "next": "notify_done"
+    },
+    {
+      "id": "notify_done",
+      "name": "Notify: Video ready",
+      "type": "send_notification",
+      "config": {
+        "title": "🎬 Video generado: {{variables.topic}}",
+        "message": "Video listo en: {{video_path}}\nThumbnail: {{thumbnail_path}}",
+        "urgency": "normal"
+      }
+    }
+  ],
+  "on_error": {
+    "type": "send_notification",
+    "config": {
+      "title": "❌ Error en pipeline de video",
+      "message": "Falló en paso: {{error.node}}\nError: {{error.message}}",
+      "urgency": "high"
+    }
+  }
+}

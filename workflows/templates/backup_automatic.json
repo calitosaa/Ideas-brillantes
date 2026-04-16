@@ -1,0 +1,65 @@
+{
+  "name": "daily-backup",
+  "description": "Every night at 11pm, backup ~/Documents to ~/Backups with timestamp, clean backups older than 30 days",
+  "version": "1.0",
+  "active": true,
+  "trigger": {
+    "type": "schedule",
+    "config": {
+      "cron": "0 23 * * *",
+      "timezone": "Europe/Madrid"
+    }
+  },
+  "nodes": [
+    {
+      "id": "create_backup",
+      "name": "Create compressed backup",
+      "type": "exec_command",
+      "config": {
+        "command": "tar -czf ~/Backups/docs_$(date +%Y%m%d_%H%M%S).tar.gz ~/Documents",
+        "timeout": 300
+      },
+      "output_var": "backup_result",
+      "next": "cleanup_old"
+    },
+    {
+      "id": "cleanup_old",
+      "name": "Remove backups older than 30 days",
+      "type": "exec_command",
+      "config": {
+        "command": "find ~/Backups -name 'docs_*.tar.gz' -mtime +30 -delete",
+        "timeout": 30
+      },
+      "next": "get_backup_size"
+    },
+    {
+      "id": "get_backup_size",
+      "name": "Get backup size",
+      "type": "exec_command",
+      "config": {
+        "command": "du -sh ~/Backups/ | cut -f1",
+        "timeout": 10
+      },
+      "output_var": "total_size",
+      "next": "notify"
+    },
+    {
+      "id": "notify",
+      "name": "Backup complete notification",
+      "type": "send_notification",
+      "config": {
+        "title": "💾 Backup completado — {{date}}",
+        "message": "~/Documents respaldado correctamente.\nEspacio total backups: {{total_size}}",
+        "urgency": "low"
+      }
+    }
+  ],
+  "on_error": {
+    "type": "send_notification",
+    "config": {
+      "title": "❌ Error en backup",
+      "message": "El backup falló: {{error.message}}",
+      "urgency": "high"
+    }
+  }
+}

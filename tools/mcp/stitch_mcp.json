@@ -1,0 +1,163 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "stitch-mcp Server Configuration",
+  "description": "Configuration for the stitch-mcp server, which provides UI/UX design tools. stitch-mcp allows the assistant to extract design tokens, retrieve generated frontend code, capture design screenshots, generate new screens from natural language prompts, and manage design projects.",
+  "server": {
+    "name": "stitch",
+    "version": "1.0.0",
+    "command": "npx",
+    "args": [
+      "stitch-mcp",
+      "--port",
+      "3000",
+      "--host",
+      "127.0.0.1"
+    ],
+    "env": {
+      "STITCH_API_KEY": "${STITCH_API_KEY}",
+      "STITCH_PROJECT_DIR": "/home/user/Ideas-brillantes/designs",
+      "STITCH_OUTPUT_DIR": "/home/user/Ideas-brillantes/designs/output",
+      "STITCH_LOG_LEVEL": "INFO",
+      "NODE_ENV": "production"
+    },
+    "transport": "http",
+    "host": "127.0.0.1",
+    "port": 3000,
+    "restart_policy": "on_failure",
+    "max_restarts": 3
+  },
+  "tools": [
+    {
+      "name": "extract_design",
+      "description": "Extract design tokens (colours, typography, spacing, shadows) from a design file or running screen.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "Path to a design file (Figma export, SVG, PNG) or a project/screen identifier to extract tokens from."
+          },
+          "token_types": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["colors", "typography", "spacing", "shadows", "border_radius", "all"]
+            },
+            "default": ["all"],
+            "description": "Which categories of design tokens to extract. Defaults to all token types."
+          },
+          "format": {
+            "type": "string",
+            "enum": ["json", "css_variables", "tailwind", "scss"],
+            "default": "json",
+            "description": "Output format for the extracted design tokens."
+          }
+        },
+        "required": ["source"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_code",
+      "description": "Retrieve generated frontend component code for a design screen or component.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "screen_id": {
+            "type": "string",
+            "description": "The identifier of the screen or component to retrieve generated code for."
+          },
+          "framework": {
+            "type": "string",
+            "enum": ["react", "vue", "svelte", "html_css", "tailwind"],
+            "default": "react",
+            "description": "The target frontend framework for the generated code."
+          },
+          "include_styles": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to include CSS/styling code alongside the component markup."
+          }
+        },
+        "required": ["screen_id"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_screenshot",
+      "description": "Capture a rendered screenshot of a design screen or component at a specified viewport size.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "screen_id": {
+            "type": "string",
+            "description": "The identifier of the screen or component to screenshot."
+          },
+          "viewport": {
+            "type": "string",
+            "enum": ["mobile", "tablet", "desktop", "1280x800", "375x667", "1920x1080"],
+            "default": "desktop",
+            "description": "The viewport size at which to render and capture the screenshot."
+          },
+          "output_path": {
+            "type": "string",
+            "description": "Optional absolute path to save the screenshot image."
+          }
+        },
+        "required": ["screen_id"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "generate_screen",
+      "description": "Generate a new UI screen or component design from a natural language prompt.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "description": "A natural language description of the UI screen or component to generate (e.g. 'a dark-themed login page with email and password fields and a gradient button')."
+          },
+          "style_guide": {
+            "type": "string",
+            "description": "Optional reference to an existing design token file or project style guide to apply consistent branding."
+          },
+          "output_name": {
+            "type": "string",
+            "description": "Optional name for the generated screen (used as its identifier for subsequent operations)."
+          }
+        },
+        "required": ["prompt"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "manage_project",
+      "description": "Create, list, update, or delete design projects within the stitch workspace.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": ["create", "list", "get", "update", "delete"],
+            "description": "The project management action to perform."
+          },
+          "project_id": {
+            "type": "string",
+            "description": "The unique identifier of the project to act on. Required for 'get', 'update', and 'delete' actions."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name for the project. Required when action is 'create'; optional for 'update'."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description of the project's purpose."
+          }
+        },
+        "required": ["action"],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

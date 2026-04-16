@@ -1,0 +1,83 @@
+{
+  "name": "email-daily-summary",
+  "description": "Every weekday at 8am, read unread emails, summarize with AI, send desktop notification",
+  "version": "1.0",
+  "active": true,
+  "trigger": {
+    "type": "schedule",
+    "config": {
+      "cron": "0 8 * * 1-5",
+      "timezone": "Europe/Madrid",
+      "description": "Monday to Friday at 8:00 AM"
+    }
+  },
+  "nodes": [
+    {
+      "id": "read_emails",
+      "name": "Read Unread Emails",
+      "type": "read_email",
+      "config": {
+        "folder": "INBOX",
+        "filter": "unread",
+        "limit": 50,
+        "mark_as_read": false
+      },
+      "output_var": "emails",
+      "next": "check_has_emails"
+    },
+    {
+      "id": "check_has_emails",
+      "name": "Any emails?",
+      "type": "filter",
+      "config": {
+        "conditions": [
+          {"field": "{{emails.count}}", "op": "gt", "value": 0}
+        ],
+        "next_if_true": "summarize",
+        "next_if_false": "notify_empty"
+      }
+    },
+    {
+      "id": "summarize",
+      "name": "AI Summary",
+      "type": "ai_process",
+      "config": {
+        "prompt": "Summarize these {{emails.count}} unread emails concisely in bullet points. Group by priority (urgent first). For each: sender, subject, one-line summary.\n\nEmails:\n{{emails.list}}",
+        "input_var": "emails",
+        "output_var": "summary",
+        "max_tokens": 800,
+        "language": "auto"
+      },
+      "next": "notify_summary"
+    },
+    {
+      "id": "notify_summary",
+      "name": "Desktop Notification",
+      "type": "send_notification",
+      "config": {
+        "title": "📧 {{emails.count}} emails sin leer — {{date}}",
+        "message": "{{summary}}",
+        "urgency": "normal"
+      }
+    },
+    {
+      "id": "notify_empty",
+      "name": "No emails notification",
+      "type": "send_notification",
+      "config": {
+        "title": "📭 Bandeja vacía",
+        "message": "No tienes emails sin leer. ¡Buen comienzo de día!",
+        "urgency": "low"
+      }
+    }
+  ],
+  "on_error": {
+    "type": "send_notification",
+    "config": {
+      "title": "⚠️ Error: Email Summary",
+      "message": "No se pudo leer el correo: {{error.message}}",
+      "urgency": "high"
+    }
+  },
+  "created_at": "2025-04-16T00:00:00Z"
+}

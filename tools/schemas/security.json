@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Security Tools",
+  "description": "JSON Schema definitions for security tools available to the ideas-brillantes assistant. Provides malware scanning for files and URLs, process inspection, file quarantine, security report generation, and network traffic monitoring.",
+  "tools": [
+    {
+      "name": "scan_file",
+      "description": "Scan a file or directory for malware, suspicious signatures, or known threats using the configured antivirus engine.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Absolute path to the file or directory to scan."
+          },
+          "deep": {
+            "type": "boolean",
+            "default": false,
+            "description": "If true, performs a deep/heuristic scan (slower but more thorough). Defaults to a fast signature scan."
+          }
+        },
+        "required": ["path"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "scan_url",
+      "description": "Check a URL against threat intelligence databases and sandbox analysis to detect malware, phishing, or other threats.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to scan for threats (e.g. 'https://suspicious-site.example.com/download')."
+          }
+        },
+        "required": ["url"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "check_process",
+      "description": "Inspect one or more running processes for suspicious behaviour, unusual network connections, or known malware indicators.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "pid": {
+            "type": "integer",
+            "description": "Optional PID of a specific process to inspect. If omitted and name is also omitted, all running processes are checked."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional process name substring to match (e.g. 'chrome', 'python'). Can be combined with pid."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "quarantine_file",
+      "description": "Move a suspicious file to the quarantine vault, making it inaccessible while preserving it for later analysis or recovery.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Absolute path to the file to quarantine."
+          }
+        },
+        "required": ["path"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_security_report",
+      "description": "Generate a summary security report covering scan results, quarantined items, and flagged events since a given time.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "since": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Optional ISO 8601 timestamp. Only events occurring after this time are included. If omitted, reports on all recorded events."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "monitor_network",
+      "description": "Start capturing and analysing network traffic on a given interface for a short duration, returning a summary of suspicious or notable connections.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "interface": {
+            "type": "string",
+            "description": "Network interface name to monitor (e.g. 'eth0', 'wlan0'). Defaults to the primary active interface."
+          },
+          "filter": {
+            "type": "string",
+            "description": "Optional BPF (Berkeley Packet Filter) expression to narrow captured traffic (e.g. 'port 443', 'host 192.168.1.1')."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

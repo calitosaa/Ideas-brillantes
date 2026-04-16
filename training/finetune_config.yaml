@@ -1,0 +1,88 @@
+# ideas-brillantes Fine-tuning Configuration
+# Uses Unsloth for efficient LoRA training on GLM-5-1
+
+model:
+  name: THUDM/GLM-5-1
+  trust_remote_code: true
+  torch_dtype: float16
+  load_in_4bit: true  # QLoRA: 4-bit base model
+
+lora:
+  r: 64                  # LoRA rank
+  lora_alpha: 128        # Scaling factor (usually 2x rank)
+  lora_dropout: 0.05
+  bias: none
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+  task_type: CAUSAL_LM
+  use_rslora: true       # Rank-stabilized LoRA
+
+training:
+  output_dir: output/checkpoints
+  num_train_epochs: 3
+  per_device_train_batch_size: 2
+  per_device_eval_batch_size: 2
+  gradient_accumulation_steps: 8   # Effective batch size = 16
+  learning_rate: 2.0e-4
+  lr_scheduler_type: cosine
+  warmup_ratio: 0.03
+  weight_decay: 0.01
+  max_grad_norm: 1.0
+  fp16: true
+  bf16: false
+  evaluation_strategy: steps
+  eval_steps: 200
+  save_strategy: steps
+  save_steps: 200
+  save_total_limit: 3
+  load_best_model_at_end: true
+  metric_for_best_model: eval_loss
+  logging_steps: 25
+  report_to:
+    - tensorboard
+  dataloader_num_workers: 2
+  group_by_length: true
+  optim: adamw_8bit      # Memory-efficient optimizer
+
+data:
+  dataset_dir: training/dataset
+  val_split_ratio: 0.05
+  max_seq_length: 4096
+  packing: false
+  format: chatml         # <|system|> ... <|user|> ... <|assistant|>
+  dataset_files:
+    - pc_control_linux.jsonl
+    - automation_workflows.jsonl
+    - ui_design_material3.jsonl
+    - code_engineering.jsonl
+    - security_antivirus.jsonl
+    - memory_context.jsonl
+    - content_media.jsonl
+    - research_knowledge.jsonl
+    - browser_web.jsonl
+    - communication.jsonl
+    - devops_linux.jsonl
+    - multiagent_swarms.jsonl
+    - methodology_skills.jsonl
+    - bilingual_examples.jsonl
+
+export:
+  output_dir: output/ideas-brillantes-v1
+  merge_adapter: true    # Merge LoRA into base weights
+  save_gguf: true
+  gguf_quantization: Q4_K_M
+  gguf_output: output/gguf/ideas-brillantes-v1-Q4_K_M.gguf
+
+hardware:
+  # Minimum requirements
+  min_vram_gb: 16
+  recommended_vram_gb: 24
+  # With 16GB VRAM (RTX 3090): use load_in_4bit=true, batch_size=2, grad_accum=8
+  # With 24GB VRAM (RTX 4090/A10): use load_in_4bit=false, batch_size=4, grad_accum=4
+  # With 40GB+ VRAM (A100): use full fp16, batch_size=8, grad_accum=2

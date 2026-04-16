@@ -1,0 +1,151 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Communication Tools",
+  "description": "JSON Schema definitions for communication tools available to the ideas-brillantes assistant. Covers email sending and reading, Slack messaging, calendar event creation, and desktop notifications.",
+  "tools": [
+    {
+      "name": "send_email",
+      "description": "Compose and send an email message via the configured email account.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "to": {
+            "oneOf": [
+              { "type": "string", "format": "email" },
+              {
+                "type": "array",
+                "items": { "type": "string", "format": "email" },
+                "minItems": 1
+              }
+            ],
+            "description": "Recipient email address or list of addresses."
+          },
+          "subject": {
+            "type": "string",
+            "description": "Email subject line."
+          },
+          "body": {
+            "type": "string",
+            "description": "Body of the email. Plain text or HTML depending on the configured mailer."
+          },
+          "attachments": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Optional list of absolute file paths to attach to the email."
+          }
+        },
+        "required": ["to", "subject", "body"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "read_email",
+      "description": "Fetch emails from a mailbox folder, optionally filtered by a search string.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "folder": {
+            "type": "string",
+            "default": "INBOX",
+            "description": "Mailbox folder to read from (e.g. 'INBOX', 'Sent', 'Drafts'). Defaults to 'INBOX'."
+          },
+          "filter": {
+            "type": "string",
+            "description": "Optional search string to filter emails by subject, sender, or body content."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20,
+            "description": "Maximum number of emails to return, ordered by most recent first. Defaults to 20."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "send_slack",
+      "description": "Post a message to a Slack channel or thread.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "channel": {
+            "type": "string",
+            "description": "Slack channel name (e.g. '#general') or channel ID to post the message to."
+          },
+          "message": {
+            "type": "string",
+            "description": "Message text to post. Supports Slack mrkdwn formatting."
+          },
+          "thread_ts": {
+            "type": "string",
+            "description": "Optional timestamp of the parent message to reply in a thread (e.g. '1234567890.123456')."
+          }
+        },
+        "required": ["channel", "message"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "create_calendar_event",
+      "description": "Create a new event in the user's calendar.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title or summary of the calendar event."
+          },
+          "start": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Start date and time of the event in ISO 8601 format (e.g. '2026-05-01T09:00:00+02:00')."
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time",
+            "description": "End date and time of the event in ISO 8601 format."
+          },
+          "attendees": {
+            "type": "array",
+            "items": { "type": "string", "format": "email" },
+            "description": "Optional list of attendee email addresses to invite."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional detailed description or notes for the event."
+          }
+        },
+        "required": ["title", "start", "end"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "send_notification",
+      "description": "Display a desktop notification to the user via libnotify / notify-send.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Short title displayed at the top of the notification."
+          },
+          "message": {
+            "type": "string",
+            "description": "Notification body text with additional details."
+          },
+          "urgency": {
+            "type": "string",
+            "enum": ["low", "normal", "critical"],
+            "default": "normal",
+            "description": "Notification urgency level that controls how long it stays visible and its visual style. Defaults to 'normal'."
+          }
+        },
+        "required": ["title", "message"],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

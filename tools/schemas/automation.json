@@ -1,0 +1,164 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Workflow Automation Tools",
+  "description": "JSON Schema definitions for workflow automation tools available to the ideas-brillantes assistant. Enables creating, scheduling, running, and managing multi-step automated workflows with trigger-based or cron-based execution.",
+  "tools": [
+    {
+      "name": "create_workflow",
+      "description": "Define a new automation workflow with a trigger and a sequence of action nodes.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Human-readable name for the workflow (e.g. 'Daily backup', 'Send weekly report')."
+          },
+          "trigger": {
+            "type": "object",
+            "description": "Event or condition that starts the workflow.",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["manual", "schedule", "file_change", "webhook", "event"],
+                "description": "Type of trigger."
+              },
+              "config": {
+                "type": "object",
+                "description": "Trigger-specific configuration (e.g. cron expression for 'schedule', watched path for 'file_change').",
+                "additionalProperties": true
+              }
+            },
+            "required": ["type"],
+            "additionalProperties": false
+          },
+          "nodes": {
+            "type": "array",
+            "minItems": 1,
+            "description": "Ordered list of action nodes to execute when the workflow runs.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique identifier for this node within the workflow."
+                },
+                "tool": {
+                  "type": "string",
+                  "description": "Name of the tool to invoke at this step (e.g. 'exec_command', 'send_email')."
+                },
+                "params": {
+                  "type": "object",
+                  "description": "Parameters to pass to the tool. Values may reference outputs of earlier nodes using {{node_id.output_field}} syntax.",
+                  "additionalProperties": true
+                },
+                "on_error": {
+                  "type": "string",
+                  "enum": ["stop", "continue", "retry"],
+                  "default": "stop",
+                  "description": "Behavior when this node fails. Defaults to 'stop'."
+                }
+              },
+              "required": ["id", "tool"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["name", "trigger", "nodes"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "schedule_task",
+      "description": "Attach a cron-based schedule to an existing workflow so it runs automatically.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "description": "ID of the workflow to schedule."
+          },
+          "cron_expression": {
+            "type": "string",
+            "description": "Standard cron expression defining the schedule (e.g. '0 9 * * 1-5' for weekdays at 09:00)."
+          }
+        },
+        "required": ["workflow_id", "cron_expression"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "run_workflow",
+      "description": "Manually trigger a workflow to run immediately, optionally passing runtime inputs.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "description": "ID of the workflow to run."
+          },
+          "inputs": {
+            "type": "object",
+            "description": "Optional key-value map of runtime inputs made available to workflow nodes.",
+            "additionalProperties": true
+          }
+        },
+        "required": ["workflow_id"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "list_workflows",
+      "description": "List all defined workflows, optionally filtered by status.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["active", "paused", "error", "all"],
+            "default": "all",
+            "description": "Filter workflows by their current status. Defaults to 'all'."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "delete_workflow",
+      "description": "Permanently delete a workflow definition and cancel any associated scheduled runs.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "description": "ID of the workflow to delete."
+          }
+        },
+        "required": ["workflow_id"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_workflow_logs",
+      "description": "Retrieve execution logs for a workflow, ordered most-recent first.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "description": "ID of the workflow whose logs to retrieve."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 500,
+            "default": 50,
+            "description": "Maximum number of log entries to return. Defaults to 50."
+          }
+        },
+        "required": ["workflow_id"],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

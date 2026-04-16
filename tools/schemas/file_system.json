@@ -1,0 +1,145 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "File System Tools",
+  "description": "JSON Schema definitions for file system tools available to the ideas-brillantes assistant. Provides read/write access to the local Linux file system, directory listing, file movement, deletion, and search.",
+  "tools": [
+    {
+      "name": "read_file",
+      "description": "Read the full text content of a file from the local file system.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Absolute or relative path to the file to read (e.g. '/home/user/notes.txt')."
+          }
+        },
+        "required": ["path"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "write_file",
+      "description": "Write or update a file on the local file system.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Absolute or relative path where the file should be written."
+          },
+          "content": {
+            "type": "string",
+            "description": "Text content to write into the file."
+          },
+          "mode": {
+            "type": "string",
+            "enum": ["overwrite", "append", "create_new"],
+            "default": "overwrite",
+            "description": "'overwrite' replaces the file (default), 'append' adds content to the end, 'create_new' fails if the file already exists."
+          }
+        },
+        "required": ["path", "content"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "list_dir",
+      "description": "List the contents of a directory, optionally including all subdirectories.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Absolute or relative path to the directory to list."
+          },
+          "recursive": {
+            "type": "boolean",
+            "default": false,
+            "description": "If true, list all files and folders in subdirectories as well."
+          }
+        },
+        "required": ["path"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "move_file",
+      "description": "Move or rename a file or directory from one path to another.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "src": {
+            "type": "string",
+            "description": "Source path of the file or directory to move."
+          },
+          "dst": {
+            "type": "string",
+            "description": "Destination path (including the new filename if renaming)."
+          }
+        },
+        "required": ["src", "dst"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "delete_file",
+      "description": "Permanently delete a file or directory. Requires explicit confirmation to prevent accidental deletion.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Absolute or relative path to the file or directory to delete."
+          },
+          "confirm": {
+            "type": "boolean",
+            "description": "Must be set to true to confirm that deletion is intentional. The call is rejected if false or omitted."
+          }
+        },
+        "required": ["path", "confirm"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "search_files",
+      "description": "Search for files matching a query string in their name or content within a directory.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search term or regex pattern to match against file names or contents."
+          },
+          "path": {
+            "type": "string",
+            "description": "Optional root directory to search in. Defaults to the current working directory."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["name", "content", "both"],
+            "default": "name",
+            "description": "Whether to match against file names, file contents, or both. Defaults to 'name'."
+          }
+        },
+        "required": ["query"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "create_dir",
+      "description": "Create a new directory (and any missing parent directories).",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Absolute or relative path of the directory to create. Intermediate directories are created automatically."
+          }
+        },
+        "required": ["path"],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

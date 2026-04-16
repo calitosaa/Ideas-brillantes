@@ -1,0 +1,106 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Terminal Tools",
+  "description": "JSON Schema definitions for terminal and process management tools available to the ideas-brillantes assistant. Enables shell command execution, script running, process inspection, and environment variable access.",
+  "tools": [
+    {
+      "name": "exec_command",
+      "description": "Execute a shell command and return its stdout, stderr, and exit code.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "command": {
+            "type": "string",
+            "description": "The shell command to execute (e.g. 'ls -la /home/user')."
+          },
+          "cwd": {
+            "type": "string",
+            "description": "Optional working directory for the command. Defaults to the assistant's current working directory."
+          },
+          "timeout": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Optional timeout in seconds. The process is killed if it exceeds this duration. Defaults to 30 seconds."
+          }
+        },
+        "required": ["command"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "run_script",
+      "description": "Execute a multi-line script using a specified interpreter.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "script": {
+            "type": "string",
+            "description": "The script source code to execute."
+          },
+          "interpreter": {
+            "type": "string",
+            "default": "bash",
+            "description": "Interpreter to use (e.g. 'bash', 'python3', 'node', 'ruby'). Defaults to 'bash'."
+          },
+          "args": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Optional list of positional arguments to pass to the script (accessible as $1, $2, … or sys.argv[1], …)."
+          }
+        },
+        "required": ["script"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "list_processes",
+      "description": "List currently running processes, optionally filtered by name or pattern.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "filter": {
+            "type": "string",
+            "description": "Optional name substring or regex pattern to filter process list results."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "kill_process",
+      "description": "Send a signal to a running process, typically to terminate it.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "pid": {
+            "type": "integer",
+            "description": "Process ID of the target process."
+          },
+          "signal": {
+            "type": "string",
+            "default": "SIGTERM",
+            "description": "Signal name to send (e.g. 'SIGTERM', 'SIGKILL', 'SIGHUP'). Defaults to 'SIGTERM'."
+          }
+        },
+        "required": ["pid"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_env",
+      "description": "Retrieve the value of one or all environment variables in the current session.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Name of the environment variable to retrieve (e.g. 'PATH', 'HOME'). If omitted, all environment variables are returned as a key-value map."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    }
+  ]
+}
