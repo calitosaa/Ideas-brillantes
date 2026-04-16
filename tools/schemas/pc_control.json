@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PC Control Tools",
+  "description": "JSON Schema definitions for PC control tools available to the ideas-brillantes assistant. Enables direct interaction with the desktop environment: launching apps, capturing the screen, simulating mouse and keyboard input.",
+  "tools": [
+    {
+      "name": "open_app",
+      "description": "Launch a desktop application by name, optionally passing command-line arguments.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name or executable path of the application to open (e.g. 'firefox', 'gedit', '/usr/bin/vlc')."
+          },
+          "args": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Optional list of command-line arguments to pass to the application."
+          }
+        },
+        "required": ["name"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "close_app",
+      "description": "Gracefully close a running application by name. Sends a close signal; the application may prompt to save unsaved work.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the running application to close (e.g. 'firefox', 'gedit')."
+          }
+        },
+        "required": ["name"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "screenshot",
+      "description": "Capture a screenshot of the current desktop or active window.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Optional file path where the screenshot image will be saved (e.g. '/tmp/screenshot.png'). If omitted, a temporary path is used and returned."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "click",
+      "description": "Simulate a mouse click at the given screen coordinates.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "integer",
+            "description": "Horizontal pixel coordinate to click (from the left edge of the screen)."
+          },
+          "y": {
+            "type": "integer",
+            "description": "Vertical pixel coordinate to click (from the top edge of the screen)."
+          },
+          "button": {
+            "type": "string",
+            "enum": ["left", "right", "middle"],
+            "default": "left",
+            "description": "Mouse button to click. Defaults to 'left'."
+          },
+          "double": {
+            "type": "boolean",
+            "default": false,
+            "description": "If true, performs a double-click instead of a single click."
+          }
+        },
+        "required": ["x", "y"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "type_text",
+      "description": "Type a string of text using simulated keyboard input at the current cursor position.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "The text to type. Supports Unicode characters."
+          }
+        },
+        "required": ["text"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "hotkey",
+      "description": "Send a keyboard shortcut by pressing multiple keys simultaneously (e.g. Ctrl+C, Alt+F4).",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "keys": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1,
+            "description": "Ordered list of key names to press together (e.g. ['ctrl', 'c'] or ['alt', 'F4']). Key names follow the xdotool / pyautogui convention."
+          }
+        },
+        "required": ["keys"],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

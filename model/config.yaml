@@ -1,0 +1,114 @@
+# ideas-brillantes Model Configuration
+
+# Base model
+base_model:
+  name: THUDM/GLM-5-1
+  revision: main
+  trust_remote_code: true
+  torch_dtype: float16
+
+# Ollama model name (after fine-tuning and quantization)
+ollama_model: ideas-brillantes
+
+# Inference parameters
+inference:
+  temperature: 0.7
+  top_p: 0.9
+  top_k: 40
+  max_new_tokens: 4096
+  repetition_penalty: 1.1
+  context_length: 32768
+  do_sample: true
+
+# Fine-tuning configuration (LoRA)
+finetuning:
+  method: lora
+  lora_rank: 64
+  lora_alpha: 128
+  lora_dropout: 0.05
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+  bias: none
+  task_type: CAUSAL_LM
+
+  # Training hyperparameters
+  training:
+    learning_rate: 2.0e-4
+    num_train_epochs: 3
+    per_device_train_batch_size: 4
+    per_device_eval_batch_size: 4
+    gradient_accumulation_steps: 4
+    warmup_ratio: 0.03
+    lr_scheduler_type: cosine
+    save_steps: 500
+    eval_steps: 500
+    logging_steps: 50
+    max_grad_norm: 1.0
+    weight_decay: 0.01
+    fp16: true
+    bf16: false
+    dataloader_num_workers: 4
+    group_by_length: true
+    report_to: tensorboard
+
+  # Data
+  data:
+    dataset_dir: training/dataset
+    val_split: 0.05
+    max_seq_length: 4096
+    packing: false
+    format: chatml  # ChatML format compatible with GLM-5-1
+
+# Quantization (for GGUF export)
+quantization:
+  format: gguf
+  quantization_type: Q4_K_M  # Good balance quality/size
+  output_dir: output/gguf
+
+# Memory system (claude-mem compatible)
+memory:
+  backend: sqlite_chroma
+  sqlite_path: ~/.ideas-brillantes/memory.db
+  chroma_path: ~/.ideas-brillantes/chroma
+  mcp_port: 37777
+  embedding_model: all-MiniLM-L6-v2
+  max_results: 10
+  similarity_threshold: 0.7
+
+# Browser agent (browser-use compatible)
+browser:
+  headless: false
+  browser: chromium
+  viewport_width: 1280
+  viewport_height: 720
+  timeout: 30000
+  max_steps: 50
+
+# Automation engine (n8n-inspired)
+automation:
+  workflows_dir: ~/.ideas-brillantes/workflows
+  logs_dir: ~/.ideas-brillantes/logs
+  max_concurrent: 5
+  retry_attempts: 3
+  retry_delay: 5
+
+# Security
+security:
+  auto_scan_downloads: true
+  auto_scan_urls: true
+  auto_monitor_processes: true
+  quarantine_dir: ~/.ideas-brillantes/quarantine
+  threat_db_update: daily
+
+# Output paths
+output:
+  checkpoints: output/checkpoints
+  final_model: output/ideas-brillantes-v1
+  gguf: output/gguf/ideas-brillantes-v1-Q4_K_M.gguf
+  logs: output/logs

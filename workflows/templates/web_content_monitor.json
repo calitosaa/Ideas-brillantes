@@ -1,0 +1,96 @@
+{
+  "name": "web-content-monitor",
+  "description": "Every hour check a URL for content changes and notify when page changes detected",
+  "version": "1.0",
+  "active": true,
+  "variables": {
+    "monitor_url": "https://example.com/page-to-monitor",
+    "selector": "main",
+    "last_hash_file": "~/.ideas-brillantes/monitors/web_hash.txt"
+  },
+  "trigger": {
+    "type": "schedule",
+    "config": {
+      "cron": "0 * * * *",
+      "description": "Every hour"
+    }
+  },
+  "nodes": [
+    {
+      "id": "fetch_page",
+      "name": "Fetch current page content",
+      "type": "web_request",
+      "config": {
+        "url": "{{variables.monitor_url}}",
+        "method": "GET",
+        "extract_text": true
+      },
+      "output_var": "current_content",
+      "next": "hash_content"
+    },
+    {
+      "id": "hash_content",
+      "name": "Hash current content",
+      "type": "exec_command",
+      "config": {
+        "command": "echo '{{current_content}}' | md5sum | cut -d' ' -f1",
+        "timeout": 5
+      },
+      "output_var": "current_hash",
+      "next": "read_previous_hash"
+    },
+    {
+      "id": "read_previous_hash",
+      "name": "Read previous hash",
+      "type": "exec_command",
+      "config": {
+        "command": "cat {{variables.last_hash_file}} 2>/dev/null || echo 'NONE'",
+        "timeout": 5
+      },
+      "output_var": "previous_hash",
+      "next": "compare"
+    },
+    {
+      "id": "compare",
+      "name": "Content changed?",
+      "type": "filter",
+      "config": {
+        "conditions": [
+          {"field": "{{current_hash}}", "op": "neq", "value": "{{previous_hash}}"}
+        ],
+        "next_if_true": "save_hash",
+        "next_if_false": "no_change"
+      }
+    },
+    {
+      "id": "save_hash",
+      "name": "Save new hash",
+      "type": "write_file",
+      "config": {
+        "path": "{{variables.last_hash_file}}",
+        "content": "{{current_hash}}",
+        "mode": "overwrite"
+      },
+      "next": "notify_change"
+    },
+    {
+      "id": "notify_change",
+      "name": "Notify: Page changed!",
+      "type": "send_notification",
+      "config": {
+        "title": "🔔 Página actualizada",
+        "message": "Han detectado cambios en:\n{{variables.monitor_url}}\n\nAbre el navegador para ver qué cambió.",
+        "urgency": "normal"
+      }
+    },
+    {
+      "id": "no_change",
+      "name": "No changes (silent)",
+      "type": "exec_command",
+      "config": {
+        "command": "echo 'No changes detected at {{datetime}}'",
+        "timeout": 5
+      }
+    }
+  ]
+}

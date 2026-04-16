@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Browser / Web Tools",
+  "description": "JSON Schema definitions for browser and web automation tools available to the ideas-brillantes assistant. Provides programmatic control of a headless or visible browser session: navigation, clicking, typing, content extraction, screenshots, scrolling, and waiting for conditions.",
+  "tools": [
+    {
+      "name": "navigate_url",
+      "description": "Navigate the browser to a given URL and wait for the page to load.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Fully-qualified URL to navigate to (e.g. 'https://example.com')."
+          }
+        },
+        "required": ["url"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "web_click",
+      "description": "Click a web element identified by a CSS selector or XPath expression.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "string",
+            "description": "CSS selector or XPath expression identifying the element to click (e.g. '#submit-btn', '//button[text()=\"OK\"]')."
+          }
+        },
+        "required": ["selector"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "web_type",
+      "description": "Type text into a web input element identified by a CSS selector or XPath expression.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "string",
+            "description": "CSS selector or XPath expression identifying the input element."
+          },
+          "text": {
+            "type": "string",
+            "description": "Text to type into the element."
+          }
+        },
+        "required": ["selector", "text"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "web_extract",
+      "description": "Extract text or structured data from the current page, optionally scoped to a CSS selector.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "string",
+            "description": "Optional CSS selector to scope extraction to a specific element. If omitted, the full page body is used."
+          },
+          "format": {
+            "type": "string",
+            "enum": ["text", "html", "markdown", "json"],
+            "default": "text",
+            "description": "Output format for the extracted content. 'text' returns plain text, 'html' returns raw HTML, 'markdown' converts HTML to Markdown, 'json' attempts to parse structured data."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "web_screenshot",
+      "description": "Capture a screenshot of the current browser viewport.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Optional file path to save the screenshot image (e.g. '/tmp/page.png'). If omitted, a temporary path is used and returned."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "web_scroll",
+      "description": "Scroll the current page or a specific element up, down, left, or right.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "direction": {
+            "type": "string",
+            "enum": ["up", "down", "left", "right"],
+            "description": "Direction in which to scroll."
+          },
+          "amount": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 300,
+            "description": "Number of pixels to scroll. Defaults to 300."
+          }
+        },
+        "required": ["direction"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "web_wait",
+      "description": "Pause execution until a specified condition is met or a timeout is reached.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "condition": {
+            "type": "string",
+            "description": "Condition to wait for. Accepts a CSS selector (waits for element to appear), a URL pattern, or one of the special strings 'load' (DOMContentLoaded) or 'networkidle' (network quiet)."
+          },
+          "timeout": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 10,
+            "description": "Maximum number of seconds to wait before raising a timeout error. Defaults to 10."
+          }
+        },
+        "required": ["condition"],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

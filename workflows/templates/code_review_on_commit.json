@@ -1,0 +1,132 @@
+{
+  "name": "code-review-on-commit",
+  "description": "Watch a git repository, auto-review code on every commit, post report as comment or notification",
+  "version": "1.0",
+  "active": true,
+  "variables": {
+    "repo_path": "~/projects/my-app",
+    "branch": "main",
+    "report_dir": "~/Reports/code-reviews",
+    "auto_fix_style": false
+  },
+  "trigger": {
+    "type": "file_watch",
+    "config": {
+      "path": "{{variables.repo_path}}/.git",
+      "events": ["modify"],
+      "pattern": "COMMIT_EDITMSG",
+      "recursive": false,
+      "description": "Triggered on every git commit"
+    }
+  },
+  "nodes": [
+    {
+      "id": "get_diff",
+      "name": "Get commit diff",
+      "type": "exec_command",
+      "config": {
+        "command": "cd {{variables.repo_path}} && git diff HEAD~1 HEAD --unified=5 --stat",
+        "timeout": 15
+      },
+      "output_var": "diff",
+      "next": "get_commit_info"
+    },
+    {
+      "id": "get_commit_info",
+      "name": "Get commit metadata",
+      "type": "exec_command",
+      "config": {
+        "command": "cd {{variables.repo_path}} && git log -1 --format='{\"hash\": \"%H\", \"author\": \"%an\", \"message\": \"%s\", \"date\": \"%ci\"}'",
+        "timeout": 5
+      },
+      "output_var": "commit_info",
+      "next": "check_diff_size"
+    },
+    {
+      "id": "check_diff_size",
+      "name": "Is diff reviewable?",
+      "type": "filter",
+      "config": {
+        "conditions": [
+          {"field": "{{diff}}", "op": "neq", "value": ""}
+        ],
+        "next_if_true": "ai_review",
+        "next_if_false": "skip_empty"
+      }
+    },
+    {
+      "id": "ai_review",
+      "name": "AI Code Review",
+      "type": "ai_process",
+      "config": {
+        "prompt": "Perform a thorough code review of this git diff.\n\nCommit: {{commit_info.message}}\nAuthor: {{commit_info.author}}\n\nDiff:\n{{diff}}\n\nAnalyze across 9 dimensions:\n1. Correctness — Logic errors, edge cases, off-by-one\n2. Security — OWASP Top 10, injection, XSS, secrets exposure\n3. Performance — N+1 queries, unnecessary loops, memory leaks\n4. Maintainability — Readability, naming, complexity\n5. Test coverage — Are new lines tested? Missing test cases?\n6. Error handling — Unhandled exceptions, missing validation\n7. Type safety — Type errors, null checks, coercions\n8. Architecture — Separation of concerns, SOLID principles\n9. Documentation — Missing docs for public APIs\n\nFormat as Markdown:\n## Review Summary\n**Risk level**: LOW|MEDIUM|HIGH|CRITICAL\n\n## Issues Found\n(categorized by severity: CRITICAL > WARNING > SUGGESTION)\n\n## Positive Aspects\n\n## Recommendations",
+        "output_var": "review",
+        "max_tokens": 2000
+      },
+      "next": "security_scan"
+    },
+    {
+      "id": "security_scan",
+      "name": "Security pattern scan",
+      "type": "exec_command",
+      "config": {
+        "command": "cd {{variables.repo_path}} && git diff HEAD~1 HEAD | grep -E '(password|secret|token|api_key|private_key|credential)\\s*=' | grep -v 'test\\|mock\\|example' || echo 'NO_SECRETS_FOUND'",
+        "timeout": 10
+      },
+      "output_var": "secrets_check",
+      "next": "save_report"
+    },
+    {
+      "id": "save_report",
+      "name": "Save review report",
+      "type": "write_file",
+      "config": {
+        "path": "{{variables.report_dir}}/review_{{commit_info.hash}}.md",
+        "content": "# Code Review — {{commit_info.hash}}\n**Date**: {{datetime}}\n**Author**: {{commit_info.author}}\n**Message**: {{commit_info.message}}\n\n{{review}}\n\n## Secret Detection\n```\n{{secrets_check}}\n```",
+        "mode": "create"
+      },
+      "next": "check_critical"
+    },
+    {
+      "id": "check_critical",
+      "name": "Critical issues?",
+      "type": "filter",
+      "config": {
+        "conditions": [
+          {"field": "{{secrets_check}}", "op": "neq", "value": "NO_SECRETS_FOUND"}
+        ],
+        "next_if_true": "notify_critical",
+        "next_if_false": "notify_normal"
+      }
+    },
+    {
+      "id": "notify_critical",
+      "name": "CRITICAL: Secrets detected",
+      "type": "send_notification",
+      "config": {
+        "title": "🚨 SECRETOS EN COMMIT: {{commit_info.hash}}",
+        "message": "Posibles credenciales expuestas detectadas en el commit.\nRevisa: {{variables.report_dir}}/review_{{commit_info.hash}}.md",
+        "urgency": "critical"
+      }
+    },
+    {
+      "id": "notify_normal",
+      "name": "Review complete",
+      "type": "send_notification",
+      "config": {
+        "title": "📋 Code Review: {{commit_info.message}}",
+        "message": "Revisión completada para {{commit_info.hash}}.\nInforme: {{variables.report_dir}}/review_{{commit_info.hash}}.md",
+        "urgency": "low"
+      }
+    },
+    {
+      "id": "skip_empty",
+      "name": "Empty diff - skip",
+      "type": "exec_command",
+      "config": {
+        "command": "echo 'Empty diff, skipping review for {{commit_info.hash}}'",
+        "timeout": 5
+      }
+    }
+  ]
+}

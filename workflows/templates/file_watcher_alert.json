@@ -1,0 +1,81 @@
+{
+  "name": "file-watcher-security-scan",
+  "description": "Watch ~/Downloads for new files, auto-scan for malware, notify user with results",
+  "version": "1.0",
+  "active": true,
+  "trigger": {
+    "type": "file_watch",
+    "config": {
+      "path": "~/Downloads",
+      "events": ["create"],
+      "pattern": "*",
+      "recursive": false,
+      "description": "Triggered when any new file appears in Downloads"
+    }
+  },
+  "nodes": [
+    {
+      "id": "notify_scanning",
+      "name": "Notify: Starting scan",
+      "type": "send_notification",
+      "config": {
+        "title": "🔍 Escaneando: {{trigger.filename}}",
+        "message": "Analizando el archivo descargado...",
+        "urgency": "low"
+      },
+      "next": "scan"
+    },
+    {
+      "id": "scan",
+      "name": "Security Scan",
+      "type": "scan_file",
+      "config": {
+        "path": "{{trigger.file_path}}",
+        "deep": true
+      },
+      "output_var": "scan_result",
+      "next": "check_threat"
+    },
+    {
+      "id": "check_threat",
+      "name": "Threat detected?",
+      "type": "filter",
+      "config": {
+        "conditions": [
+          {"field": "{{scan_result.threat_level}}", "op": "gte", "value": 3}
+        ],
+        "next_if_true": "quarantine",
+        "next_if_false": "notify_clean"
+      }
+    },
+    {
+      "id": "quarantine",
+      "name": "Auto-quarantine",
+      "type": "quarantine_file",
+      "config": {
+        "path": "{{trigger.file_path}}"
+      },
+      "next": "notify_threat"
+    },
+    {
+      "id": "notify_threat",
+      "name": "CRITICAL: Threat alert",
+      "type": "send_notification",
+      "config": {
+        "title": "🚨 AMENAZA DETECTADA",
+        "message": "Archivo: {{trigger.filename}}\nThreat: {{scan_result.threat_name}}\nACCIÓN: Movido a cuarentena automáticamente",
+        "urgency": "critical"
+      }
+    },
+    {
+      "id": "notify_clean",
+      "name": "File is clean",
+      "type": "send_notification",
+      "config": {
+        "title": "✅ Archivo limpio: {{trigger.filename}}",
+        "message": "Sin amenazas detectadas. Tamaño: {{trigger.file_size}}",
+        "urgency": "low"
+      }
+    }
+  ]
+}

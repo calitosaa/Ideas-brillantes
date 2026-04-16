@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MCP Server Registry",
+  "description": "Master configuration listing all MCP (Model Context Protocol) servers available to the Ideas-Brillantes LLM assistant. Each entry describes the server name, connection details, human-readable description, and the capabilities it exposes.",
+  "servers": [
+    {
+      "name": "browser_use",
+      "host": "127.0.0.1",
+      "port": 8765,
+      "transport": "websocket",
+      "description": "browser-use MCP server — provides a controlled Chromium browser instance for autonomous web navigation, DOM interaction, content extraction, and web screenshots. Powered by the browser-use Python library.",
+      "capabilities": [
+        "navigate_url",
+        "web_click",
+        "web_type",
+        "web_extract",
+        "web_screenshot",
+        "web_scroll",
+        "web_wait"
+      ],
+      "status": "active"
+    },
+    {
+      "name": "memory",
+      "host": "127.0.0.1",
+      "port": 37777,
+      "transport": "stdio",
+      "description": "claude-mem MCP server — provides persistent long-term memory using a hybrid SQLite + ChromaDB vector store. Supports semantic search, chronological retrieval, tagging, and memory lifecycle management.",
+      "capabilities": [
+        "search_memory",
+        "save_memory",
+        "get_memory_timeline",
+        "delete_memory",
+        "clear_memory"
+      ],
+      "status": "active"
+    },
+    {
+      "name": "stitch",
+      "host": "127.0.0.1",
+      "port": 3000,
+      "transport": "http",
+      "description": "stitch-mcp server — provides UI/UX design tools for extracting design tokens, retrieving generated code, capturing design screenshots, generating new screens from prompts, and managing design projects.",
+      "capabilities": [
+        "extract_design",
+        "get_code",
+        "get_screenshot",
+        "generate_screen",
+        "manage_project"
+      ],
+      "status": "active"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "name": "weekly-security-scan",
+  "description": "Every Sunday at 2am, full system security scan, generate report, save to ~/Reports",
+  "version": "1.0",
+  "active": true,
+  "trigger": {
+    "type": "schedule",
+    "config": {
+      "cron": "0 2 * * 0",
+      "timezone": "Europe/Madrid",
+      "description": "Every Sunday at 2:00 AM"
+    }
+  },
+  "nodes": [
+    {
+      "id": "scan_downloads",
+      "name": "Scan Downloads folder",
+      "type": "exec_command",
+      "config": {
+        "command": "clamscan -r ~/Downloads --infected --log=/tmp/scan_downloads.txt",
+        "timeout": 300
+      },
+      "output_var": "downloads_scan",
+      "next": "scan_home"
+    },
+    {
+      "id": "scan_home",
+      "name": "Quick scan home dir",
+      "type": "exec_command",
+      "config": {
+        "command": "clamscan ~/Documents ~/Desktop --infected --log=/tmp/scan_home.txt",
+        "timeout": 600
+      },
+      "output_var": "home_scan",
+      "next": "check_processes"
+    },
+    {
+      "id": "check_processes",
+      "name": "Check suspicious processes",
+      "type": "exec_command",
+      "config": {
+        "command": "ps aux --sort=-%cpu | head -20",
+        "timeout": 10
+      },
+      "output_var": "processes",
+      "next": "generate_report"
+    },
+    {
+      "id": "generate_report",
+      "name": "Generate security report",
+      "type": "ai_process",
+      "config": {
+        "prompt": "Generate a security report based on these scan results.\n\nDownloads scan:\n{{downloads_scan}}\n\nHome scan:\n{{home_scan}}\n\nTop processes:\n{{processes}}\n\nFormat as Markdown with: Executive Summary, Threats Found, Process Analysis, Recommendations.",
+        "output_var": "report",
+        "max_tokens": 1500
+      },
+      "next": "save_report"
+    },
+    {
+      "id": "save_report",
+      "name": "Save report to disk",
+      "type": "write_file",
+      "config": {
+        "path": "~/Reports/security_{{date}}.md",
+        "content": "# Informe de Seguridad — {{datetime}}\n\n{{report}}",
+        "mode": "create"
+      },
+      "next": "notify"
+    },
+    {
+      "id": "notify",
+      "name": "Notify completion",
+      "type": "send_notification",
+      "config": {
+        "title": "🛡️ Escaneo semanal completado",
+        "message": "Informe guardado en ~/Reports/security_{{date}}.md",
+        "urgency": "normal"
+      }
+    }
+  ]
+}

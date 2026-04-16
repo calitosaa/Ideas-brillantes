@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Memory Tools",
+  "description": "JSON Schema definitions for memory tools available to the ideas-brillantes assistant. Compatible with the claude-mem protocol. Provides semantic search, saving, timeline retrieval, and management of persistent memories stored in a local vector and SQLite database.",
+  "tools": [
+    {
+      "name": "search_memory",
+      "description": "Perform a semantic similarity search over stored memories and return the most relevant results.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Natural language search query used to find semantically similar memories."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 10,
+            "description": "Maximum number of memory results to return. Defaults to 10."
+          },
+          "threshold": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0.5,
+            "description": "Minimum cosine similarity score (0–1) a memory must reach to be included in results. Defaults to 0.5."
+          }
+        },
+        "required": ["query"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "save_memory",
+      "description": "Persist a new memory entry with optional tags and a category for future retrieval.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "Text content of the memory to store (e.g. a fact, preference, past action, or note)."
+          },
+          "tags": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Optional list of keyword tags to attach for filtering (e.g. ['work', 'project-x'])."
+          },
+          "category": {
+            "type": "string",
+            "description": "Optional high-level category label (e.g. 'preferences', 'tasks', 'facts', 'conversations')."
+          }
+        },
+        "required": ["content"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "get_memory_timeline",
+      "description": "Retrieve memories ordered chronologically, optionally filtered by date range and category.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Optional start of the time range in ISO 8601 format. Only memories created at or after this timestamp are returned."
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Optional end of the time range in ISO 8601 format. Only memories created at or before this timestamp are returned."
+          },
+          "category": {
+            "type": "string",
+            "description": "Optional category to filter the timeline results."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "delete_memory",
+      "description": "Permanently delete a single memory entry by its unique ID.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the memory entry to delete (returned by search_memory or get_memory_timeline)."
+          }
+        },
+        "required": ["id"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "clear_memory",
+      "description": "Delete all memory entries, optionally scoped to a specific category. This action is irreversible.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Optional category to restrict deletion to. If omitted, ALL memories across all categories are deleted."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    }
+  ]
+}
