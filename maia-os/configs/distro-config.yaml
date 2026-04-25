@@ -1,0 +1,65 @@
+[desktop]
+name=Maia OS
+default-user=maia
+default-password=maia
+autologin-user=maia
+autologin-user-timeout=0
+
+[installer]
+type=calamares
+show-debug-info=false
+branding=maia-os
+
+[packages]
+# Aplicaciones base
+base-packages=gnome-core,gdm3,gnome-shell,gnome-terminal,nautilus,gnome-software,gnome-tweaks,firefox-esr,network-manager,pulseaudio,bluetooth
+
+# Extensiones GNOME
+extensions=dash-to-dock,user-themes,burn-my-windows,blur-my-shell,impatience,magic-lamp
+
+# Temas y iconos
+themes=materia-gtk-theme,material-icons,maia-cursor-theme
+
+# Herramientas de sistema
+system-tools=htop,neofetch,git,curl,wget,vim,timeshift,grub-customizer
+
+# Multimedia
+multimedia=vlc,rhythmbox,gthumb,shotwell
+
+# Oficina
+office=libreoffice,evince
+
+# Desarrollo
+development=gnome-builder,git,python3,nodejs,npm
+
+[customization]
+wallpaper=/usr/share/backgrounds/maia-os/default.jpg
+gtk-theme=Maia-M3E
+icon-theme=Material-Icons
+cursor-theme=Maia-Cursor
+font-name=Roboto Flex 11
+document-font-name=Roboto Flex 11
+monospace-font-name=Roboto Mono 10
+
+[distribution]
+id=maia-os
+name=Maia OS
+version=1.0.0
+codename=Stella
+based-on=debian
+release-date=2024-01-01
+supported-architectures=amd64
+default-language=es_ES.UTF-8
+supported-languages=en_US.UTF-8,es_ES.UTF-8,pt_BR.UTF-8,fr_FR.UTF-8,de_DE.UTF-8
+
+[repository]
+name=Maia OS Repository
+url=https://repo.maia-os.org
+gpg-key=https://repo.maia-os.org/maia-os.gpg.key
+
+[support]
+website=https://maia-os.org
+forum=https://forum.maia-os.org
+documentation=https://docs.maia-os.org
+bug-tracker=https://github.com/maia-os/bugs
+donations=https://opencollective.com/maia-os

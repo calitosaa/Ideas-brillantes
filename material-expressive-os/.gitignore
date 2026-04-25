@@ -1,0 +1,74 @@
+# .gitignore para Material 3 Expressive OS
+
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+*.o
+*.so
+*.a
+
+# IDE y editores
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Temporales
+tmp/
+temp/
+/tmp/
+
+# Configuración local
+.env
+.env.local
+.env.*.local
+
+# Archivos de configuración personal
+*.local
+*.bak
+*.backup
+
+# Temas compilados (si se generan)
+themes/*/gtk-3.0/gtk.css.compiled
+themes/*/gtk-4.0/gtk.css.compiled
+
+# Caché
+.cache/
+__pycache__/
+*.pyc
+
+# Paquetes instalados localmente
+.themes/
+.icons/
+.fonts/
+
+# Configuraciones específicas del usuario
+configs/*/*.user
+configs/*/*.custom
+
+# Assets generados
+assets/logos/*.png
+assets/wallpapers/generated/
+
+# Documentación generada
+docs/generated/
+
+# Testing
+coverage/
+.nyc_output/
+
+# Lock files (opcional, depende de tu flujo)
+# package-lock.json
+# yarn.lock

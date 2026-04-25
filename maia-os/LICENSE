@@ -1,0 +1,87 @@
+# Maia OS - Licencia GPL-3.0
+
+## Copyright
+
+Copyright (C) 2024 Maia OS Project
+
+Este programa es software libre: puedes redistribuirlo y/o modificarlo bajo los términos de la Licencia Pública General GNU publicada por la Free Software Foundation, ya sea la versión 3 de la Licencia, o (a tu elección) cualquier versión posterior.
+
+Este programa se distribuye con la esperanza de que sea útil, pero SIN NINGUNA GARANTÍA; incluso sin la garantía implícita de COMERCIABILIDAD o IDONEIDAD PARA UN PROPÓSITO PARTICULAR. Consulta la Licencia Pública General GNU para más detalles.
+
+Deberías haber recibido una copia de la Licencia Pública General GNU junto con este programa. Si no es así, consulta <https://www.gnu.org/licenses/>.
+
+## Resumen para Humanos
+
+### Lo que PUEDES hacer:
+✅ Usar Maia OS para cualquier propósito (personal, educativo, comercial)
+✅ Estudiar cómo funciona el sistema
+✅ Modificar el código fuente
+✅ Distribuir copias del sistema original o modificado
+✅ Vender distribuciones basadas en Maia OS
+
+### Lo que DEBES hacer:
+📋 Incluir esta licencia en cualquier distribución
+📋 Proporcionar acceso al código fuente completo
+📋 Mantener los avisos de copyright originales
+📋 Indicar claramente los cambios realizados
+📋 Licenciar las modificaciones bajo GPL-3.0 también
+
+### Lo que NO PUEDES hacer:
+❌ Sublicenciar el código bajo términos más restrictivos
+❌ Distribuir sin proporcionar el código fuente
+❌ Imponer restricciones adicionales a los usuarios
+❌ Usar las marcas registradas sin permiso
+
+## Assets Visuales (Logo, Wallpapers, Iconos)
+
+Los assets visuales de Maia OS están licenciados bajo Creative Commons Attribution-ShareAlike 4.0 International (CC-BY-SA-4.0).
+
+### Resumen CC-BY-SA-4.0:
+
+**Eres libre de:**
+- Compartir: copiar y redistribuir el material
+- Adaptar: remezclar, transformar y crear a partir del material
+
+**Bajo los siguientes términos:**
+- Atribución: Debes dar crédito apropiado
+- CompartirIgual: Si remezclas, transformas o creas a partir del material, debes distribuir tus contribuciones bajo la misma licencia
+
+Para ver una copia de esta licencia, visita: https://creativecommons.org/licenses/by-sa/4.0/
+
+## Marcas Registradas
+
+Los siguientes nombres y logos son marcas registradas de Maia OS Project:
+- "Maia OS"
+- El logo de la estrella de Maia
+- "Material 3 Expressive Edition"
+
+El uso de estas marcas requiere permiso explícito del proyecto, excepto para referencias editoriales o descriptivas justas.
+
+## Excepciones y Contribuciones
+
+### Contribuciones de Terceros
+
+Todas las contribuciones al proyecto Maia OS deben estar licenciadas bajo GPL-3.0 (código) o CC-BY-SA-4.0 (assets visuales). Al contribuir, aceptas que tu trabajo forme parte del proyecto bajo estos términos.
+
+### Bibliotecas Incluidas
+
+Maia OS incluye software de terceros bajo diversas licencias de código abierto:
+- Linux Kernel: GPL-2.0
+- GNOME Desktop: LGPL/GPL
+- Debian packages: Varias licencias OSS compatibles
+- Material Design Icons: Apache 2.0
+
+Consulta los archivos LICENSE individuales en cada componente para más detalles.
+
+## Contacto para Licencias
+
+Para preguntas sobre licencias, permisos especiales o uso comercial:
+- Email: legal@maia-os.org
+- Web: https://maia-os.org/legal
+
+---
+
+**Texto completo de GPL-3.0**: https://www.gnu.org/licenses/gpl-3.0.html  
+**Texto completo de CC-BY-SA-4.0**: https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+*Última actualización: Enero 2024*

@@ -1,0 +1,1039 @@
+/*
+ * Maia OS GTK Theme - Material 3 Expressive
+ * Basado en las guías oficiales de Material Design 3
+ * https://m3.material.io/
+ * 
+ * Inspirado en:
+ * - Runixe786/Expressive-Windows (animaciones fluidas)
+ * - BeerCSS (componentes y tokens)
+ * - Exo (estética moderna)
+ * - Material 3 Expressive Catalog (paletas de color)
+ */
+
+/* ============================================
+   TOKENS DE COLOR MATERIAL 3
+   ============================================ */
+
+@define-color md_primary_palette_key_color #6750A4;
+@define-color md_secondary_palette_key_color #625B71;
+@define-color md_tertiary_palette_key_color #7D5260;
+@define-color md_neutral_palette_key_color #6C6A75;
+@define-color md_error_palette_key_color #B3261E;
+
+/* Primary Palette */
+@define-color md_sys_color_primary_0 #000000;
+@define-color md_sys_color_primary_10 #21005D;
+@define-color md_sys_color_primary_20 #381E72;
+@define-color md_sys_color_primary_25 #45297E;
+@define-color md_sys_color_primary_30 #4F378B;
+@define-color md_sys_color_primary_35 #594297;
+@define-color md_sys_color_primary_40 #6750A4;
+@define-color md_sys_color_primary_50 #7F67BE;
+@define-color md_sys_color_primary_60 #9A82DB;
+@define-color md_sys_color_primary_70 #B69DF8;
+@define-color md_sys_color_primary_80 #D0BCFF;
+@define-color md_sys_color_primary_90 #EADDFF;
+@define-color md_sys_color_primary_95 #F6EDFF;
+@define-color md_sys_color_primary_98 #FFFBFE;
+@define-color md_sys_color_primary_99 #FFFBFE;
+@define-color md_sys_color_primary_100 #FFFFFF;
+
+/* Secondary Palette */
+@define-color md_sys_color_secondary_0 #000000;
+@define-color md_sys_color_secondary_10 #1D192B;
+@define-color md_sys_color_secondary_20 #332D41;
+@define-color md_sys_color_secondary_25 #3E384D;
+@define-color md_sys_color_secondary_30 #4A4458;
+@define-color md_sys_color_secondary_35 #564F65;
+@define-color md_sys_color_secondary_40 #625B71;
+@define-color md_sys_color_secondary_50 #7A7289;
+@define-color md_sys_color_secondary_60 #958DA5;
+@define-color md_sys_color_secondary_70 #B0A7C0;
+@define-color md_sys_color_secondary_80 #CCC2DC;
+@define-color md_sys_color_secondary_90 #E8DEF8;
+@define-color md_sys_color_secondary_95 #F6EDFF;
+@define-color md_sys_color_secondary_98 #FFFBFE;
+@define-color md_sys_color_secondary_99 #FFFBFE;
+@define-color md_sys_color_secondary_100 #FFFFFF;
+
+/* Tertiary Palette */
+@define-color md_sys_color_tertiary_0 #000000;
+@define-color md_sys_color_tertiary_10 #31111D;
+@define-color md_sys_color_tertiary_20 #492532;
+@define-color md_sys_color_tertiary_25 #55303D;
+@define-color md_sys_color_tertiary_30 #633B48;
+@define-color md_sys_color_tertiary_35 #704653;
+@define-color md_sys_color_tertiary_40 #7D5260;
+@define-color md_sys_color_tertiary_50 #986977;
+@define-color md_sys_color_tertiary_60 #B58392;
+@define-color md_sys_color_tertiary_70 #D39DAC;
+@define-color md_sys_color_tertiary_80 #EFB8C8;
+@define-color md_sys_color_tertiary_90 #FFD8E4;
+@define-color md_sys_color_tertiary_95 #FFECF1;
+@define-color md_sys_color_tertiary_98 #FFF8F8;
+@define-color md_sys_color_tertiary_99 #FFFBFA;
+@define-color md_sys_color_tertiary_100 #FFFFFF;
+
+/* Error Palette */
+@define-color md_sys_color_error_0 #000000;
+@define-color md_sys_color_error_10 #410002;
+@define-color md_sys_color_error_20 #690005;
+@define-color md_sys_color_error_25 #7E0004;
+@define-color md_sys_color_error_30 #93000A;
+@define-color md_sys_color_error_35 #A80710;
+@define-color md_sys_color_error_40 #BA1A1A;
+@define-color md_sys_color_error_50 #DE3730;
+@define-color md_sys_color_error_60 #FF5449;
+@define-color md_sys_color_error_70 #FF897D;
+@define-color md_sys_color_error_80 #FFB4AB;
+@define-color md_sys_color_error_90 #FFDAD6;
+@define-color md_sys_color_error_95 #FFECE9;
+@define-color md_sys_color_error_98 #FFF8F7;
+@define-color md_sys_color_error_99 #FFFBFF;
+@define-color md_sys_color_error_100 #FFFFFF;
+
+/* Neutral Palette - Light Mode */
+@define-color md_sys_color_on_primary_light @md_sys_color_primary_100;
+@define-color md_sys_color_on_primary_container_light @md_sys_color_primary_30;
+@define-color md_sys_color_primary_container_light @md_sys_color_primary_90;
+@define-color md_sys_color_on_secondary_light @md_sys_color_secondary_100;
+@define-color md_sys_color_on_secondary_container_light @md_sys_color_secondary_30;
+@define-color md_sys_color_secondary_container_light @md_sys_color_secondary_90;
+@define-color md_sys_color_on_tertiary_light @md_sys_color_tertiary_100;
+@define-color md_sys_color_on_tertiary_container_light @md_sys_color_tertiary_30;
+@define-color md_sys_color_tertiary_container_light @md_sys_color_tertiary_90;
+@define-color md_sys_color_on_error_light @md_sys_color_error_100;
+@define-color md_sys_color_on_error_container_light @md_sys_color_error_30;
+@define-color md_sys_color_error_container_light @md_sys_color_error_90;
+@define-color md_sys_color_on_background_light #1C1B1F;
+@define-color md_sys_color_background_light #FFFBFE;
+@define-color md_sys_color_on_surface_light #1C1B1F;
+@define-color md_sys_color_on_surface_variant_light #49454F;
+@define-color md_sys_color_surface_light #FFFBFE;
+@define-color md_sys_color_surface_variant_light #E7E0EC;
+@define-color md_sys_color_outline_light #79747E;
+@define-color md_sys_color_outline_variant_light #CAC4D0;
+@define-color md_sys_color_inverse_surface_light #313033;
+@define-color md_sys_color_inverse_on_surface_light #F4EFF4;
+@define-color md_sys_color_inverse_primary_light #D0BCFF;
+@define-color md_sys_color_shadow_light #000000;
+@define-color md_sys_color_scrim_light #000000;
+
+/* Neutral Palette - Dark Mode */
+@define-color md_sys_color_on_primary_dark @md_sys_color_primary_20;
+@define-color md_sys_color_on_primary_container_dark @md_sys_color_primary_90;
+@define-color md_sys_color_primary_container_dark @md_sys_color_primary_30;
+@define-color md_sys_color_on_secondary_dark @md_sys_color_secondary_20;
+@define-color md_sys_color_on_secondary_container_dark @md_sys_color_secondary_90;
+@define-color md_sys_color_secondary_container_dark @md_sys_color_secondary_30;
+@define-color md_sys_color_on_tertiary_dark @md_sys_color_tertiary_20;
+@define-color md_sys_color_on_tertiary_container_dark @md_sys_color_tertiary_90;
+@define-color md_sys_color_tertiary_container_dark @md_sys_color_tertiary_30;
+@define-color md_sys_color_on_error_dark @md_sys_color_error_20;
+@define-color md_sys_color_on_error_container_dark @md_sys_color_error_90;
+@define-color md_sys_color_error_container_dark @md_sys_color_error_30;
+@define-color md_sys_color_on_background_dark #E6E1E5;
+@define-color md_sys_color_background_dark #141218;
+@define-color md_sys_color_on_surface_dark #E6E1E5;
+@define-color md_sys_color_on_surface_variant_dark #CAC4D0;
+@define-color md_sys_color_surface_dark #141218;
+@define-color md_sys_color_surface_variant_dark #49454F;
+@define-color md_sys_color_outline_dark #938F99;
+@define-color md_sys_color_outline_variant_dark #49454F;
+@define-color md_sys_color_inverse_surface_dark #E6E1E5;
+@define-color md_sys_color_inverse_on_surface_dark #313033;
+@define-color md_sys_color_inverse_primary_dark @md_sys_color_primary_40;
+@define-color md_sys_color_shadow_dark #000000;
+@define-color md_sys_color_scrim_dark #000000;
+
+/* ============================================
+   ANIMACIONES MATERIAL 3 EXPRESSIVE
+   Curvas Bezier oficiales de Material Design
+   ============================================ */
+
+/* Duraciones estándar */
+@keyframes material-enter {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes material-exit {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes material-slide-up-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes material-slide-up-exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes material-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes material-fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes material-scale-expand {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes material-ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes material-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes material-progress-indeterminate {
+  0% {
+    margin-left: -100%;
+  }
+  100% {
+    margin-left: 100%;
+  }
+}
+
+/* ============================================
+   VARIABLES GLOBALES
+   ============================================ */
+
+@define-color theme_fg_color @md_sys_color_on_surface_light;
+@define-color theme_bg_color @md_sys_color_background_light;
+@define-color theme_selected_bg_color @md_sys_color_primary_light;
+@define-color theme_selected_fg_color @md_sys_color_on_primary_light;
+@define-color insensitive_bg_color @md_sys_color_surface_variant_light;
+@define-color insensitive_fg_color @md_sys_color_outline_light;
+@define-color base_color @md_sys_color_background_light;
+@define-color text_color @md_sys_color_on_surface_light;
+@define-color border_color @md_sys_color_outline_variant_light;
+@define-color content_view_bg @md_sys_color_background_light;
+@define-color placeholder_text_color @md_sys_color_outline_light;
+
+/* Radius Material 3 */
+@define-color corner_radius_xs 4px;
+@define-color corner_radius_sm 8px;
+@define-color corner_radius_md 12px;
+@define-color corner_radius_lg 16px;
+@define-color corner_radius_xl 24px;
+@define-color corner_radius_full 9999px;
+
+/* Sombras Material 3 - Niveles de elevación */
+@define-shadow shadow_1 0px 1px 2px rgba(0,0,0,0.3), 0px 1px 3px 1px rgba(0,0,0,0.15);
+@define-shadow shadow_2 0px 1px 2px rgba(0,0,0,0.3), 0px 2px 6px 2px rgba(0,0,0,0.15);
+@define-shadow shadow_3 0px 4px 8px 3px rgba(0,0,0,0.15), 0px 1px 3px rgba(0,0,0,0.3);
+@define-shadow shadow_4 0px 6px 10px 4px rgba(0,0,0,0.15), 0px 2px 3px rgba(0,0,0,0.3);
+@define-shadow shadow_5 0px 8px 12px 6px rgba(0,0,0,0.15), 0px 4px 4px rgba(0,0,0,0.3);
+
+/* ============================================
+   WIDGETS BASE
+   ============================================ */
+
+* {
+  /* Tipografía Roboto Flex - Escala Material 3 */
+  font-family: 'Roboto Flex', 'Roboto', sans-serif;
+  font-feature-settings: "wght" var(--font-weight, 400);
+  
+  /* Transiciones suaves con curvas Material */
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1.0);
+  
+  /* Colores base */
+  color: @md_sys_color_on_surface_light;
+  background-color: @md_sys_color_background_light;
+}
+
+/* Modo Oscuro Automático */
+@media (prefers-color-scheme: dark) {
+  * {
+    color: @md_sys_color_on_surface_dark;
+    background-color: @md_sys_color_background_dark;
+  }
+  
+  window {
+    background-color: @md_sys_color_surface_dark;
+  }
+}
+
+/* ============================================
+   VENTANAS Y CONTENEDORES
+   ============================================ */
+
+window {
+  background-color: @md_sys_color_surface_light;
+  border-radius: @corner_radius_xl;
+  box-shadow: shadow_2;
+}
+
+window.csd {
+  border-radius: @corner_radius_xl;
+  margin: 0;
+}
+
+window.background {
+  background-color: @md_sys_color_surface_light;
+}
+
+/* Modo oscuro para ventanas */
+@media (prefers-color-scheme: dark) {
+  window {
+    background-color: @md_sys_color_surface_dark;
+    box-shadow: shadow_3;
+  }
+}
+
+/* ============================================
+   BOTONES - Material 3 Buttons
+   ============================================ */
+
+button {
+  min-height: 40px;
+  padding: 0 24px;
+  border-radius: @corner_radius_full;
+  border: none;
+  background-color: transparent;
+  color: @md_sys_color_primary_light;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.1px;
+  box-shadow: none;
+  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+button:hover {
+  background-color: alpha(@md_sys_color_primary_light, 0.08);
+  transition-duration: 150ms;
+}
+
+button:active {
+  background-color: alpha(@md_sys_color_primary_light, 0.12);
+  transform: scale(0.98);
+  transition-duration: 100ms;
+  transition-timing-function: cubic-bezier(0.4, 0.0, 0.6, 1.0);
+}
+
+button:focus {
+  outline: 2px solid @md_sys_color_primary_light;
+  outline-offset: 2px;
+}
+
+button:disabled {
+  color: @md_sys_color_outline_light;
+  background-color: transparent;
+}
+
+/* Filled Button */
+button.suggested-action {
+  background-color: @md_sys_color_primary_light;
+  color: @md_sys_color_on_primary_light;
+  box-shadow: shadow_1;
+}
+
+button.suggested-action:hover {
+  background-color: @md_sys_color_primary_50;
+  box-shadow: shadow_2;
+}
+
+button.suggested-action:active {
+  background-color: @md_sys_color_primary_35;
+  box-shadow: none;
+  transform: scale(0.96);
+}
+
+/* Destructive Action */
+button.destructive-action {
+  background-color: @md_sys_color_error_40;
+  color: @md_sys_color_on_error_light;
+}
+
+button.destructive-action:hover {
+  background-color: @md_sys_color_error_50;
+  box-shadow: shadow_2;
+}
+
+button.destructive-action:active {
+  background-color: @md_sys_color_error_35;
+}
+
+/* Text Button */
+button.text-button {
+  padding: 0 12px;
+  min-height: 36px;
+}
+
+/* Outlined Button */
+button.outlined {
+  border: 1px solid @md_sys_color_outline_light;
+  background-color: transparent;
+  color: @md_sys_color_primary_light;
+}
+
+button.outlined:hover {
+  background-color: alpha(@md_sys_color_primary_light, 0.08);
+}
+
+button.outlined:active {
+  background-color: alpha(@md_sys_color_primary_light, 0.12);
+}
+
+/* FAB - Floating Action Button */
+button.fab {
+  min-width: 56px;
+  min-height: 56px;
+  border-radius: @corner_radius_lg;
+  background-color: @md_sys_color_primary_container_light;
+  color: @md_sys_color_on_primary_container_light;
+  box-shadow: shadow_3;
+  padding: 0;
+}
+
+button.fab:hover {
+  background-color: @md_sys_color_primary_container_light;
+  box-shadow: shadow_4;
+  transform: scale(1.05);
+}
+
+button.fab:active {
+  box-shadow: shadow_2;
+  transform: scale(0.95);
+}
+
+/* Icon Button */
+button.circular {
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 9999px;
+  padding: 8px;
+}
+
+button.image-button {
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: @corner_radius_full;
+  padding: 8px;
+}
+
+/* ============================================
+   TARJETAS - Material 3 Cards
+   ============================================ */
+
+card {
+  background-color: @md_sys_color_surface_light;
+  border-radius: @corner_radius_md;
+  border: none;
+  box-shadow: shadow_1;
+  padding: 16px;
+  transition: all 300ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+card:hover {
+  box-shadow: shadow_2;
+  transform: translateY(-2px);
+}
+
+card.elevated {
+  box-shadow: shadow_2;
+}
+
+card.filled {
+  background-color: @md_sys_color_surface_variant_light;
+  box-shadow: none;
+}
+
+card.outlined {
+  background-color: transparent;
+  border: 1px solid @md_sys_color_outline_variant_light;
+  box-shadow: none;
+}
+
+/* ============================================
+   CAMPOS DE TEXTO - Material 3 Text Fields
+   ============================================ */
+
+entry {
+  min-height: 56px;
+  padding: 0 16px;
+  border-radius: @corner_radius_xs;
+  border: 1px solid @md_sys_color_outline_light;
+  background-color: @md_sys_color_surface_light;
+  color: @md_sys_color_on_surface_light;
+  font-size: 16px;
+  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+entry:focus {
+  border-color: @md_sys_color_primary_light;
+  border-width: 2px;
+  padding: 0 15px; /* Compensar borde más grueso */
+  box-shadow: inset 0 0 0 2px alpha(@md_sys_color_primary_light, 0.2);
+}
+
+entry:hover:not(:focus) {
+  border-color: @md_sys_color_on_surface_variant_light;
+}
+
+entry:disabled {
+  color: @md_sys_color_outline_light;
+  background-color: @md_sys_color_surface_variant_light;
+}
+
+entry.error {
+  border-color: @md_sys_color_error_40;
+}
+
+entry.warning {
+  border-color: @md_sys_color_error_60;
+}
+
+/* Entry con label flotante */
+entry.flat {
+  border: none;
+  border-bottom: 1px solid @md_sys_color_outline_light;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+entry.flat:focus {
+  border-bottom-color: @md_sys_color_primary_light;
+  border-bottom-width: 2px;
+}
+
+/* ============================================
+   BARRAS DE DESPLAZAMIENTO
+   ============================================ */
+
+scrollbar {
+  background-color: transparent;
+  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+scrollbar slider {
+  min-width: 8px;
+  min-height: 8px;
+  border-radius: @corner_radius_full;
+  background-color: @md_sys_color_outline_light;
+  margin: 4px;
+  transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+scrollbar slider:hover {
+  background-color: @md_sys_color_on_surface_variant_light;
+  min-width: 12px;
+  min-height: 12px;
+}
+
+scrollbar slider:active {
+  background-color: @md_sys_color_primary_light;
+}
+
+scrollbar.horizontal slider {
+  min-width: 40px;
+}
+
+scrollbar.vertical slider {
+  min-height: 40px;
+}
+
+/* ============================================
+   MENÚS Y POPOVERS
+   ============================================ */
+
+menu, .menu {
+  padding: 8px;
+  background-color: @md_sys_color_surface_light;
+  border-radius: @corner_radius_md;
+  border: none;
+  box-shadow: shadow_3;
+}
+
+menuitem {
+  min-height: 48px;
+  padding: 0 16px;
+  border-radius: @corner_radius_sm;
+  color: @md_sys_color_on_surface_light;
+  font-size: 14px;
+  transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+menuitem:hover {
+  background-color: alpha(@md_sys_color_primary_light, 0.08);
+}
+
+menuitem:active {
+  background-color: alpha(@md_sys_color_primary_light, 0.12);
+  transform: scale(0.98);
+}
+
+popover {
+  padding: 8px;
+  background-color: @md_sys_color_surface_light;
+  border-radius: @corner_radius_md;
+  border: none;
+  box-shadow: shadow_3;
+  transition: all 300ms cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+popover.background {
+  animation: material-enter 300ms cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+/* ============================================
+   SWITCHES - Material 3 Switches
+   ============================================ */
+
+switch {
+  min-width: 52px;
+  min-height: 32px;
+  border-radius: @corner_radius_full;
+  background-color: @md_sys_color_surface_variant_light;
+  border: 2px solid transparent;
+  transition: all 300ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+switch:checked {
+  background-color: @md_sys_color_primary_light;
+}
+
+switch:hover {
+  box-shadow: inset 0 0 0 2px alpha(@md_sys_color_on_surface_light, 0.1);
+}
+
+switch slider {
+  min-width: 16px;
+  min-height: 16px;
+  margin: 6px;
+  border-radius: @corner_radius_full;
+  background-color: @md_sys_color_outline_light;
+  box-shadow: shadow_1;
+  transition: all 300ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+switch:checked slider {
+  background-color: @md_sys_color_on_primary_light;
+  transform: translateX(20px);
+}
+
+switch:disabled {
+  opacity: 0.5;
+}
+
+/* ============================================
+   CHECKBOXES Y RADIOS
+   ============================================ */
+
+check, radio {
+  min-width: 20px;
+  min-height: 20px;
+  border-radius: @corner_radius_xs;
+  border: 2px solid @md_sys_color_outline_light;
+  background-color: transparent;
+  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+radio {
+  border-radius: 9999px;
+}
+
+check:checked, radio:checked {
+  background-color: @md_sys_color_primary_light;
+  border-color: @md_sys_color_primary_light;
+  color: @md_sys_color_on_primary_light;
+}
+
+check:hover, radio:hover {
+  border-color: @md_sys_color_on_surface_variant_light;
+  box-shadow: inset 0 0 0 2px alpha(@md_sys_color_primary_light, 0.1);
+}
+
+/* ============================================
+   BARRAS DE PROGRESO
+   ============================================ */
+
+progressbar {
+  min-height: 4px;
+  border-radius: @corner_radius_full;
+  background-color: @md_sys_color_surface_variant_light;
+  overflow: hidden;
+}
+
+progressbar progress {
+  background-color: @md_sys_color_primary_light;
+  border-radius: @corner_radius_full;
+  transition: width 300ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+progressbar:indeterminate {
+  background: linear-gradient(
+    90deg,
+    @md_sys_color_surface_variant_light 0%,
+    @md_sys_color_primary_light 50%,
+    @md_sys_color_surface_variant_light 100%
+  );
+  background-size: 200% 100%;
+  animation: material-shimmer 1.5s infinite linear;
+}
+
+/* ============================================
+   SLIDERS
+   ============================================ */
+
+scale {
+  min-height: 40px;
+}
+
+scale trough {
+  min-height: 4px;
+  border-radius: @corner_radius_full;
+  background-color: @md_sys_color_surface_variant_light;
+  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+scale highlight {
+  background-color: @md_sys_color_primary_light;
+  border-radius: @corner_radius_full;
+}
+
+scale slider {
+  min-width: 20px;
+  min-height: 20px;
+  margin: -8px;
+  border-radius: 9999px;
+  background-color: @md_sys_color_primary_light;
+  box-shadow: shadow_2;
+  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+scale slider:hover {
+  transform: scale(1.2);
+  box-shadow: shadow_3;
+}
+
+scale slider:active {
+  transform: scale(1.3);
+  background-color: @md_sys_color_primary_50;
+}
+
+/* ============================================
+   PESTAÑAS - Material 3 Tabs
+   ============================================ */
+
+tab {
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: @corner_radius_full;
+  color: @md_sys_color_on_surface_variant_light;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 300ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+tab:hover {
+  background-color: alpha(@md_sys_color_primary_light, 0.08);
+  color: @md_sys_color_on_surface_light;
+}
+
+tab:checked {
+  background-color: @md_sys_color_secondary_container_light;
+  color: @md_sys_color_on_secondary_container_light;
+}
+
+tabs > header.top,
+tabs > header.bottom {
+  padding: 4px;
+}
+
+tabs > header.left,
+tabs > header.right {
+  padding: 4px;
+}
+
+/* ============================================
+   LISTAS Y ÁRBOLES
+   ============================================ */
+
+list {
+  background-color: transparent;
+  border-radius: @corner_radius_md;
+}
+
+row {
+  padding: 12px 16px;
+  min-height: 52px;
+  border-radius: @corner_radius_sm;
+  transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+row:hover {
+  background-color: alpha(@md_sys_color_primary_light, 0.08);
+}
+
+row:active {
+  background-color: alpha(@md_sys_color_primary_light, 0.12);
+  transform: scale(0.99);
+}
+
+row:selected {
+  background-color: alpha(@md_sys_color_primary_light, 0.12);
+}
+
+row.expander {
+  padding: 0;
+}
+
+row.expander .expander-row {
+  padding: 12px 16px;
+}
+
+/* ============================================
+   DIÁLOGOS
+   ============================================ */
+
+messagedialog {
+  border-radius: @corner_radius_lg;
+  background-color: @md_sys_color_surface_light;
+  box-shadow: shadow_5;
+}
+
+messagedialog .titlebar {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  padding: 24px 24px 0 24px;
+}
+
+messagedialog .message-area {
+  padding: 24px;
+}
+
+messagedialog .dialog-action-box {
+  padding: 0 24px 24px 24px;
+}
+
+/* ============================================
+   TOOLTIP
+   ============================================ */
+
+tooltip {
+  padding: 8px 16px;
+  border-radius: @corner_radius_xs;
+  background-color: @md_sys_color_inverse_surface_light;
+  color: @md_sys_color_inverse_on_surface_light;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: shadow_2;
+  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+/* ============================================
+   SEPARADORES
+   ============================================ */
+
+separator {
+  min-height: 1px;
+  min-width: 1px;
+  background-color: @md_sys_color_outline_variant_light;
+  margin: 8px 0;
+}
+
+separator.vertical {
+  margin: 0 8px;
+}
+
+/* ============================================
+   ICONOS Y SÍMBOLOS
+   ============================================ */
+
+image {
+  -gtk-icon-transform: scale(1);
+  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+image:hover {
+  -gtk-icon-transform: scale(1.1);
+}
+
+/* ============================================
+   ESTADO DE CARGA - SKELETON
+   ============================================ */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    @md_sys_color_surface_variant_light 25%,
+    @md_sys_color_outline_variant_light 50%,
+    @md_sys_color_surface_variant_light 75%
+  );
+  background-size: 200% 100%;
+  animation: material-shimmer 1.5s infinite linear;
+  border-radius: @corner_radius_sm;
+}
+
+/* ============================================
+   EFECTO RIPPLE (Material Ripple)
+   ============================================ */
+
+.ripple-effect {
+  background-image: radial-gradient(
+    circle,
+    alpha(@md_sys_color_primary_light, 0.3) 0%,
+    transparent 70%
+  );
+  animation: material-ripple 600ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+/* ============================================
+   APLICACIONES ESPECÍFICAS
+   ============================================ */
+
+/* Nautilus Files */
+.nautilus-window {
+  background-color: @md_sys_color_surface_light;
+}
+
+.nautilus-window .sidebar {
+  background-color: @md_sys_color_surface_light;
+  border-right: 1px solid @md_sys_color_outline_variant_light;
+}
+
+/* GNOME Settings */
+.settings-window {
+  background-color: @md_sys_color_surface_light;
+}
+
+/* Terminal */
+terminal-window {
+  background-color: #1C1B1F;
+  color: #E6E1E5;
+}
+
+/* ============================================
+   UTILIDADES DE ANIMACIÓN
+   ============================================ */
+
+.animated-enter {
+  animation: material-enter 300ms cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+.animated-exit {
+  animation: material-exit 200ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+.animated-slide-up {
+  animation: material-slide-up-enter 400ms cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+.animated-fade-in {
+  animation: material-fade-in 200ms ease-out;
+}
+
+.animated-scale {
+  animation: material-scale-expand 300ms cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+/* Estados de hover mejorados */
+.hoverable:hover {
+  filter: brightness(1.05);
+}
+
+/* Efecto de enfoque accesible */
+*:focus-visible {
+  outline: 2px solid @md_sys_color_primary_light;
+  outline-offset: 2px;
+  border-radius: @corner_radius_sm;
+}
+
+/* ============================================
+   MEDIA QUERIES PARA DIFERENTES TAMAÑOS
+   ============================================ */
+
+@media (min-width: 1200px) {
+  /* Pantallas grandes - más espacio */
+  button {
+    padding: 0 32px;
+    min-height: 48px;
+  }
+  
+  entry {
+    min-height: 64px;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Dispositivos pequeños - compacto */
+  button {
+    padding: 0 16px;
+    min-height: 36px;
+  }
+  
+  card {
+    padding: 12px;
+  }
+}
+
+/* ============================================
+   FIN DEL TEMA MATERIAL 3 EXPRESSIVE
+   ============================================ */

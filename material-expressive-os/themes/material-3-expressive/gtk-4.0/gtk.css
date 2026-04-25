@@ -1,0 +1,53 @@
+/*
+ * Material 3 Expressive - GTK Theme Configuration
+ * Tema principal basado en Material Design 3 Expressive
+ */
+
+@define-color accent_color #D0BCFF;
+@define-color accent_bg_color #4F378B;
+@define-color accent_fg_color #FFFFFF;
+@define-color destructive_color #FFB4AB;
+@define-color destructive_bg_color #BA1A1A;
+@define-color destructive_fg_color #FFFFFF;
+@define-color success_color #B7F4C3;
+@define-color success_bg_color #006E1C;
+@define-color success_fg_color #FFFFFF;
+@define-color warning_color #FFE995;
+@define-color warning_bg_color #7A5C00;
+@define-color warning_fg_color #FFFFFF;
+@define-color error_color #FFB4AB;
+@define-color error_bg_color #BA1A1A;
+@define-color error_fg_color #FFFFFF;
+
+@define-color window_bg_color #141218;
+@define-color window_fg_color #E6E1E5;
+@define-color view_bg_color #141218;
+@define-color view_fg_color #E6E1E5;
+@define-color headerbar_bg_color #141218;
+@define-color headerbar_fg_color #E6E1E5;
+@define-color headerbar_border_color #444746;
+@define-color headerbar_backdrop_color @window_bg_color;
+@define-color headerbar_shade_color rgba(0, 0, 0, 0.36);
+@define-color card_bg_color #141218;
+@define-color card_fg_color #E6E1E5;
+@define-color card_shade_color rgba(0, 0, 0, 0.36);
+@define-color dialog_bg_color #141218;
+@define-color dialog_fg_color #E6E1E5;
+@define-color popover_bg_color #141218;
+@define-color popover_fg_color #E6E1E5;
+@define-color shade_color rgba(0, 0, 0, 0.36);
+@define-color scrollbar_outline_color rgba(255, 255, 255, 0.5);
+
+/* Bordes redondeados Material 3 */
+@define-color border_radius_small 8px;
+@define-color border_radius_medium 12px;
+@define-color border_radius_large 16px;
+@define-color border_radius_extra_large 28px;
+
+/* Sombras y elevaciones */
+@define-color shadow_small 0px 1px 2px rgba(0, 0, 0, 0.3),
+                          0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+@define-color shadow_medium 0px 1px 2px rgba(0, 0, 0, 0.3),
+                            0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+@define-color shadow_large 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+                          0px 1px 3px rgba(0, 0, 0, 0.3);

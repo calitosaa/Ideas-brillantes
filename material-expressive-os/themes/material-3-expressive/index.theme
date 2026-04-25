@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Material 3 Expressive Dark
+Comment=Material Design 3 Expressive dark theme inspired by Google Pixel
+GTKTheme=material-3-expressive
+IconTheme=Tela-circle-dark
+CursorTheme=Adwaita
+Font=Roboto Flex 11
+MonospaceFont=Roboto Mono 10
+DocumentFont=Roboto Regular 11
+ApplicationPreferDarkTheme=true
