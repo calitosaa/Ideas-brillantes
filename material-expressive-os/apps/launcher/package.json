@@ -1,0 +1,20 @@
+{
+  "name": "@material-expressive/launcher",
+  "version": "1.0.0",
+  "description": "Material 3 Expressive App Launcher - Pixel-style launcher for GNOME",
+  "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/main.js",
+    "dev": "nodemon src/main.js",
+    "build": "echo 'Building launcher...'"
+  },
+  "keywords": [
+    "launcher",
+    "gnome",
+    "material-3",
+    "pixel"
+  ],
+  "author": "Material Expressive Team",
+  "license": "MIT"
+}

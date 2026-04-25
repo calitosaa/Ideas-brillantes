@@ -1,0 +1,49 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Material 3 Expressive OS Logo -->
+  <!-- Diseño inspirado en Material Design con formas expresivas -->
+  
+  <!-- Fondo circular con gradiente Material 3 -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4F378B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D0BCFF;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#EFB8C8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFD9E3;stop-opacity:1" />
+    </linearGradient>
+    
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Círculo base -->
+  <circle cx="256" cy="256" r="240" fill="url(#bgGradient)" filter="url(#shadow)"/>
+  
+  <!-- Forma expresiva Material 3 (rounded square) -->
+  <rect x="156" y="156" width="200" height="200" rx="56" fill="white" fill-opacity="0.15"/>
+  
+  <!-- Elemento central - M estilizada -->
+  <path d="M 200 220 L 200 320 L 230 320 L 230 260 L 256 290 L 282 260 L 282 320 L 312 320 L 312 220 L 282 220 L 256 250 L 230 220 Z" 
+        fill="url(#accentGradient)" 
+        filter="url(#shadow)"/>
+  
+  <!-- Puntos decorativos Material 3 -->
+  <circle cx="180" cy="180" r="12" fill="#EFB8C8" opacity="0.8"/>
+  <circle cx="332" cy="180" r="8" fill="#D0BCFF" opacity="0.6"/>
+  <circle cx="180" cy="332" r="10" fill="#B7F4C3" opacity="0.7"/>
+  <circle cx="332" cy="332" r="14" fill="#FFE995" opacity="0.5"/>
+  
+  <!-- Anillo decorativo -->
+  <circle cx="256" cy="256" r="180" stroke="white" stroke-width="2" stroke-opacity="0.2" fill="none"/>
+  
+  <!-- Texto opcional (comentado para logo limpio) -->
+  <!--
+  <text x="256" y="420" font-family="Roboto Flex, sans-serif" font-size="24" font-weight="500" 
+        fill="white" text-anchor="middle" opacity="0.9">Material 3</text>
+  <text x="256" y="445" font-family="Roboto Flex, sans-serif" font-size="16" font-weight="400" 
+        fill="white" text-anchor="middle" opacity="0.7">Expressive OS</text>
+  -->
+</svg>

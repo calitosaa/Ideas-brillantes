@@ -1,0 +1,94 @@
+# Maia OS - .gitignore
+
+# Output directory (ISOs generadas)
+output/
+*.iso
+*.iso.sha256
+*.iso.md5
+
+# Directorio de trabajo temporal
+work/
+chroot/
+tmp/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# IDE y editores
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.project
+.settings/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+ENV/
+env/
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Backups
+*.bak
+*.backup
+*.old
+
+# Certificados y llaves privadas
+*.key
+*.pem
+!.gitkeep
+
+# Configuración local
+local.conf
+custom.sh
+.secrets
+
+# Paquetes .deb temporales
+packages/*.deb
+!packages/.gitkeep
+
+# Caché de builds
+.cache/
+ccache/
+
+# Máquinas virtuales de testing
+*.qcow2
+*.vdi
+*.vmdk
+*.ova
+
+# Documentación generada
+docs/_build/
+docs/build/
+
+# Archivos grandes de assets (usar Git LFS)
+assets/wallpapers/*.jpg
+assets/wallpapers/*.png
+assets/fonts/*.ttf
+assets/fonts/*.otf
+
+# Snapshots y checkpoints
+snapshots/
+checkpoints/
+
+# Testing
+coverage/
+.coverage
+htmlcov/
+.pytest_cache/

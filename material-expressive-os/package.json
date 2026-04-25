@@ -1,0 +1,34 @@
+{
+  "name": "material-expressive-os",
+  "version": "1.0.0",
+  "description": "Material 3 Expressive OS - Linux distribution with Material Design 3 UI",
+  "author": "Material Expressive Team",
+  "license": "MIT",
+  "scripts": {
+    "install:theme": "./scripts/install-theme.sh",
+    "build:apps": "npm run build --workspaces",
+    "dev": "npm run dev --workspaces"
+  },
+  "workspaces": [
+    "apps/*"
+  ],
+  "keywords": [
+    "material-design",
+    "material-3",
+    "gnome",
+    "linux",
+    "gtk",
+    "expressive",
+    "pixel"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tu-usuario/material-expressive-os.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tu-usuario/material-expressive-os/issues"
+  },
+  "homepage": "https://github.com/tu-usuario/material-expressive-os#readme",
+  "dependencies": {},
+  "devDependencies": {}
+}

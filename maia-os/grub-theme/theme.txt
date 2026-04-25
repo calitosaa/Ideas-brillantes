@@ -1,0 +1,82 @@
+# Maia OS GRUB Theme - Material 3 Expressive
+# Tema de arranque inspirado en Google Pixel
+
+# Fondo
+desktop-image: "background.png"
+desktop-color: "#141218"
+
+# Título
+title-text: "Maia OS"
+title-font: "Roboto Flex Bold 48"
+title-color: "#E6E1E5"
+title-left: 50%
+title-top: 30%
+title-align: center
+
+# Mensaje de boot
+message-font: "Roboto Flex Regular 16"
+message-color: "#CAC4D0"
+message-left: 50%
+message-top: 40%
+message-align: center
+
+# Terminal de boot
+terminal-font: "Roboto Mono Regular 14"
+terminal-box: "terminal_box_*.png"
+terminal-left: 10%
+terminal-top: 50%
+terminal-width: 80%
+terminal-height: 40%
+
+# Menu de entrada
++ boot_menu {
+    left = 25%
+    top = 55%
+    width = 50%
+    height = 35%
+    
+    # Items del menú
+    item_font = "Roboto Flex Regular 20"
+    item_color = "#CAC4D0"
+    selected_item_font = "Roboto Flex Bold 20"
+    selected_item_color = "#E6E1E5"
+    
+    # Espaciado
+    item_height = 50
+    item_padding = 0
+    item_spacing = 16
+    
+    # Icono de item seleccionado
+    icon_width = 48
+    icon_height = 48
+    item_icon_space = 16
+    
+    # Fondo del item seleccionado (Material 3 Primary Container)
+    selected_item_pixmap_style = "selected_*.png"
+}
+
+# Barra de progreso
++ progress_bar {
+    id = "__timeout__"
+    left = 35%
+    top = 90%
+    width = 30%
+    height = 4
+    
+    # Colores Material 3
+    fg_color = "#6750A4"
+    bg_color = "#49454F"
+    
+    border = false
+}
+
+# Contador de timeout
++ label {
+    id = "__timeout__"
+    text = "@TIMEOUT@"
+    font = "Roboto Mono Regular 16"
+    color = "#938F99"
+    left = 50%
+    top = 92%
+    align = center
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <!-- Maia Files Icon - Material 3 Expressive -->
+  <defs>
+    <linearGradient id="folderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6750A4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#9A82DB;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Folder body -->
+  <path d="M4 10 L4 38 C4 40.2 5.8 42 8 42 L40 42 C42.2 42 44 40.2 44 38 L44 14 C44 11.8 42.2 10 40 10 L24 10 L20 6 L8 6 C5.8 6 4 7.8 4 10 Z" 
+        fill="url(#folderGradient)" filter="url(#shadow)"/>
+  
+  <!-- Folder tab highlight -->
+  <path d="M8 6 L20 6 L22 10 L8 10 Z" fill="#FFFFFF" opacity="0.2"/>
+  
+  <!-- Material design accent -->
+  <circle cx="24" cy="26" r="8" fill="#FFFFFF" opacity="0.3"/>
+  <path d="M24 22 L24 30 M20 26 L28 26" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+</svg>

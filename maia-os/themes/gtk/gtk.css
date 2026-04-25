@@ -1,0 +1,476 @@
+/*
+ * Maia OS - Material 3 Expressive GTK Theme
+ * Tema completo para GTK 3 y GTK 4 basado en Material Design 3 Expressive
+ * Inspirado en Google Pixel Experience para PC
+ */
+
+/* ============================================
+   VARIABLES DE COLOR - MATERIAL 3 EXPRESSIVE
+   ============================================ */
+
+@define-color md_primary #6750A4;
+@define-color md_on_primary #FFFFFF;
+@define-color md_primary_container #E8DEF8;
+@define-color md_on_primary_container #21005D;
+@define-color md_secondary #625B71;
+@define-color md_on_secondary #FFFFFF;
+@define-color md_secondary_container #E8DEF8;
+@define-color md_on_secondary_container #1D192B;
+@define-color md_tertiary #7D5260;
+@define-color md_on_tertiary #FFFFFF;
+@define-color md_tertiary_container #FFD8E4;
+@define-color md_on_tertiary_container #31111D;
+@define-color md_error #B3261E;
+@define-color md_on_error #FFFFFF;
+@define-color md_error_container #F9DEDC;
+@define-color md_on_error_container #410E0B;
+@define-color md_background #141218;
+@define-color md_on_background #E6E1E5;
+@define-color md_surface #141218;
+@define-color md_on_surface #E6E1E5;
+@define-color md_surface_variant #49454F;
+@define-color md_on_surface_variant #CAC4D0;
+@define-color md_outline #938F99;
+@define-color md_inverse_surface #E6E1E5;
+@define-color md_inverse_on_surface #313033;
+@define-color md_elevation_surface #1E1B23;
+@define-color md_shadow #000000;
+
+/* Dark theme colors */
+@define-color window_bg_color #141218;
+@define-color window_fg_color #E6E1E5;
+@define-color headerbar_bg_color #1E1B23;
+@define-color headerbar_fg_color #E6E1E5;
+@define-color headerbar_border_color #49454F;
+@define-color view_bg_color #141218;
+@define-color view_fg_color #E6E1E5;
+@define-color card_bg_color #1E1B23;
+@define-color card_fg_color #E6E1E5;
+@define-color popover_bg_color #2D2933;
+@define-color popover_fg_color #E6E1E5;
+@define-color dialog_bg_color #2D2933;
+@define-color dialog_fg_color #E6E1E5;
+@define-color sidebar_bg_color #1E1B23;
+@define-color sidebar_fg_color #E6E1E5;
+@define-color sidebar_border_color #49454F;
+@define-color secondary_sidebar_bg_color #1E1B23;
+@define-color secondary_sidebar_fg_color #E6E1E5;
+
+/* Accent colors */
+@define-color accent_bg_color @md_primary;
+@define-color accent_fg_color @md_on_primary;
+@define-color accent_color @md_primary;
+@define-color destructive_bg_color @md_error;
+@define-color destructive_fg_color @md_on_error;
+@define-color destructive_color @md_error;
+@define-color success_bg_color #4CAF50;
+@define-color success_fg_color #FFFFFF;
+@define-color warning_bg_color #FFC107;
+@define-color warning_fg_color #000000;
+@define-color error_bg_color @md_error;
+@define-color error_fg_color @md_on_error;
+
+/* ============================================
+   CONFIGURACIÓN GENERAL
+   ============================================ */
+
+@define-color borders @md_surface_variant;
+@define-color unfocused_borders @md_outline;
+@define-color focus_border @md_primary;
+@define-color link_color #D0BCFF;
+@define-color link_visited_color #B3261E;
+
+/* Border radius - Material 3 Expressive */
+@define-color border_radius_small 8px;
+@define-color border_radius_medium 12px;
+@define-color border_radius_large 16px;
+@define-color border_radius_xlarge 24px;
+@define-color border_radius_xxxlarge 28px;
+
+/* ============================================
+   WIDGETS - GTK 3 & GTK 4
+   ============================================ */
+
+/* Ventanas */
+window {
+    background-color: @window_bg_color;
+    color: @window_fg_color;
+}
+
+window.csd {
+    border-radius: @border_radius_xlarge;
+}
+
+/* Header Bars */
+headerbar {
+    background-color: @headerbar_bg_color;
+    color: @headerbar_fg_color;
+    border-bottom: 1px solid @headerbar_border_color;
+    padding: 8px 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+headerbar.titlebar {
+    border-radius: @border_radius_xlarge @border_radius_xlarge 0 0;
+}
+
+headerbar entry,
+headerbar button,
+headerbar switch {
+    border-radius: @border_radius_medium;
+}
+
+/* Botones */
+button {
+    background-color: @card_bg_color;
+    color: @card_fg_color;
+    border: none;
+    border-radius: @border_radius_medium;
+    padding: 8px 16px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 250ms cubic-bezier(0.2, 0.0, 0, 1.0);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background-color: @md_surface_variant;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
+}
+
+button:active {
+    background-color: @md_primary;
+    color: @md_on_primary;
+    box-shadow: 0 4px 8px rgba(103, 80, 164, 0.4);
+    transform: translateY(0);
+}
+
+button.suggested-action {
+    background-color: @md_primary;
+    color: @md_on_primary;
+}
+
+button.suggested-action:hover {
+    background-color: #7B6BB4;
+}
+
+button.destructive-action {
+    background-color: @md_error;
+    color: @md_on_error;
+}
+
+button.flat {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+button.flat:hover {
+    background-color: rgba(230, 225, 229, 0.08);
+}
+
+/* Entries (campos de texto) */
+entry {
+    background-color: @view_bg_color;
+    color: @view_fg_color;
+    border: 1px solid @md_outline;
+    border-radius: @border_radius_medium;
+    padding: 10px 14px;
+    font-size: 14px;
+    transition: all 200ms cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+entry:focus {
+    border-color: @md_primary;
+    box-shadow: 0 0 0 2px rgba(103, 80, 164, 0.3);
+}
+
+entry:disabled {
+    background-color: @md_surface_variant;
+    color: @md_on_surface_variant;
+}
+
+/* Tarjetas */
+card {
+    background-color: @card_bg_color;
+    color: @card_fg_color;
+    border-radius: @border_radius_large;
+    padding: 16px;
+    border: 1px solid @borders;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 250ms cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Listas */
+list {
+    background-color: @view_bg_color;
+    border-radius: @border_radius_large;
+}
+
+list row {
+    padding: 12px 16px;
+    transition: all 150ms cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+list row:hover {
+    background-color: rgba(230, 225, 229, 0.08);
+}
+
+list row:selected {
+    background-color: @md_primary_container;
+    color: @md_on_primary_container;
+}
+
+/* Sidebar */
+sidebar {
+    background-color: @sidebar_bg_color;
+    color: @sidebar_fg_color;
+    border-right: 1px solid @sidebar_border_color;
+}
+
+sidebar list {
+    background-color: transparent;
+}
+
+/* Popovers */
+popover {
+    background-color: @popover_bg_color;
+    color: @popover_fg_color;
+    border-radius: @border_radius_xlarge;
+    border: 1px solid @borders;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    padding: 8px;
+}
+
+popover menu {
+    padding: 8px;
+}
+
+popover menu menuitem {
+    padding: 10px 16px;
+    border-radius: @border_radius_medium;
+    transition: all 150ms cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+popover menu menuitem:hover {
+    background-color: rgba(230, 225, 229, 0.08);
+}
+
+/* Diálogos */
+window.dialog.message {
+    background-color: @dialog_bg_color;
+    color: @dialog_fg_color;
+    border-radius: @border_radius_xlarge;
+    border: 1px solid @borders;
+}
+
+/* Switches */
+switch {
+    background-color: @md_surface_variant;
+    border-radius: 28px;
+    min-width: 52px;
+    min-height: 32px;
+    transition: all 250ms cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+switch:checked {
+    background-color: @md_primary;
+}
+
+switch slider {
+    background-color: @md_on_surface;
+    border-radius: 50%;
+    margin: 4px;
+    min-width: 24px;
+    min-height: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: all 250ms cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+switch:checked slider {
+    background-color: @md_on_primary;
+    transform: translateX(20px);
+}
+
+/* Progress bars */
+progressbar progress {
+    background-color: @md_primary;
+    border-radius: 4px;
+    min-height: 4px;
+}
+
+progressbar trough {
+    background-color: @md_surface_variant;
+    border-radius: 4px;
+}
+
+/* Scrollbars */
+scrollbar {
+    background-color: transparent;
+}
+
+scrollbar slider {
+    background-color: @md_outline;
+    border-radius: 8px;
+    min-width: 8px;
+    min-height: 8px;
+    margin: 4px;
+}
+
+scrollbar slider:hover {
+    background-color: @md_on_surface_variant;
+}
+
+/* Tabs */
+tab {
+    background-color: transparent;
+    color: @md_on_surface_variant;
+    border-radius: @border_radius_medium;
+    padding: 8px 16px;
+    transition: all 200ms cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+tab:checked {
+    background-color: @md_primary_container;
+    color: @md_on_primary_container;
+}
+
+tab:hover:not(:checked) {
+    background-color: rgba(230, 225, 229, 0.08);
+}
+
+/* Tooltips */
+tooltip {
+    background-color: @md_elevation_surface;
+    color: @md_on_surface;
+    border-radius: @border_radius_medium;
+    padding: 8px 12px;
+    font-size: 13px;
+    border: none;
+}
+
+/* Menus */
+menu {
+    background-color: @popover_bg_color;
+    color: @popover_fg_color;
+    border-radius: @border_radius_large;
+    border: 1px solid @borders;
+    padding: 8px;
+}
+
+menu menuitem {
+    padding: 10px 16px;
+    border-radius: @border_radius_medium;
+    transition: all 150ms cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+menu menuitem:hover {
+    background-color: rgba(230, 225, 229, 0.08);
+}
+
+/* ============================================
+   APLICACIONES ESPECÍFICAS
+   ============================================ */
+
+/* Nautilus (Files) */
+.nautilus-window headerbar {
+    background-color: @headerbar_bg_color;
+}
+
+.nautilus-window .sidebar {
+    background-color: @sidebar_bg_color;
+}
+
+/* Terminal */
+terminal-window {
+    background-color: #0D0D0D;
+}
+
+vte-terminal {
+    border-radius: @border_radius_large;
+}
+
+/* Settings */
+.settings-window stacksidebar {
+    background-color: @sidebar_bg_color;
+}
+
+/* GNOME Software */
+gnome-software-window headerbar {
+    background-color: @headerbar_bg_color;
+}
+
+/* ============================================
+   ANIMACIONES MATERIAL 3
+   ============================================ */
+
+@keyframes fade_in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slide_up {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scale_up {
+    from { 
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to { 
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Aplicar animaciones */
+window {
+    animation: fade_in 150ms cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+button:active {
+    animation: scale_up 150ms cubic-bezier(0.2, 0.0, 0, 1.0);
+}
+
+/* ============================================
+   MODO CLARO (Light Theme Override)
+   ============================================ */
+
+@media (prefers-color-scheme: light) {
+    @define-color md_primary #6750A4;
+    @define-color md_on_primary #FFFFFF;
+    @define-color md_primary_container #E8DEF8;
+    @define-color md_on_primary_container #21005D;
+    @define-color md_background #FFFBFE;
+    @define-color md_on_background #1D1B20;
+    @define-color md_surface #FFFBFE;
+    @define-color md_on_surface #1D1B20;
+    @define-color md_surface_variant #E7E0EC;
+    @define-color md_on_surface_variant #49454F;
+    
+    @define-color window_bg_color #FFFBFE;
+    @define-color window_fg_color #1D1B20;
+    @define-color headerbar_bg_color #F3EDF7;
+    @define-color headerbar_fg_color #1D1B20;
+    @define-color card_bg_color #F3EDF7;
+    @define-color card_fg_color #1D1B20;
+    @define-color popover_bg_color #FFFFFF;
+    @define-color popover_fg_color #1D1B20;
+    @define-color dialog_bg_color #FFFFFF;
+    @define-color dialog_fg_color #1D1B20;
+    @define-color sidebar_bg_color #F3EDF7;
+    @define-color sidebar_fg_color #1D1B20;
+}
