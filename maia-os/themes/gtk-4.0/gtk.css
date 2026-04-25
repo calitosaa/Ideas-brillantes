@@ -1,1039 +1,1357 @@
-/*
- * Maia OS GTK Theme - Material 3 Expressive
- * Basado en las guías oficiales de Material Design 3
- * https://m3.material.io/
- * 
- * Inspirado en:
- * - Runixe786/Expressive-Windows (animaciones fluidas)
- * - BeerCSS (componentes y tokens)
- * - Exo (estética moderna)
- * - Material 3 Expressive Catalog (paletas de color)
- */
+# =============================================================================
+# MAIA OS - Material 3 Expressive Theme for GTK4/Libadwaita
+# Basado en: Material Design 3 Guidelines (m3.material.io)
+# Inspirado en: Expressive Windows, Beer CSS, Exo, M3 Expressive Catalog
+# =============================================================================
 
-/* ============================================
-   TOKENS DE COLOR MATERIAL 3
-   ============================================ */
+/* -----------------------------------------------------------------------------
+   MATERIAL 3 EXPRESSIVE COLOR SYSTEM
+   Paleta completa con tonos 0-100 para Primary, Secondary, Tertiary, Error
+   -------------------------------------------------------------------------- */
 
-@define-color md_primary_palette_key_color #6750A4;
-@define-color md_secondary_palette_key_color #625B71;
-@define-color md_tertiary_palette_key_color #7D5260;
-@define-color md_neutral_palette_key_color #6C6A75;
-@define-color md_error_palette_key_color #B3261E;
+@define-color primary_palette_key_color #9f86ff;
+@define-color secondary_palette_key_color #645d74;
+@define-color tertiary_palette_key_color #7e5260;
+@define-color error_palette_key_color #ba1a1a;
+@define-color neutral_palette_key_color #79747e;
+@define-color neutral_variant_palette_key_color #79747e;
 
-/* Primary Palette */
-@define-color md_sys_color_primary_0 #000000;
-@define-color md_sys_color_primary_10 #21005D;
-@define-color md_sys_color_primary_20 #381E72;
-@define-color md_sys_color_primary_25 #45297E;
-@define-color md_sys_color_primary_30 #4F378B;
-@define-color md_sys_color_primary_35 #594297;
-@define-color md_sys_color_primary_40 #6750A4;
-@define-color md_sys_color_primary_50 #7F67BE;
-@define-color md_sys_color_primary_60 #9A82DB;
-@define-color md_sys_color_primary_70 #B69DF8;
-@define-color md_sys_color_primary_80 #D0BCFF;
-@define-color md_sys_color_primary_90 #EADDFF;
-@define-color md_sys_color_primary_95 #F6EDFF;
-@define-color md_sys_color_primary_98 #FFFBFE;
-@define-color md_sys_color_primary_99 #FFFBFE;
-@define-color md_sys_color_primary_100 #FFFFFF;
+/* Primary Palette - Tonos 0-100 */
+@define-color primary_0 #000000;
+@define-color primary_10 #21005d;
+@define-color primary_20 #38007a;
+@define-color primary_30 #4f1b92;
+@define-color primary_40 #6734a8;
+@define-color primary_50 #7f4dbf;
+@define-color primary_60 #9867d9;
+@define-color primary_70 #b382f4;
+@define-color primary_80 #cf9eff;
+@define-color primary_90 #ebddff;
+@define-color primary_95 #f8edff;
+@define-color primary_100 #ffffff;
+
+/* On Primary */
+@define-color on_primary_0 #ffffff;
+@define-color on_primary_10 #ffffff;
+@define-color on_primary_20 #ffffff;
+@define-color on_primary_30 #ffffff;
+@define-color on_primary_40 #ffffff;
+@define-color on_primary_50 #ffffff;
+@define-color on_primary_60 #000000;
+@define-color on_primary_70 #000000;
+@define-color on_primary_80 #1e0060;
+@define-color on_primary_90 #372673;
+@define-color on_primary_95 #44337f;
+@define-color on_primary_100 #000000;
+
+/* Primary Container */
+@define-color primary_container_0 #21005d;
+@define-color primary_container_10 #2f0d6e;
+@define-color primary_container_20 #3d1a7f;
+@define-color primary_container_30 #4c2791;
+@define-color primary_container_40 #5b35a3;
+@define-color primary_container_50 #6b43b6;
+@define-color primary_container_60 #7c52ca;
+@define-color primary_container_70 #8e62de;
+@define-color primary_container_80 #a073f3;
+@define-color primary_container_90 #b385ff;
+@define-color primary_container_95 #c49aff;
+@define-color primary_container_100 #d6afff;
+
+/* On Primary Container */
+@define-color on_primary_container_0 #ffffff;
+@define-color on_primary_container_10 #ffffff;
+@define-color on_primary_container_20 #ffffff;
+@define-color on_primary_container_30 #ffffff;
+@define-color on_primary_container_40 #ffffff;
+@define-color on_primary_container_50 #ffffff;
+@define-color on_primary_container_60 #ffffff;
+@define-color on_primary_container_70 #000000;
+@define-color on_primary_container_80 #000000;
+@define-color on_primary_container_90 #1e0060;
+@define-color on_primary_container_95 #2a0a6b;
+@define-color on_primary_container_100 #372673;
 
 /* Secondary Palette */
-@define-color md_sys_color_secondary_0 #000000;
-@define-color md_sys_color_secondary_10 #1D192B;
-@define-color md_sys_color_secondary_20 #332D41;
-@define-color md_sys_color_secondary_25 #3E384D;
-@define-color md_sys_color_secondary_30 #4A4458;
-@define-color md_sys_color_secondary_35 #564F65;
-@define-color md_sys_color_secondary_40 #625B71;
-@define-color md_sys_color_secondary_50 #7A7289;
-@define-color md_sys_color_secondary_60 #958DA5;
-@define-color md_sys_color_secondary_70 #B0A7C0;
-@define-color md_sys_color_secondary_80 #CCC2DC;
-@define-color md_sys_color_secondary_90 #E8DEF8;
-@define-color md_sys_color_secondary_95 #F6EDFF;
-@define-color md_sys_color_secondary_98 #FFFBFE;
-@define-color md_sys_color_secondary_99 #FFFBFE;
-@define-color md_sys_color_secondary_100 #FFFFFF;
+@define-color secondary_0 #000000;
+@define-color secondary_10 #28283a;
+@define-color secondary_20 #3c3c4f;
+@define-color secondary_30 #505065;
+@define-color secondary_40 #65647b;
+@define-color secondary_50 #7a7891;
+@define-color secondary_60 #908ea9;
+@define-color secondary_70 #aba9c5;
+@define-color secondary_80 #c6c4e2;
+@define-color secondary_90 #e3e0ff;
+@define-color secondary_95 #f2eeff;
+@define-color secondary_100 #ffffff;
+
+@define-color on_secondary_0 #ffffff;
+@define-color on_secondary_10 #ffffff;
+@define-color on_secondary_20 #ffffff;
+@define-color on_secondary_30 #ffffff;
+@define-color on_secondary_40 #ffffff;
+@define-color on_secondary_50 #ffffff;
+@define-color on_secondary_60 #000000;
+@define-color on_secondary_70 #000000;
+@define-color on_secondary_80 #000000;
+@define-color on_secondary_90 #1e182b;
+@define-color on_secondary_95 #2a2236;
+@define-color on_secondary_100 #372f44;
+
+/* Secondary Container */
+@define-color secondary_container_0 #28283a;
+@define-color secondary_container_10 #343448;
+@define-color secondary_container_20 #414156;
+@define-color secondary_container_30 #4e4e65;
+@define-color secondary_container_40 #5c5c74;
+@define-color secondary_container_50 #6b6a84;
+@define-color secondary_container_60 #7a7995;
+@define-color secondary_container_70 #8a89a7;
+@define-color secondary_container_80 #9b99b9;
+@define-color secondary_container_90 #acabd;
+@define-color secondary_container_95 #bebdf1;
+@define-color secondary_container_100 #d0cfff;
+
+@define-color on_secondary_container_0 #ffffff;
+@define-color on_secondary_container_10 #ffffff;
+@define-color on_secondary_container_20 #ffffff;
+@define-color on_secondary_container_30 #ffffff;
+@define-color on_secondary_container_40 #ffffff;
+@define-color on_secondary_container_50 #ffffff;
+@define-color on_secondary_container_60 #ffffff;
+@define-color on_secondary_container_70 #000000;
+@define-color on_secondary_container_80 #000000;
+@define-color on_secondary_container_90 #1e182b;
+@define-color on_secondary_container_95 #2a2236;
+@define-color on_secondary_container_100 #372f44;
 
 /* Tertiary Palette */
-@define-color md_sys_color_tertiary_0 #000000;
-@define-color md_sys_color_tertiary_10 #31111D;
-@define-color md_sys_color_tertiary_20 #492532;
-@define-color md_sys_color_tertiary_25 #55303D;
-@define-color md_sys_color_tertiary_30 #633B48;
-@define-color md_sys_color_tertiary_35 #704653;
-@define-color md_sys_color_tertiary_40 #7D5260;
-@define-color md_sys_color_tertiary_50 #986977;
-@define-color md_sys_color_tertiary_60 #B58392;
-@define-color md_sys_color_tertiary_70 #D39DAC;
-@define-color md_sys_color_tertiary_80 #EFB8C8;
-@define-color md_sys_color_tertiary_90 #FFD8E4;
-@define-color md_sys_color_tertiary_95 #FFECF1;
-@define-color md_sys_color_tertiary_98 #FFF8F8;
-@define-color md_sys_color_tertiary_99 #FFFBFA;
-@define-color md_sys_color_tertiary_100 #FFFFFF;
+@define-color tertiary_0 #000000;
+@define-color tertiary_10 #3a1f2a;
+@define-color tertiary_20 #503440;
+@define-color tertiary_30 #674a57;
+@define-color tertiary_40 #7f616f;
+@define-color tertiary_50 #987988;
+@define-color tertiary_60 #b292a2;
+@define-color tertiary_70 #ceadbf;
+@define-color tertiary_80 #eac9dc;
+@define-color tertiary_90 #ffe6f0;
+@define-color tertiary_95 #fff3f8;
+@define-color tertiary_100 #ffffff;
+
+@define-color on_tertiary_0 #ffffff;
+@define-color on_tertiary_10 #ffffff;
+@define-color on_tertiary_20 #ffffff;
+@define-color on_tertiary_30 #ffffff;
+@define-color on_tertiary_40 #ffffff;
+@define-color on_tertiary_50 #ffffff;
+@define-color on_tertiary_60 #000000;
+@define-color on_tertiary_70 #000000;
+@define-color on_tertiary_80 #372630;
+@define-color on_tertiary_90 #44333d;
+@define-color on_tertiary_95 #513f49;
+@define-color on_tertiary_100 #000000;
+
+/* Tertiary Container */
+@define-color tertiary_container_0 #3a1f2a;
+@define-color tertiary_container_10 #462935;
+@define-color tertiary_container_20 #533441;
+@define-color tertiary_container_30 #613f4d;
+@define-color tertiary_container_40 #6f4b5a;
+@define-color tertiary_container_50 #7e5868;
+@define-color tertiary_container_60 #8d6677;
+@define-color tertiary_container_70 #9d7587;
+@define-color tertiary_container_80 #ae8598;
+@define-color tertiary_container_90 #bf96aa;
+@define-color tertiary_container_95 #d1a8bd;
+@define-color tertiary_container_100 #e4bbd1;
+
+@define-color on_tertiary_container_0 #ffffff;
+@define-color on_tertiary_container_10 #ffffff;
+@define-color on_tertiary_container_20 #ffffff;
+@define-color on_tertiary_container_30 #ffffff;
+@define-color on_tertiary_container_40 #ffffff;
+@define-color on_tertiary_container_50 #ffffff;
+@define-color on_tertiary_container_60 #ffffff;
+@define-color on_tertiary_container_70 #000000;
+@define-color on_tertiary_container_80 #372630;
+@define-color on_tertiary_container_90 #44333d;
+@define-color on_tertiary_container_95 #513f49;
+@define-color on_tertiary_container_100 #5f4b56;
 
 /* Error Palette */
-@define-color md_sys_color_error_0 #000000;
-@define-color md_sys_color_error_10 #410002;
-@define-color md_sys_color_error_20 #690005;
-@define-color md_sys_color_error_25 #7E0004;
-@define-color md_sys_color_error_30 #93000A;
-@define-color md_sys_color_error_35 #A80710;
-@define-color md_sys_color_error_40 #BA1A1A;
-@define-color md_sys_color_error_50 #DE3730;
-@define-color md_sys_color_error_60 #FF5449;
-@define-color md_sys_color_error_70 #FF897D;
-@define-color md_sys_color_error_80 #FFB4AB;
-@define-color md_sys_color_error_90 #FFDAD6;
-@define-color md_sys_color_error_95 #FFECE9;
-@define-color md_sys_color_error_98 #FFF8F7;
-@define-color md_sys_color_error_99 #FFFBFF;
-@define-color md_sys_color_error_100 #FFFFFF;
-
-/* Neutral Palette - Light Mode */
-@define-color md_sys_color_on_primary_light @md_sys_color_primary_100;
-@define-color md_sys_color_on_primary_container_light @md_sys_color_primary_30;
-@define-color md_sys_color_primary_container_light @md_sys_color_primary_90;
-@define-color md_sys_color_on_secondary_light @md_sys_color_secondary_100;
-@define-color md_sys_color_on_secondary_container_light @md_sys_color_secondary_30;
-@define-color md_sys_color_secondary_container_light @md_sys_color_secondary_90;
-@define-color md_sys_color_on_tertiary_light @md_sys_color_tertiary_100;
-@define-color md_sys_color_on_tertiary_container_light @md_sys_color_tertiary_30;
-@define-color md_sys_color_tertiary_container_light @md_sys_color_tertiary_90;
-@define-color md_sys_color_on_error_light @md_sys_color_error_100;
-@define-color md_sys_color_on_error_container_light @md_sys_color_error_30;
-@define-color md_sys_color_error_container_light @md_sys_color_error_90;
-@define-color md_sys_color_on_background_light #1C1B1F;
-@define-color md_sys_color_background_light #FFFBFE;
-@define-color md_sys_color_on_surface_light #1C1B1F;
-@define-color md_sys_color_on_surface_variant_light #49454F;
-@define-color md_sys_color_surface_light #FFFBFE;
-@define-color md_sys_color_surface_variant_light #E7E0EC;
-@define-color md_sys_color_outline_light #79747E;
-@define-color md_sys_color_outline_variant_light #CAC4D0;
-@define-color md_sys_color_inverse_surface_light #313033;
-@define-color md_sys_color_inverse_on_surface_light #F4EFF4;
-@define-color md_sys_color_inverse_primary_light #D0BCFF;
-@define-color md_sys_color_shadow_light #000000;
-@define-color md_sys_color_scrim_light #000000;
-
-/* Neutral Palette - Dark Mode */
-@define-color md_sys_color_on_primary_dark @md_sys_color_primary_20;
-@define-color md_sys_color_on_primary_container_dark @md_sys_color_primary_90;
-@define-color md_sys_color_primary_container_dark @md_sys_color_primary_30;
-@define-color md_sys_color_on_secondary_dark @md_sys_color_secondary_20;
-@define-color md_sys_color_on_secondary_container_dark @md_sys_color_secondary_90;
-@define-color md_sys_color_secondary_container_dark @md_sys_color_secondary_30;
-@define-color md_sys_color_on_tertiary_dark @md_sys_color_tertiary_20;
-@define-color md_sys_color_on_tertiary_container_dark @md_sys_color_tertiary_90;
-@define-color md_sys_color_tertiary_container_dark @md_sys_color_tertiary_30;
-@define-color md_sys_color_on_error_dark @md_sys_color_error_20;
-@define-color md_sys_color_on_error_container_dark @md_sys_color_error_90;
-@define-color md_sys_color_error_container_dark @md_sys_color_error_30;
-@define-color md_sys_color_on_background_dark #E6E1E5;
-@define-color md_sys_color_background_dark #141218;
-@define-color md_sys_color_on_surface_dark #E6E1E5;
-@define-color md_sys_color_on_surface_variant_dark #CAC4D0;
-@define-color md_sys_color_surface_dark #141218;
-@define-color md_sys_color_surface_variant_dark #49454F;
-@define-color md_sys_color_outline_dark #938F99;
-@define-color md_sys_color_outline_variant_dark #49454F;
-@define-color md_sys_color_inverse_surface_dark #E6E1E5;
-@define-color md_sys_color_inverse_on_surface_dark #313033;
-@define-color md_sys_color_inverse_primary_dark @md_sys_color_primary_40;
-@define-color md_sys_color_shadow_dark #000000;
-@define-color md_sys_color_scrim_dark #000000;
-
-/* ============================================
-   ANIMACIONES MATERIAL 3 EXPRESSIVE
-   Curvas Bezier oficiales de Material Design
-   ============================================ */
-
-/* Duraciones estándar */
-@keyframes material-enter {
-  0% {
-    opacity: 0;
-    transform: scale(0.92);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes material-exit {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-}
-
-@keyframes material-slide-up-enter {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes material-slide-up-exit {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes material-fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes material-fade-out {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes material-scale-expand {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.02);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes material-ripple {
-  0% {
-    transform: scale(0);
-    opacity: 0.4;
-  }
-  100% {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-
-@keyframes material-shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-@keyframes material-progress-indeterminate {
-  0% {
-    margin-left: -100%;
-  }
-  100% {
-    margin-left: 100%;
-  }
-}
-
-/* ============================================
-   VARIABLES GLOBALES
-   ============================================ */
-
-@define-color theme_fg_color @md_sys_color_on_surface_light;
-@define-color theme_bg_color @md_sys_color_background_light;
-@define-color theme_selected_bg_color @md_sys_color_primary_light;
-@define-color theme_selected_fg_color @md_sys_color_on_primary_light;
-@define-color insensitive_bg_color @md_sys_color_surface_variant_light;
-@define-color insensitive_fg_color @md_sys_color_outline_light;
-@define-color base_color @md_sys_color_background_light;
-@define-color text_color @md_sys_color_on_surface_light;
-@define-color border_color @md_sys_color_outline_variant_light;
-@define-color content_view_bg @md_sys_color_background_light;
-@define-color placeholder_text_color @md_sys_color_outline_light;
-
-/* Radius Material 3 */
-@define-color corner_radius_xs 4px;
-@define-color corner_radius_sm 8px;
-@define-color corner_radius_md 12px;
-@define-color corner_radius_lg 16px;
-@define-color corner_radius_xl 24px;
-@define-color corner_radius_full 9999px;
-
-/* Sombras Material 3 - Niveles de elevación */
-@define-shadow shadow_1 0px 1px 2px rgba(0,0,0,0.3), 0px 1px 3px 1px rgba(0,0,0,0.15);
-@define-shadow shadow_2 0px 1px 2px rgba(0,0,0,0.3), 0px 2px 6px 2px rgba(0,0,0,0.15);
-@define-shadow shadow_3 0px 4px 8px 3px rgba(0,0,0,0.15), 0px 1px 3px rgba(0,0,0,0.3);
-@define-shadow shadow_4 0px 6px 10px 4px rgba(0,0,0,0.15), 0px 2px 3px rgba(0,0,0,0.3);
-@define-shadow shadow_5 0px 8px 12px 6px rgba(0,0,0,0.15), 0px 4px 4px rgba(0,0,0,0.3);
-
-/* ============================================
-   WIDGETS BASE
-   ============================================ */
-
-* {
-  /* Tipografía Roboto Flex - Escala Material 3 */
-  font-family: 'Roboto Flex', 'Roboto', sans-serif;
-  font-feature-settings: "wght" var(--font-weight, 400);
-  
-  /* Transiciones suaves con curvas Material */
-  transition-property: all;
-  transition-duration: 300ms;
-  transition-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1.0);
-  
-  /* Colores base */
-  color: @md_sys_color_on_surface_light;
-  background-color: @md_sys_color_background_light;
-}
-
-/* Modo Oscuro Automático */
-@media (prefers-color-scheme: dark) {
-  * {
-    color: @md_sys_color_on_surface_dark;
-    background-color: @md_sys_color_background_dark;
-  }
-  
-  window {
-    background-color: @md_sys_color_surface_dark;
-  }
-}
-
-/* ============================================
-   VENTANAS Y CONTENEDORES
-   ============================================ */
-
-window {
-  background-color: @md_sys_color_surface_light;
-  border-radius: @corner_radius_xl;
-  box-shadow: shadow_2;
-}
-
-window.csd {
-  border-radius: @corner_radius_xl;
-  margin: 0;
-}
-
-window.background {
-  background-color: @md_sys_color_surface_light;
-}
-
-/* Modo oscuro para ventanas */
-@media (prefers-color-scheme: dark) {
-  window {
-    background-color: @md_sys_color_surface_dark;
-    box-shadow: shadow_3;
-  }
-}
-
-/* ============================================
-   BOTONES - Material 3 Buttons
-   ============================================ */
-
-button {
-  min-height: 40px;
-  padding: 0 24px;
-  border-radius: @corner_radius_full;
-  border: none;
-  background-color: transparent;
-  color: @md_sys_color_primary_light;
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: 0.1px;
-  box-shadow: none;
-  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
-}
-
-button:hover {
-  background-color: alpha(@md_sys_color_primary_light, 0.08);
-  transition-duration: 150ms;
-}
-
-button:active {
-  background-color: alpha(@md_sys_color_primary_light, 0.12);
-  transform: scale(0.98);
-  transition-duration: 100ms;
-  transition-timing-function: cubic-bezier(0.4, 0.0, 0.6, 1.0);
-}
-
-button:focus {
-  outline: 2px solid @md_sys_color_primary_light;
-  outline-offset: 2px;
-}
-
-button:disabled {
-  color: @md_sys_color_outline_light;
-  background-color: transparent;
-}
-
-/* Filled Button */
-button.suggested-action {
-  background-color: @md_sys_color_primary_light;
-  color: @md_sys_color_on_primary_light;
-  box-shadow: shadow_1;
-}
-
-button.suggested-action:hover {
-  background-color: @md_sys_color_primary_50;
-  box-shadow: shadow_2;
-}
-
-button.suggested-action:active {
-  background-color: @md_sys_color_primary_35;
-  box-shadow: none;
-  transform: scale(0.96);
-}
-
-/* Destructive Action */
-button.destructive-action {
-  background-color: @md_sys_color_error_40;
-  color: @md_sys_color_on_error_light;
-}
-
-button.destructive-action:hover {
-  background-color: @md_sys_color_error_50;
-  box-shadow: shadow_2;
-}
-
-button.destructive-action:active {
-  background-color: @md_sys_color_error_35;
-}
-
-/* Text Button */
-button.text-button {
-  padding: 0 12px;
-  min-height: 36px;
-}
-
-/* Outlined Button */
-button.outlined {
-  border: 1px solid @md_sys_color_outline_light;
-  background-color: transparent;
-  color: @md_sys_color_primary_light;
-}
-
-button.outlined:hover {
-  background-color: alpha(@md_sys_color_primary_light, 0.08);
-}
-
-button.outlined:active {
-  background-color: alpha(@md_sys_color_primary_light, 0.12);
-}
-
-/* FAB - Floating Action Button */
-button.fab {
-  min-width: 56px;
-  min-height: 56px;
-  border-radius: @corner_radius_lg;
-  background-color: @md_sys_color_primary_container_light;
-  color: @md_sys_color_on_primary_container_light;
-  box-shadow: shadow_3;
-  padding: 0;
-}
-
-button.fab:hover {
-  background-color: @md_sys_color_primary_container_light;
-  box-shadow: shadow_4;
-  transform: scale(1.05);
-}
-
-button.fab:active {
-  box-shadow: shadow_2;
-  transform: scale(0.95);
-}
-
-/* Icon Button */
-button.circular {
-  min-width: 40px;
-  min-height: 40px;
-  border-radius: 9999px;
-  padding: 8px;
-}
-
-button.image-button {
-  min-width: 40px;
-  min-height: 40px;
-  border-radius: @corner_radius_full;
-  padding: 8px;
-}
-
-/* ============================================
-   TARJETAS - Material 3 Cards
-   ============================================ */
-
-card {
-  background-color: @md_sys_color_surface_light;
-  border-radius: @corner_radius_md;
-  border: none;
-  box-shadow: shadow_1;
-  padding: 16px;
-  transition: all 300ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
-}
-
-card:hover {
-  box-shadow: shadow_2;
-  transform: translateY(-2px);
-}
-
-card.elevated {
-  box-shadow: shadow_2;
-}
-
-card.filled {
-  background-color: @md_sys_color_surface_variant_light;
-  box-shadow: none;
-}
-
-card.outlined {
-  background-color: transparent;
-  border: 1px solid @md_sys_color_outline_variant_light;
-  box-shadow: none;
-}
-
-/* ============================================
-   CAMPOS DE TEXTO - Material 3 Text Fields
-   ============================================ */
-
-entry {
-  min-height: 56px;
-  padding: 0 16px;
-  border-radius: @corner_radius_xs;
-  border: 1px solid @md_sys_color_outline_light;
-  background-color: @md_sys_color_surface_light;
-  color: @md_sys_color_on_surface_light;
-  font-size: 16px;
-  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
-}
-
-entry:focus {
-  border-color: @md_sys_color_primary_light;
-  border-width: 2px;
-  padding: 0 15px; /* Compensar borde más grueso */
-  box-shadow: inset 0 0 0 2px alpha(@md_sys_color_primary_light, 0.2);
-}
-
-entry:hover:not(:focus) {
-  border-color: @md_sys_color_on_surface_variant_light;
-}
-
-entry:disabled {
-  color: @md_sys_color_outline_light;
-  background-color: @md_sys_color_surface_variant_light;
-}
-
-entry.error {
-  border-color: @md_sys_color_error_40;
-}
-
-entry.warning {
-  border-color: @md_sys_color_error_60;
-}
-
-/* Entry con label flotante */
-entry.flat {
-  border: none;
-  border-bottom: 1px solid @md_sys_color_outline_light;
-  border-radius: 0;
-  background-color: transparent;
-}
-
-entry.flat:focus {
-  border-bottom-color: @md_sys_color_primary_light;
-  border-bottom-width: 2px;
-}
-
-/* ============================================
-   BARRAS DE DESPLAZAMIENTO
-   ============================================ */
-
-scrollbar {
-  background-color: transparent;
-  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
-}
-
-scrollbar slider {
-  min-width: 8px;
-  min-height: 8px;
-  border-radius: @corner_radius_full;
-  background-color: @md_sys_color_outline_light;
-  margin: 4px;
-  transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
-}
-
-scrollbar slider:hover {
-  background-color: @md_sys_color_on_surface_variant_light;
-  min-width: 12px;
-  min-height: 12px;
-}
-
-scrollbar slider:active {
-  background-color: @md_sys_color_primary_light;
-}
-
-scrollbar.horizontal slider {
-  min-width: 40px;
-}
-
-scrollbar.vertical slider {
-  min-height: 40px;
-}
-
-/* ============================================
-   MENÚS Y POPOVERS
-   ============================================ */
-
-menu, .menu {
-  padding: 8px;
-  background-color: @md_sys_color_surface_light;
-  border-radius: @corner_radius_md;
-  border: none;
-  box-shadow: shadow_3;
-}
-
-menuitem {
-  min-height: 48px;
-  padding: 0 16px;
-  border-radius: @corner_radius_sm;
-  color: @md_sys_color_on_surface_light;
-  font-size: 14px;
-  transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
-}
-
-menuitem:hover {
-  background-color: alpha(@md_sys_color_primary_light, 0.08);
-}
-
-menuitem:active {
-  background-color: alpha(@md_sys_color_primary_light, 0.12);
-  transform: scale(0.98);
-}
-
-popover {
-  padding: 8px;
-  background-color: @md_sys_color_surface_light;
-  border-radius: @corner_radius_md;
-  border: none;
-  box-shadow: shadow_3;
-  transition: all 300ms cubic-bezier(0.2, 0.0, 0, 1.0);
-}
-
-popover.background {
-  animation: material-enter 300ms cubic-bezier(0.2, 0.0, 0, 1.0);
-}
-
-/* ============================================
-   SWITCHES - Material 3 Switches
-   ============================================ */
-
-switch {
-  min-width: 52px;
-  min-height: 32px;
-  border-radius: @corner_radius_full;
-  background-color: @md_sys_color_surface_variant_light;
-  border: 2px solid transparent;
-  transition: all 300ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
-}
-
-switch:checked {
-  background-color: @md_sys_color_primary_light;
-}
-
-switch:hover {
-  box-shadow: inset 0 0 0 2px alpha(@md_sys_color_on_surface_light, 0.1);
-}
-
-switch slider {
-  min-width: 16px;
-  min-height: 16px;
-  margin: 6px;
-  border-radius: @corner_radius_full;
-  background-color: @md_sys_color_outline_light;
-  box-shadow: shadow_1;
-  transition: all 300ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
-}
-
-switch:checked slider {
-  background-color: @md_sys_color_on_primary_light;
-  transform: translateX(20px);
-}
-
-switch:disabled {
-  opacity: 0.5;
-}
-
-/* ============================================
-   CHECKBOXES Y RADIOS
-   ============================================ */
-
-check, radio {
-  min-width: 20px;
-  min-height: 20px;
-  border-radius: @corner_radius_xs;
-  border: 2px solid @md_sys_color_outline_light;
-  background-color: transparent;
-  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
-}
-
-radio {
-  border-radius: 9999px;
-}
-
-check:checked, radio:checked {
-  background-color: @md_sys_color_primary_light;
-  border-color: @md_sys_color_primary_light;
-  color: @md_sys_color_on_primary_light;
-}
-
-check:hover, radio:hover {
-  border-color: @md_sys_color_on_surface_variant_light;
-  box-shadow: inset 0 0 0 2px alpha(@md_sys_color_primary_light, 0.1);
-}
-
-/* ============================================
-   BARRAS DE PROGRESO
-   ============================================ */
-
-progressbar {
-  min-height: 4px;
-  border-radius: @corner_radius_full;
-  background-color: @md_sys_color_surface_variant_light;
-  overflow: hidden;
-}
-
-progressbar progress {
-  background-color: @md_sys_color_primary_light;
-  border-radius: @corner_radius_full;
-  transition: width 300ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
-}
-
-progressbar:indeterminate {
-  background: linear-gradient(
-    90deg,
-    @md_sys_color_surface_variant_light 0%,
-    @md_sys_color_primary_light 50%,
-    @md_sys_color_surface_variant_light 100%
-  );
-  background-size: 200% 100%;
-  animation: material-shimmer 1.5s infinite linear;
-}
-
-/* ============================================
-   SLIDERS
-   ============================================ */
-
-scale {
-  min-height: 40px;
-}
-
-scale trough {
-  min-height: 4px;
-  border-radius: @corner_radius_full;
-  background-color: @md_sys_color_surface_variant_light;
-  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
-}
-
-scale highlight {
-  background-color: @md_sys_color_primary_light;
-  border-radius: @corner_radius_full;
-}
-
-scale slider {
-  min-width: 20px;
-  min-height: 20px;
-  margin: -8px;
-  border-radius: 9999px;
-  background-color: @md_sys_color_primary_light;
-  box-shadow: shadow_2;
-  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
-}
-
-scale slider:hover {
-  transform: scale(1.2);
-  box-shadow: shadow_3;
-}
-
-scale slider:active {
-  transform: scale(1.3);
-  background-color: @md_sys_color_primary_50;
-}
-
-/* ============================================
-   PESTAÑAS - Material 3 Tabs
-   ============================================ */
-
-tab {
-  min-height: 48px;
-  padding: 0 24px;
-  border-radius: @corner_radius_full;
-  color: @md_sys_color_on_surface_variant_light;
-  font-weight: 500;
-  font-size: 14px;
-  transition: all 300ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
-}
-
-tab:hover {
-  background-color: alpha(@md_sys_color_primary_light, 0.08);
-  color: @md_sys_color_on_surface_light;
-}
-
-tab:checked {
-  background-color: @md_sys_color_secondary_container_light;
-  color: @md_sys_color_on_secondary_container_light;
-}
-
-tabs > header.top,
-tabs > header.bottom {
-  padding: 4px;
-}
-
-tabs > header.left,
-tabs > header.right {
-  padding: 4px;
-}
-
-/* ============================================
-   LISTAS Y ÁRBOLES
-   ============================================ */
-
-list {
-  background-color: transparent;
-  border-radius: @corner_radius_md;
-}
-
-row {
-  padding: 12px 16px;
-  min-height: 52px;
-  border-radius: @corner_radius_sm;
-  transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
-}
-
-row:hover {
-  background-color: alpha(@md_sys_color_primary_light, 0.08);
-}
-
-row:active {
-  background-color: alpha(@md_sys_color_primary_light, 0.12);
-  transform: scale(0.99);
-}
-
-row:selected {
-  background-color: alpha(@md_sys_color_primary_light, 0.12);
-}
-
-row.expander {
-  padding: 0;
-}
-
-row.expander .expander-row {
-  padding: 12px 16px;
-}
-
-/* ============================================
-   DIÁLOGOS
-   ============================================ */
-
-messagedialog {
-  border-radius: @corner_radius_lg;
-  background-color: @md_sys_color_surface_light;
-  box-shadow: shadow_5;
-}
-
-messagedialog .titlebar {
-  background: transparent;
-  box-shadow: none;
-  border: none;
-  padding: 24px 24px 0 24px;
-}
-
-messagedialog .message-area {
-  padding: 24px;
-}
-
-messagedialog .dialog-action-box {
-  padding: 0 24px 24px 24px;
-}
-
-/* ============================================
-   TOOLTIP
-   ============================================ */
-
-tooltip {
-  padding: 8px 16px;
-  border-radius: @corner_radius_xs;
-  background-color: @md_sys_color_inverse_surface_light;
-  color: @md_sys_color_inverse_on_surface_light;
-  font-size: 12px;
-  font-weight: 500;
-  box-shadow: shadow_2;
-  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
-}
-
-/* ============================================
-   SEPARADORES
-   ============================================ */
-
-separator {
-  min-height: 1px;
-  min-width: 1px;
-  background-color: @md_sys_color_outline_variant_light;
-  margin: 8px 0;
-}
-
-separator.vertical {
-  margin: 0 8px;
-}
-
-/* ============================================
-   ICONOS Y SÍMBOLOS
-   ============================================ */
-
-image {
-  -gtk-icon-transform: scale(1);
-  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
-}
-
-image:hover {
-  -gtk-icon-transform: scale(1.1);
-}
-
-/* ============================================
-   ESTADO DE CARGA - SKELETON
-   ============================================ */
-
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    @md_sys_color_surface_variant_light 25%,
-    @md_sys_color_outline_variant_light 50%,
-    @md_sys_color_surface_variant_light 75%
-  );
-  background-size: 200% 100%;
-  animation: material-shimmer 1.5s infinite linear;
-  border-radius: @corner_radius_sm;
-}
-
-/* ============================================
-   EFECTO RIPPLE (Material Ripple)
-   ============================================ */
-
-.ripple-effect {
-  background-image: radial-gradient(
-    circle,
-    alpha(@md_sys_color_primary_light, 0.3) 0%,
-    transparent 70%
-  );
-  animation: material-ripple 600ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
-}
-
-/* ============================================
-   APLICACIONES ESPECÍFICAS
-   ============================================ */
-
-/* Nautilus Files */
-.nautilus-window {
-  background-color: @md_sys_color_surface_light;
-}
-
-.nautilus-window .sidebar {
-  background-color: @md_sys_color_surface_light;
-  border-right: 1px solid @md_sys_color_outline_variant_light;
-}
-
-/* GNOME Settings */
-.settings-window {
-  background-color: @md_sys_color_surface_light;
-}
-
-/* Terminal */
-terminal-window {
-  background-color: #1C1B1F;
-  color: #E6E1E5;
-}
-
-/* ============================================
-   UTILIDADES DE ANIMACIÓN
-   ============================================ */
-
-.animated-enter {
-  animation: material-enter 300ms cubic-bezier(0.2, 0.0, 0, 1.0);
-}
-
-.animated-exit {
-  animation: material-exit 200ms cubic-bezier(0.4, 0.0, 0.2, 1.0);
-}
-
-.animated-slide-up {
-  animation: material-slide-up-enter 400ms cubic-bezier(0.2, 0.0, 0, 1.0);
-}
-
-.animated-fade-in {
-  animation: material-fade-in 200ms ease-out;
-}
-
-.animated-scale {
-  animation: material-scale-expand 300ms cubic-bezier(0.2, 0.0, 0, 1.0);
-}
-
-/* Estados de hover mejorados */
-.hoverable:hover {
-  filter: brightness(1.05);
-}
-
-/* Efecto de enfoque accesible */
-*:focus-visible {
-  outline: 2px solid @md_sys_color_primary_light;
-  outline-offset: 2px;
-  border-radius: @corner_radius_sm;
-}
-
-/* ============================================
-   MEDIA QUERIES PARA DIFERENTES TAMAÑOS
-   ============================================ */
-
-@media (min-width: 1200px) {
-  /* Pantallas grandes - más espacio */
-  button {
-    padding: 0 32px;
-    min-height: 48px;
-  }
-  
-  entry {
-    min-height: 64px;
-  }
-}
-
-@media (max-width: 600px) {
-  /* Dispositivos pequeños - compacto */
-  button {
-    padding: 0 16px;
-    min-height: 36px;
-  }
-  
-  card {
-    padding: 12px;
-  }
-}
-
-/* ============================================
-   FIN DEL TEMA MATERIAL 3 EXPRESSIVE
-   ============================================ */
+@define-color error_0 #000000;
+@define-color error_10 #410002;
+@define-color error_20 #690005;
+@define-color error_30 #93000a;
+@define-color error_40 #ba1a1a;
+@define-color error_50 #de3737;
+@define-color error_60 #ff5454;
+@define-color error_70 #ff8989;
+@define-color error_80 #ffb4ab;
+@define-color error_90 #ffdad6;
+@define-color error_95 #ffedea;
+@define-color error_100 #ffffff;
+
+@define-color on_error_0 #ffffff;
+@define-color on_error_10 #ffffff;
+@define-color on_error_20 #ffffff;
+@define-color on_error_30 #ffffff;
+@define-color on_error_40 #ffffff;
+@define-color on_error_50 #ffffff;
+@define-color on_error_60 #000000;
+@define-color on_error_70 #000000;
+@define-color on_error_80 #000000;
+@define-color on_error_90 #410002;
+@define-color on_error_95 #510003;
+@define-color on_error_100 #690005;
+
+/* Error Container */
+@define-color error_container_0 #410002;
+@define-color error_container_10 #560003;
+@define-color error_container_20 #6d0005;
+@define-color error_container_30 #850007;
+@define-color error_container_40 #9e000a;
+@define-color error_container_50 #b91a1a;
+@define-color error_container_60 #d63636;
+@define-color error_container_70 #f45454;
+@define-color error_container_80 #ff8989;
+@define-color error_container_90 #ffb4ab;
+@define-color error_container_95 #ffdad6;
+@define-color error_container_100 #ffffff;
+
+@define-color on_error_container_0 #ffffff;
+@define-color on_error_container_10 #ffffff;
+@define-color on_error_container_20 #ffffff;
+@define-color on_error_container_30 #ffffff;
+@define-color on_error_container_40 #ffffff;
+@define-color on_error_container_50 #ffffff;
+@define-color on_error_container_60 #ffffff;
+@define-color on_error_container_70 #000000;
+@define-color on_error_container_80 #000000;
+@define-color on_error_container_90 #410002;
+@define-color on_error_container_95 #510003;
+@define-color on_error_container_100 #690005;
+
+/* Neutral Palette */
+@define-color neutral_0 #000000;
+@define-color neutral_10 #1c1b1f;
+@define-color neutral_20 #313033;
+@define-color neutral_30 #484649;
+@define-color neutral_40 #5f5c60;
+@define-color neutral_50 #777478;
+@define-color neutral_60 #918e92;
+@define-color neutral_70 #acaaae;
+@define-color neutral_80 #c8c5c9;
+@define-color neutral_90 #e5e1e5;
+@define-color neutral_95 #f3eff4;
+@define-color neutral_100 #ffffff;
+
+@define-color on_neutral_0 #ffffff;
+@define-color on_neutral_10 #ffffff;
+@define-color on_neutral_20 #ffffff;
+@define-color on_neutral_30 #ffffff;
+@define-color on_neutral_40 #ffffff;
+@define-color on_neutral_50 #ffffff;
+@define-color on_neutral_60 #000000;
+@define-color on_neutral_70 #000000;
+@define-color on_neutral_80 #000000;
+@define-color on_neutral_90 #2b292d;
+@define-color on_neutral_95 #373538;
+@define-color on_neutral_100 #444245;
+
+/* Neutral Variant Palette */
+@define-color neutral_variant_0 #000000;
+@define-color neutral_variant_10 #1d1a22;
+@define-color neutral_variant_20 #322f37;
+@define-color neutral_variant_30 #49454f;
+@define-color neutral_variant_40 #605d66;
+@define-color neutral_variant_50 #78757f;
+@define-color neutral_variant_60 #939099;
+@define-color neutral_variant_70 #aeabb4;
+@define-color neutral_variant_80 #cac7d0;
+@define-color neutral_variant_90 #e7e1ec;
+@define-color neutral_variant_95 #f5eef9;
+@define-color neutral_variant_100 #ffffff;
+
+@define-color on_neutral_variant_0 #ffffff;
+@define-color on_neutral_variant_10 #ffffff;
+@define-color on_neutral_variant_20 #ffffff;
+@define-color on_neutral_variant_30 #ffffff;
+@define-color on_neutral_variant_40 #ffffff;
+@define-color on_neutral_variant_50 #ffffff;
+@define-color on_neutral_variant_60 #000000;
+@define-color on_neutral_variant_70 #000000;
+@define-color on_neutral_variant_80 #000000;
+@define-color on_neutral_variant_90 #2b2830;
+@define-color on_neutral_variant_95 #37343b;
+@define-color on_neutral_variant_100 #444148;
+
+/* -----------------------------------------------------------------------------
+   LIGHT THEME - COLORES DE SUPERFICIE
+   -------------------------------------------------------------------------- */
+
+@define-color surface_light #fefbff;
+@define-color on_surface_light #1c1b1f;
+@define-color surface_container_lowest_light #ffffff;
+@define-color surface_container_low_light #f8f1f6;
+@define-color surface_container_light #f2ecee;
+@define-color surface_container_high_light #ece7e9;
+@define-color surface_container_highest_light #e6e1e5;
+@define-color surface_dim_light #ded9dd;
+@define-color surface_bright_light #fefbff;
+
+@define-color on_surface_variant_light #49454f;
+@define-color outline_light #79747e;
+@define-color outline_variant_light #cac4d0;
+
+@define-color inverse_surface_light #313033;
+@define-color inverse_on_surface_light #f4eff4;
+@define-color inverse_primary_light #cf9eff;
+
+@define-color shadow_light #000000;
+@define-color scrim_light #000000;
+
+@define-color surface_tint_light #6750a4;
+
+/* -----------------------------------------------------------------------------
+   DARK THEME - COLORES DE SUPERFICIE
+   -------------------------------------------------------------------------- */
+
+@define-color surface_dark #141218;
+@define-color on_surface_dark #e6e1e5;
+@define-color surface_container_lowest_dark #0f0d13;
+@define-color surface_container_low_dark #1d1b20;
+@define-color surface_container_dark #211f26;
+@define-color surface_container_high_dark #2b2930;
+@define-color surface_container_highest_dark #36343b;
+@define-color surface_dim_dark #141218;
+@define-color surface_bright_dark #3b383e;
+
+@define-color on_surface_variant_dark #cac4d0;
+@define-color outline_dark #938f99;
+@define-color outline_variant_dark #49454f;
+
+@define-color inverse_surface_dark #e6e1e5;
+@define-color inverse_on_surface_dark #313033;
+@define-color inverse_primary_dark #6750a4;
+
+@define-color shadow_dark #000000;
+@define-color scrim_dark #000000;
+
+@define-color surface_tint_dark #cf9eff;
+
+/* -----------------------------------------------------------------------------
+   MATERIAL 3 EXPRESSIVE ANIMATION CURVES
+   Basado en: https://m3.material.io/styles/motion/easing-curves
+   -------------------------------------------------------------------------- */
+
+/* Standard easing - Movimientos naturales */
+@define-color motion_easing_standard cubic-bezier(0.2, 0.0, 0.0, 1.0);
+/* Emphasized easing - Movimientos importantes con estilo */
+@define-color motion_easing_emphasized cubic-bezier(0.2, 0.0, 0.0, 1.0);
+/* Decelerated easing - Entrada suave */
+@define-color motion_easing_decelerated cubic-bezier(0.0, 0.0, 0.2, 1.0);
+/* Accelerated easing - Salida rápida */
+@define-color motion_easing_accelerated cubic-bezier(0.4, 0.0, 1.0, 1.0);
+/* Linear easing - Movimiento constante */
+@define-color motion_easing_linear linear;
+
+/* Durations */
+@define-color motion_duration_short 100ms;
+@define-color motion_duration_medium 200ms;
+@define-color motion_duration_long 300ms;
+@define-color motion_duration_extra_long 500ms;
+
+/* -----------------------------------------------------------------------------
+   MATERIAL 3 EXPRESSIVE SHAPES
+   Border radius según especificaciones M3
+   -------------------------------------------------------------------------- */
+
+@define-color shape_corner_none 0px;
+@define-color shape_corner_extra_small 4px;
+@define-color shape_corner_small 8px;
+@define-color shape_corner_medium 12px;
+@define-color shape_corner_large 16px;
+@define-color shape_corner_extra_large 20px;
+@define-color shape_corner_full 9999px;
+
+/* Formas específicas para componentes */
+@define-color shape_button_small 20px;
+@define-color shape_button_medium 20px;
+@define-color shape_button_large 24px;
+@define-color shape_card_small 12px;
+@define-color shape_card_medium 16px;
+@define-color shape_card_large 24px;
+@define-color shape_dialog 28px;
+@define-color shape_bottom_sheet 28px;
+@define-color shape_navigation_bar 16px;
+@define-color shape_chip_small 8px;
+@define-color shape_chip_medium 12px;
+@define-color shape_fab_small 12px;
+@define-color shape_fab_large 16px;
+@define-color shape_fab_extra_large 24px;
+
+/* -----------------------------------------------------------------------------
+   MATERIAL 3 EXPRESSIVE ELEVATION
+   Sombras según nivel de elevación (0-5)
+   Basado en: https://m3.material.io/styles/elevation
+   -------------------------------------------------------------------------- */
+
+/* Level 0 - Sin elevación */
+@define-color elevation_0 none;
+
+/* Level 1 - Elevación baja (chips, botones flotantes pequeños) */
+@define-color elevation_1 0px 1px 2px rgba(0, 0, 0, 0.3), 
+                          0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+
+/* Level 2 - Elevación media (cards, botones flotantes) */
+@define-color elevation_2 0px 1px 2px rgba(0, 0, 0, 0.3), 
+                          0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+
+/* Level 3 - Elevación alta (dialogs, bottom sheets) */
+@define-color elevation_3 0px 1px 3px rgba(0, 0, 0, 0.3), 
+                          0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+
+/* Level 4 - Elevación muy alta (menús desplegables) */
+@define-color elevation_4 0px 2px 3px rgba(0, 0, 0, 0.3), 
+                          0px 6px 10px 4px rgba(0, 0, 0, 0.15);
+
+/* Level 5 - Elevación máxima (popovers, tooltips) */
+@define-color elevation_5 0px 4px 4px rgba(0, 0, 0, 0.3), 
+                          0px 8px 12px 6px rgba(0, 0, 0, 0.15);
+
+/* -----------------------------------------------------------------------------
+   TYPOGRAPHY - MATERIAL 3 TYPE SCALE
+   Basado en: https://m3.material.io/styles/typography/type-scale-tokens
+   -------------------------------------------------------------------------- */
+
+/* Display - Títulos grandes y prominentes */
+@define-color typography_display_large_font "Google Sans Display", "Roboto Flex", sans-serif;
+@define-color typography_display_large_size 57px;
+@define-color typography_display_large_line_height 64px;
+@define-color typography_display_large_weight 400;
+@define-color typography_display_large_tracking 0px;
+
+@define-color typography_display_medium_font "Google Sans Display", "Roboto Flex", sans-serif;
+@define-color typography_display_medium_size 45px;
+@define-color typography_display_medium_line_height 52px;
+@define-color typography_display_medium_weight 400;
+@define-color typography_display_medium_tracking 0px;
+
+@define-color typography_display_small_font "Google Sans Display", "Roboto Flex", sans-serif;
+@define-color typography_display_small_size 36px;
+@define-color typography_display_small_line_height 44px;
+@define-color typography_display_small_weight 400;
+@define-color typography_display_small_tracking 0px;
+
+/* Headline - Secciones principales */
+@define-color typography_headline_large_font "Roboto Flex", sans-serif;
+@define-color typography_headline_large_size 32px;
+@define-color typography_headline_large_line_height 40px;
+@define-color typography_headline_large_weight 400;
+@define-color typography_headline_large_tracking 0px;
+
+@define-color typography_headline_medium_font "Roboto Flex", sans-serif;
+@define-color typography_headline_medium_size 28px;
+@define-color typography_headline_medium_line_height 36px;
+@define-color typography_headline_medium_weight 400;
+@define-color typography_headline_medium_tracking 0px;
+
+@define-color typography_headline_small_font "Roboto Flex", sans-serif;
+@define-color typography_headline_small_size 24px;
+@define-color typography_headline_small_line_height 32px;
+@define-color typography_headline_small_weight 400;
+@define-color typography_headline_small_tracking 0px;
+
+/* Title - Contenedores medianos */
+@define-color typography_title_large_font "Roboto Flex", sans-serif;
+@define-color typography_title_large_size 22px;
+@define-color typography_title_large_line_height 28px;
+@define-color typography_title_large_weight 400;
+@define-color typography_title_large_tracking 0px;
+
+@define-color typography_title_medium_font "Roboto Flex", sans-serif;
+@define-color typography_title_medium_size 16px;
+@define-color typography_title_medium_line_height 24px;
+@define-color typography_title_medium_weight 500;
+@define-color typography_title_medium_tracking 0.15px;
+
+@define-color typography_title_small_font "Roboto Flex", sans-serif;
+@define-color typography_title_small_size 14px;
+@define-color typography_title_small_line_height 20px;
+@define-color typography_title_small_weight 500;
+@define-color typography_title_small_tracking 0.1px;
+
+/* Body - Contenido principal */
+@define-color typography_body_large_font "Roboto Flex", sans-serif;
+@define-color typography_body_large_size 16px;
+@define-color typography_body_large_line_height 24px;
+@define-color typography_body_large_weight 400;
+@define-color typography_body_large_tracking 0.5px;
+
+@define-color typography_body_medium_font "Roboto Flex", sans-serif;
+@define-color typography_body_medium_size 14px;
+@define-color typography_body_medium_line_height 20px;
+@define-color typography_body_medium_weight 400;
+@define-color typography_body_medium_tracking 0.25px;
+
+@define-color typography_body_small_font "Roboto Flex", sans-serif;
+@define-color typography_body_small_size 12px;
+@define-color typography_body_small_line_height 16px;
+@define-color typography_body_small_weight 400;
+@define-color typography_body_small_tracking 0.4px;
+
+/* Label - Elementos pequeños y utilitarios */
+@define-color typography_label_large_font "Roboto Flex", sans-serif;
+@define-color typography_label_large_size 14px;
+@define-color typography_label_large_line_height 20px;
+@define-color typography_label_large_weight 500;
+@define-color typography_label_large_tracking 0.1px;
+
+@define-color typography_label_medium_font "Roboto Flex", sans-serif;
+@define-color typography_label_medium_size 12px;
+@define-color typography_label_medium_line_height 16px;
+@define-color typography_label_medium_weight 500;
+@define-color typography_label_medium_tracking 0.5px;
+
+@define-color typography_label_small_font "Roboto Flex", sans-serif;
+@define-color typography_label_small_size 11px;
+@define-color typography_label_small_line_height 16px;
+@define-color typography_label_small_weight 500;
+@define-color typography_label_small_tracking 0.5px;
+
+/* -----------------------------------------------------------------------------
+   STATE LAYERS - OPACIDADES DE ESTADO
+   Basado en: https://m3.material.io/styles/color/state-layers
+   -------------------------------------------------------------------------- */
+
+@define-color state_hover_light 0.08;
+@define-color state_focus_light 0.12;
+@define-color state_pressed_light 0.12;
+@define-color state_dragged_light 0.16;
+
+@define-color state_hover_dark 0.08;
+@define-color state_focus_dark 0.12;
+@define-color state_pressed_dark 0.12;
+@define-color state_dragged_dark 0.16;
+
+/* -----------------------------------------------------------------------------
+   COMPONENT SPECIFIC TOKENS
+   Tokens específicos para componentes comunes
+   -------------------------------------------------------------------------- */
+
+/* Navigation Bar */
+@define-color navigation_bar_height 80px;
+@define-color navigation_bar_icon_size 24px;
+@define-color navigation_bar_active_indicator_width 64px;
+@define-color navigation_bar_active_indicator_height 32px;
+@define-color navigation_bar_active_indicator_radius 16px;
+
+/* Navigation Rail */
+@define-color navigation_rail_width 80px;
+@define-color navigation_rail_icon_size 24px;
+
+/* Bottom Sheet */
+@define-color bottom_sheet_handle_width 32px;
+@define-color bottom_sheet_handle_height 4px;
+@define-color bottom_sheet_handle_radius 2px;
+
+/* Dialog */
+@define-color dialog_padding 24px;
+@define-color dialog_icon_size 24px;
+@define-color dialog_button_height 40px;
+@define-color dialog_button_min_width 64px;
+
+/* Buttons */
+@define-color button_height 40px;
+@define-color button_icon_size 18px;
+@define-color button_padding_horizontal 24px;
+@define-color button_elevated_elevation 1;
+@define-color button_filled_tone_elevation 0;
+@define-color button_tonal_elevation 0;
+@define-color button_outlined_elevation 0;
+@define-color button_text_elevation 0;
+
+/* Cards */
+@define-color card_elevation_elevated 1;
+@define-color card_elevation_outlined 0;
+@define-color card_elevation_filled 0;
+
+/* Chips */
+@define-color chip_height 32px;
+@define-color chip_icon_size 18px;
+@define-color chip_avatar_size 24px;
+
+/* FAB (Floating Action Button) */
+@define-color fab_small_size 40px;
+@define-color fab_regular_size 56px;
+@define-color fab_large_size 72px;
+@define-color fab_extra_large_size 96px;
+@define-color fab_icon_size 24px;
+@define-color fab_elevation 3;
+
+/* Text Fields */
+@define-color text_field_height 56px;
+@define-color text_field_outline_width 1px;
+@define-color text_field_caret_width 2px;
+@define-color text_field_prefix_suffix_padding 12px;
+
+/* Menus */
+@define-color menu_item_height 48px;
+@define-color menu_item_icon_size 24px;
+@define-color menu_item_padding_horizontal 12px;
+
+/* Progress Indicators */
+@define-color progress_indicator_track_thickness 4px;
+@define-color progress_indicator_active_indicator_thickness 4px;
+@define-color progress_indicator_circular_size 24px;
+
+/* Dividers */
+@define-color divider_thickness 1px;
+@define-color divider_inset 16px;
+
+/* -----------------------------------------------------------------------------
+   ICONOGRAPHY
+   Tamaños de iconos estándar
+   -------------------------------------------------------------------------- */
+
+@define-color icon_size_small 18px;
+@define-color icon_size_medium 24px;
+@define-color icon_size_large 28px;
+@define-color icon_size_extra_large 32px;
+@define-color icon_size_app 48px;
+@define-color icon_size_branding 64px;
+
+/* -----------------------------------------------------------------------------
+   SPACING & LAYOUT
+   Sistema de espaciado de 4px
+   -------------------------------------------------------------------------- */
+
+@define-color spacing_0 0px;
+@define-color spacing_1 4px;
+@define-color spacing_2 8px;
+@define-color spacing_3 12px;
+@define-color spacing_4 16px;
+@define-color spacing_5 20px;
+@define-color spacing_6 24px;
+@define-color spacing_7 28px;
+@define-color spacing_8 32px;
+@define-color spacing_9 36px;
+@define-color spacing_10 40px;
+@define-color spacing_11 44px;
+@define-color spacing_12 48px;
+@define-color spacing_13 52px;
+@define-color spacing_14 56px;
+@define-color spacing_15 60px;
+@define-color spacing_16 64px;
+
+/* Grid system */
+@define-color grid_column_margin 16px;
+@define-color grid_gutter 16px;
+@define-color grid_content_margin 24px;
+
+/* -----------------------------------------------------------------------------
+   BRAND COLORS - MAIA OS
+   Colores de marca específicos para Maia OS
+   -------------------------------------------------------------------------- */
+
+@define-color maia_brand_primary #9f86ff;
+@define-color maia_brand_secondary #00e5ff;
+@define-color maia_brand_tertiary #ff6f00;
+@define-color maia_brand_accent #00c853;
+
+@define-color maia_logo_gradient_start #9f86ff;
+@define-color maia_logo_gradient_end #00e5ff;
+
+/* -----------------------------------------------------------------------------
+   ACCESSIBILITY
+   Contraste mínimo WCAG AA/AAA
+   -------------------------------------------------------------------------- */
+
+/* Contraste mínimo 4.5:1 para texto normal (WCAG AA) */
+/* Contraste mínimo 7:1 para texto normal (WCAG AAA) */
+/* Contraste mínimo 3:1 para texto grande (WCAG AA) */
+/* Contraste mínimo 4.5:1 para texto grande (WCAG AAA) */
+
+@define-color accessibility_min_contrast_aa_normal 4.5;
+@define-color accessibility_min_contrast_aaa_normal 7.0;
+@define-color accessibility_min_contrast_aa_large 3.0;
+@define-color accessibility_min_contrast_aaa_large 4.5;
+
+/* -----------------------------------------------------------------------------
+   PLATFORM SPECIFIC ADJUSTMENTS
+   Ajustes específicos para GTK4/Libadwaita
+   -------------------------------------------------------------------------- */
+
+/* GTK4 window background */
+@define-color window_bg_color @surface_light;
+@define-color window_fg_color @on_surface_light;
+
+/* GTK4 headerbar */
+@define-color headerbar_bg_color @surface_container_high_light;
+@define-color headerbar_fg_color @on_surface_light;
+@define-color headerbar_border_color @outline_variant_light;
+@define-color headerbar_backdrop_color @surface_light;
+
+/* GTK4 sidebar */
+@define-color sidebar_bg_color @surface_container_low_light;
+@define-color sidebar_fg_color @on_surface_light;
+@define-color sidebar_backdrop_color @surface_container_lowest_light;
+
+/* GTK4 card */
+@define-color card_bg_color @surface_container_light;
+@define-color card_fg_color @on_surface_light;
+@define-color card_shade_color transparent;
+
+/* GTK4 list */
+@define-color list_bg_color transparent;
+@define-color list_header_bg_color @surface_container_lowest_light;
+@define-color list_header_fg_color @on_surface_variant_light;
+
+/* GTK4 row */
+@define-color row_bg_color transparent;
+@define-color row_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+@define-color row_active_bg_color alpha(@on_surface_light, @state_pressed_light);
+
+/* GTK4 button */
+@define-color button_bg_color @primary_container_90;
+@define-color button_fg_color @on_primary_container_90;
+@define-color button_hover_bg_color alpha(@primary_90, @state_hover_light);
+@define-color button_active_bg_color alpha(@primary_90, @state_pressed_light);
+@define-color button_disabled_bg_color @surface_container_highest_light;
+@define-color button_disabled_fg_color alpha(@on_surface_light, 0.38);
+
+/* GTK4 entry */
+@define-color entry_bg_color @surface_container_light;
+@define-color entry_fg_color @on_surface_light;
+@define-color entry_border_color @outline_light;
+@define-color entry_focus_border_color @primary_90;
+
+/* GTK4 check/radio/switch */
+@define-color accent_bg_color @primary_90;
+@define-color accent_fg_color @on_primary_90;
+@define-color accent_color @primary_90;
+
+/* GTK4 destructive action */
+@define-color destructive_bg_color @error_40;
+@define-color destructive_fg_color @on_error_40;
+@define-color destructive_hover_bg_color alpha(@error_40, @state_hover_light);
+@define-color destructive_active_bg_color alpha(@error_40, @state_pressed_light);
+
+/* GTK4 success/warning */
+@define-color success_bg_color #00c853;
+@define-color success_fg_color #ffffff;
+@define-color warning_bg_color #ffab00;
+@define-color warning_fg_color #000000;
+
+/* GTK4 link */
+@define-color link_color @primary_90;
+@define-color link_visited_color @tertiary_90;
+
+/* GTK4 popover */
+@define-color popover_bg_color @surface_container_light;
+@define-color popover_fg_color @on_surface_light;
+@define-color popover_border_color @outline_variant_light;
+
+/* GTK4 tooltip */
+@define-color tooltip_bg_color @inverse_surface_light;
+@define-color tooltip_fg_color @inverse_on_surface_light;
+@define-color tooltip_border_color transparent;
+
+/* GTK4 scrollbar */
+@define-color scrollbar_bg_color transparent;
+@define-color scrollbar_fg_color alpha(@on_surface_light, 0.5);
+@define-color scrollbar_hover_fg_color alpha(@on_surface_light, 0.7);
+@define-color scrollbar_active_fg_color alpha(@on_surface_light, 0.9);
+
+/* GTK4 separator */
+@define-color separator_color @outline_variant_light;
+
+/* GTK4 view */
+@define-color view_bg_color @surface_light;
+@define-color view_fg_color @on_surface_light;
+
+/* GTK4 text */
+@define-color text_view_bg_color @surface_light;
+@define-color text_view_fg_color @on_surface_light;
+@define-color text_view_caret_color @primary_90;
+@define-color text_view_selection_bg_color alpha(@primary_90, 0.4);
+@define-color text_view_selection_fg_color @on_primary_90;
+
+/* GTK4 placeholder */
+@define-color placeholder_text_color alpha(@on_surface_light, 0.6);
+
+/* GTK4 drop indicator */
+@define-color drop_target_color @primary_90;
+
+/* GTK4 focus */
+@define-color focus_border_color @primary_90;
+@define-color focus_outline_color alpha(@primary_90, 0.5);
+
+/* GTK4 backdrop */
+@define-color backdrop_bg_color alpha(@surface_light, 0.8);
+@define-color backdrop_fg_color alpha(@on_surface_light, 0.6);
+
+/* GTK4 insensitive */
+@define-color insensitive_bg_color @surface_container_highest_light;
+@define-color insensitive_fg_color alpha(@on_surface_light, 0.38);
+@define-color insensitive_base_color @surface_container_light;
+@define-color insensitive_border_color @outline_variant_light;
+
+/* GTK4 selection */
+@define-color selected_bg_color alpha(@primary_90, 0.2);
+@define-color selected_fg_color @on_surface_light;
+
+/* GTK4 thumbnail */
+@define-color thumbnail_bg_color @surface_container_light;
+@define-color thumbnail_fg_color @on_surface_light;
+
+/* GTK4 header button */
+@define-color header_button_bg_color transparent;
+@define-color header_button_fg_color @on_surface_light;
+@define-color header_button_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+@define-color header_button_active_bg_color alpha(@on_surface_light, @state_pressed_light);
+
+/* GTK4 title button */
+@define-color titlebutton_bg_color transparent;
+@define-color titlebutton_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+@define-color titlebutton_active_bg_color alpha(@on_surface_light, @state_pressed_light);
+@define-color titlebutton_close_hover_bg_color @error_40;
+@define-color titlebutton_close_active_bg_color @error_50;
+
+/* GTK4 scale */
+@define-color scale_bg_color @outline_variant_light;
+@define-color scale_fg_color @primary_90;
+@define-color scale_slider_bg_color @primary_90;
+@define-color scale_slider_fg_color @on_primary_90;
+@define-color scale_slider_hover_bg_color @primary_80;
+@define-color scale_slider_active_bg_color @primary_70;
+
+/* GTK4 progress bar */
+@define-color progressbar_bg_color @outline_variant_light;
+@define-color progressbar_fg_color @primary_90;
+@define-color progressbar_pulse_color alpha(@primary_90, 0.5);
+
+/* GTK4 spinbutton */
+@define-color spinbutton_bg_color @surface_container_light;
+@define-color spinbutton_fg_color @on_surface_light;
+@define-color spinbutton_border_color @outline_light;
+@define-color spinbutton_button_bg_color transparent;
+@define-color spinbutton_button_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+@define-color spinbutton_button_active_bg_color alpha(@on_surface_light, @state_pressed_light);
+
+/* GTK4 notebook */
+@define-color notebook_bg_color @surface_light;
+@define-color notebook_tab_bg_color transparent;
+@define-color notebook_tab_active_bg_color @surface_container_light;
+@define-color notebook_tab_fg_color @on_surface_variant_light;
+@define-color notebook_tab_active_fg_color @on_surface_light;
+@define-color notebook_tab_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+
+/* GTK5 combobox */
+@define-color combobox_bg_color @surface_container_light;
+@define-color combobox_fg_color @on_surface_light;
+@define-color combobox_border_color @outline_light;
+@define-color combobox_button_bg_color transparent;
+@define-color combobox_button_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+
+/* GTK5 expander */
+@define-color expander_bg_color transparent;
+@define-color expander_fg_color @on_surface_light;
+@define-color expander_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+@define-color expander_active_bg_color alpha(@on_surface_light, @state_pressed_light);
+
+/* GTK5 filechooser */
+@define-color filechooser_bg_color @surface_light;
+@define-color filechooser_fg_color @on_surface_light;
+@define-color filechooser_border_color @outline_light;
+@define-color filechooser_button_bg_color @primary_container_90;
+@define-color filechooser_button_fg_color @on_primary_container_90;
+
+/* GTK5 paned */
+@define-color paned_bg_color transparent;
+@define-color paned_handle_bg_color @outline_variant_light;
+@define-color paned_handle_hover_bg_color @outline_light;
+
+/* GTK5 assistant */
+@define-color assistant_bg_color @surface_light;
+@define-color assistant_fg_color @on_surface_light;
+@define-color assistant_header_bg_color @surface_container_high_light;
+@define-color assistant_header_fg_color @on_surface_light;
+
+/* GTK5 printdialog */
+@define-color printdialog_bg_color @surface_light;
+@define-color printdialog_fg_color @on_surface_light;
+
+/* GTK5 messagedialog */
+@define-color messagedialog_bg_color @surface_container_light;
+@define-color messagedialog_fg_color @on_surface_light;
+@define-color messagedialog_border_color @outline_variant_light;
+
+/* GTK5 aboutdialog */
+@define-color aboutdialog_bg_color @surface_light;
+@define-color aboutdialog_fg_color @on_surface_light;
+
+/* GTK5 colorchooser */
+@define-color colorchooser_bg_color @surface_light;
+@define-color colorchooser_fg_color @on_surface_light;
+@define-color colorchooser_swatch_bg_color @surface_container_light;
+@define-color colorchooser_swatch_border_color @outline_variant_light;
+
+/* GTK5 fontchooser */
+@define-color fontchooser_bg_color @surface_light;
+@define-color fontchooser_fg_color @on_surface_light;
+@define-color fontchooser_preview_bg_color @surface_container_light;
+
+/* GTK5 appnotification */
+@define-color appnotification_bg_color @inverse_surface_light;
+@define-color appnotification_fg_color @inverse_on_surface_light;
+@define-color appnotification_border_color transparent;
+@define-color appnotification_button_bg_color alpha(@inverse_on_surface_light, 0.2);
+@define-color appnotification_button_fg_color @inverse_on_surface_light;
+
+/* GTK5 infobar */
+@define-color infobar_info_bg_color @primary_container_90;
+@define-color infobar_info_fg_color @on_primary_container_90;
+@define-color infobar_question_bg_color @tertiary_container_90;
+@define-color infobar_question_fg_color @on_tertiary_container_90;
+@define-color infobar_warning_bg_color @warning_bg_color;
+@define-color infobar_warning_fg_color @warning_fg_color;
+@define-color infobar_error_bg_color @error_container_80;
+@define-color infobar_error_fg_color @on_error_container_80;
+
+/* GTK5 searchbar */
+@define-color searchbar_bg_color @surface_container_high_light;
+@define-color searchbar_fg_color @on_surface_light;
+@define-color searchbar_border_color @outline_variant_light;
+
+/* GTK5 statusbar */
+@define-color statusbar_bg_color @surface_container_high_light;
+@define-color statusbar_fg_color @on_surface_light;
+@define-color statusbar_border_color @outline_variant_light;
+
+/* GTK5 toolbar */
+@define-color toolbar_bg_color @surface_container_high_light;
+@define-color toolbar_fg_color @on_surface_light;
+@define-color toolbar_border_color @outline_variant_light;
+
+/* GTK5 toolpalette */
+@define-color toolpalette_bg_color @surface_container_low_light;
+@define-color toolpalette_fg_color @on_surface_light;
+@define-color toolpalette_button_bg_color transparent;
+@define-color toolpalette_button_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+
+/* GTK5 flowbox */
+@define-color flowbox_bg_color transparent;
+@define-color flowbox_fg_color @on_surface_light;
+@define-color flowbox_child_bg_color transparent;
+@define-color flowbox_child_selected_bg_color alpha(@primary_90, 0.2);
+
+/* GTK5 iconview */
+@define-color iconview_bg_color transparent;
+@define-color iconview_fg_color @on_surface_light;
+@define-color iconview_child_bg_color transparent;
+@define-color iconview_child_selected_bg_color alpha(@primary_90, 0.2);
+
+/* GTK5 rubberband */
+@define-color rubberband_bg_color alpha(@primary_90, 0.2);
+@define-color rubberband_border_color @primary_90;
+
+/* GTK5 overshot */
+@define-color overshot_top_color alpha(@primary_90, 0.3);
+@define-color overshot_bottom_color alpha(@primary_90, 0.3);
+@define-color overshot_left_color alpha(@primary_90, 0.3);
+@define-color overshot_right_color alpha(@primary_90, 0.3);
+
+/* GTK5 undershoot */
+@define-color undershoot_color alpha(@on_surface_light, 0.2);
+
+/* GTK5 junction */
+@define-color junction_bg_color @outline_variant_light;
+
+/* GTK5 magnifier */
+@define-color magnifier_bg_color @surface_light;
+@define-color magnifier_border_color @outline_light;
+
+/* GTK5 popover menu */
+@define-color popover_menu_bg_color @surface_container_light;
+@define-color popover_menu_fg_color @on_surface_light;
+@define-color popover_menu_border_color @outline_variant_light;
+@define-color popover_menu_item_bg_color transparent;
+@define-color popover_menu_item_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+@define-color popover_menu_item_active_bg_color alpha(@on_surface_light, @state_pressed_light);
+@define-color popover_menu_separator_color @outline_variant_light;
+
+/* GTK5 dropdown */
+@define-color dropdown_bg_color @surface_container_light;
+@define-color dropdown_fg_color @on_surface_light;
+@define-color dropdown_border_color @outline_light;
+@define-color dropdown_button_bg_color transparent;
+@define-color dropdown_button_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+
+/* GTK5 colorbutton */
+@define-color colorbutton_bg_color @surface_container_light;
+@define-color colorbutton_fg_color @on_surface_light;
+@define-color colorbutton_border_color @outline_light;
+@define-color colorbutton_swatch_bg_color @primary_90;
+@define-color colorbutton_swatch_border_color @outline_variant_light;
+
+/* GTK5 fontbutton */
+@define-color fontbutton_bg_color @surface_container_light;
+@define-color fontbutton_fg_color @on_surface_light;
+@define-color fontbutton_border_color @outline_light;
+
+/* GTK5 lockbutton */
+@define-color lockbutton_bg_color @surface_container_light;
+@define-color lockbutton_fg_color @on_surface_light;
+@define-color lockbutton_border_color @outline_light;
+@define-color lockbutton_locked_bg_color @success_bg_color;
+@define-color lockbutton_locked_fg_color @success_fg_color;
+@define-color lockbutton_unlocked_bg_color @warning_bg_color;
+@define-color lockbutton_unlocked_fg_color @warning_fg_color;
+
+/* GTK5 linkbutton */
+@define-color linkbutton_bg_color transparent;
+@define-color linkbutton_fg_color @link_color;
+@define-color linkbutton_hover_bg_color alpha(@link_color, @state_hover_light);
+@define-color linkbutton_active_bg_color alpha(@link_color, @state_pressed_light);
+
+/* GTK5 image */
+@define-color image_bg_color transparent;
+@define-color image_fg_color @on_surface_light;
+
+/* GTK5 label */
+@define-color label_bg_color transparent;
+@define-color label_fg_color @on_surface_light;
+@define-color label_selection_bg_color alpha(@primary_90, 0.4);
+@define-color label_selection_fg_color @on_primary_90;
+
+/* GTK5 spinner */
+@define-color spinner_bg_color transparent;
+@define-color spinner_fg_color @primary_90;
+
+/* GTK5 arrow */
+@define-color arrow_bg_color transparent;
+@define-color arrow_fg_color @on_surface_light;
+
+/* GTK5 check */
+@define-color check_bg_color transparent;
+@define-color check_fg_color @on_surface_light;
+@define-color check_checked_bg_color @accent_bg_color;
+@define-color check_checked_fg_color @accent_fg_color;
+@define-color check_indeterminate_bg_color @accent_bg_color;
+@define-color check_indeterminate_fg_color @accent_fg_color;
+
+/* GTK5 radio */
+@define-color radio_bg_color transparent;
+@define-color radio_fg_color @on_surface_light;
+@define-color radio_checked_bg_color @accent_bg_color;
+@define-color radio_checked_fg_color @accent_fg_color;
+
+/* GTK5 switch */
+@define-color switch_bg_color @outline_variant_light;
+@define-color switch_fg_color @on_surface_light;
+@define-color switch_checked_bg_color @accent_bg_color;
+@define-color switch_checked_fg_color @accent_fg_color;
+@define-color switch_slider_bg_color @surface_light;
+@define-color switch_slider_fg_color @on_surface_light;
+@define-color switch_slider_checked_bg_color @primary_90;
+@define-color switch_slider_checked_fg_color @on_primary_90;
+
+/* GTK5 levelbar */
+@define-color levelbar_bg_color @outline_variant_light;
+@define-color levelbar_fg_color @primary_90;
+@define-color levelbar_filled_for_zero_level_color @error_40;
+@define-color levelbar_filled_for_low_level_color @warning_bg_color;
+@define-color levelbar_filled_for_high_level_color @success_bg_color;
+
+/* GTK5 placesview */
+@define-color placesview_bg_color @surface_container_low_light;
+@define-color placesview_fg_color @on_surface_light;
+@define-color placesview_button_bg_color transparent;
+@define-color placesview_button_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+
+/* GTK5 stackswitcher */
+@define-color stackswitcher_bg_color transparent;
+@define-color stackswitcher_fg_color @on_surface_light;
+@define-color stackswitcher_button_bg_color transparent;
+@define-color stackswitcher_button_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+@define-color stackswitcher_button_active_bg_color alpha(@on_surface_light, @state_pressed_light);
+@define-color stackswitcher_button_checked_bg_color @surface_container_light;
+@define-color stackswitcher_button_checked_fg_color @on_surface_light;
+
+/* GTK5 stacksidebar */
+@define-color stacksidebar_bg_color @surface_container_low_light;
+@define-color stacksidebar_fg_color @on_surface_light;
+@define-color stacksidebar_row_bg_color transparent;
+@define-color stacksidebar_row_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+@define-color stacksidebar_row_active_bg_color alpha(@on_surface_light, @state_pressed_light);
+@define-color stacksidebar_row_selected_bg_color alpha(@primary_90, 0.2);
+@define-color stacksidebar_row_selected_fg_color @on_surface_light;
+
+/* GTK5 pathbar */
+@define-color pathbar_bg_color @surface_container_high_light;
+@define-color pathbar_fg_color @on_surface_light;
+@define-color pathbar_button_bg_color transparent;
+@define-color pathbar_button_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+@define-color pathbar_button_active_bg_color alpha(@on_surface_light, @state_pressed_light);
+@define-color pathbar_button_checked_bg_color @surface_container_light;
+@define-color pathbar_button_checked_fg_color @on_surface_light;
+
+/* GTK5 touchbutton */
+@define-color touchbutton_bg_color @surface_container_light;
+@define-color touchbutton_fg_color @on_surface_light;
+@define-color touchbutton_border_color @outline_light;
+@define-color touchbutton_checked_bg_color @accent_bg_color;
+@define-color touchbutton_checked_fg_color @accent_fg_color;
+
+/* GTK5 gesture */
+@define-color gesture_bg_color transparent;
+@define-color gesture_fg_color @on_surface_light;
+
+/* GTK5 shortcut */
+@define-color shortcut_bg_color transparent;
+@define-color shortcut_fg_color @on_surface_variant_light;
+@define-color shortcut_label_bg_color @surface_container_highest_light;
+@define-color shortcut_label_fg_color @on_surface_light;
+
+/* GTK5 badge */
+@define-color badge_bg_color @error_40;
+@define-color badge_fg_color @on_error_40;
+@define-color badge_small_size 6px;
+@define-color badge_medium_size 8px;
+@define-color badge_large_size 10px;
+
+/* GTK5 avatar */
+@define-color avatar_bg_color @surface_container_light;
+@define-color avatar_fg_color @on_surface_light;
+@define-color avatar_border_color @outline_variant_light;
+
+/* GTK5 passwordentry */
+@define-color passwordentry_bg_color @surface_container_light;
+@define-color passwordentry_fg_color @on_surface_light;
+@define-color passwordentry_border_color @outline_light;
+@define-color passwordentry_show_button_bg_color transparent;
+@define-color passwordentry_show_button_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+
+/* GTK5 searchentry */
+@define-color searchentry_bg_color @surface_container_light;
+@define-color searchentry_fg_color @on_surface_light;
+@define-color searchentry_border_color @outline_light;
+@define-color searchentry_clear_button_bg_color transparent;
+@define-color searchentry_clear_button_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+
+/* GTK5 spinrow */
+@define-color spinrow_bg_color transparent;
+@define-color spinrow_fg_color @on_surface_light;
+@define-color spinrow_button_bg_color transparent;
+@define-color spinrow_button_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+
+/* GTK5 comborow */
+@define-color comborow_bg_color transparent;
+@define-color comborow_fg_color @on_surface_light;
+@define-color comborow_button_bg_color transparent;
+@define-color comborow_button_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+
+/* GTK5 actionrow */
+@define-color actionrow_bg_color transparent;
+@define-color actionrow_fg_color @on_surface_light;
+@define-color actionrow_subtitle_color @on_surface_variant_light;
+@define-color actionrow_activatable_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+@define-color actionrow_activatable_active_bg_color alpha(@on_surface_light, @state_pressed_light);
+
+/* GTK5 expanderrow */
+@define-color expanderrow_bg_color transparent;
+@define-color expanderrow_fg_color @on_surface_light;
+@define-color expanderrow_title_color @on_surface_light;
+@define-color expanderrow_subtitle_color @on_surface_variant_light;
+@define-color expanderrow_expanded_bg_color transparent;
+@define-color expanderrow_expanded_title_color @on_surface_light;
+
+/* GTK5 preferencesgroup */
+@define-color preferencesgroup_bg_color transparent;
+@define-color preferencesgroup_fg_color @on_surface_light;
+@define-color preferencesgroup_description_color @on_surface_variant_light;
+@define-color preferencesgroup_header_background @surface_container_lowest_light;
+
+/* GTK5 statuspage */
+@define-color statuspage_bg_color @surface_light;
+@define-color statuspage_fg_color @on_surface_light;
+@define-color statuspage_title_color @on_surface_light;
+@define-color statuspage_description_color @on_surface_variant_light;
+@define-color statuspage_icon_color @on_surface_variant_light;
+
+/* GTK5 toast */
+@define-color toast_bg_color @inverse_surface_light;
+@define-color toast_fg_color @inverse_on_surface_light;
+@define-color toast_border_color transparent;
+@define-color toast_button_bg_color alpha(@inverse_on_surface_light, 0.2);
+@define-color toast_button_fg_color @inverse_on_surface_light;
+
+/* GTK5 overlay */
+@define-color overlay_bg_color transparent;
+@define-color overlay_fg_color @on_surface_light;
+
+/* GTK5 clamp */
+@define-color clamp_bg_color transparent;
+@define-color clamp_fg_color @on_surface_light;
+
+/* GTK5 windowhandle */
+@define-color windowhandle_bg_color transparent;
+@define-color windowhandle_fg_color @on_surface_light;
+
+/* GTK5 windowcontent */
+@define-color windowcontent_bg_color @surface_light;
+@define-color windowcontent_fg_color @on_surface_light;
+
+/* GTK5 navigationpage */
+@define-color navigationpage_bg_color @surface_light;
+@define-color navigationpage_fg_color @on_surface_light;
+
+/* GTK5 navigationsplitview */
+@define-color navigationsplitview_bg_color @surface_light;
+@define-color navigationsplitview_fg_color @on_surface_light;
+@define-color navigationsplitview_sidebar_bg_color @surface_container_low_light;
+@define-color navigationsplitview_sidebar_fg_color @on_surface_light;
+@define-color navigationsplitview_content_bg_color @surface_light;
+@define-color navigationsplitview_content_fg_color @on_surface_light;
+
+/* GTK5 navigationview */
+@define-color navigationview_bg_color @surface_light;
+@define-color navigationview_fg_color @on_surface_light;
+@define-color navigationview_pane_handle_bg_color @outline_variant_light;
+
+/* GTK5 toolbarview */
+@define-color toolbarview_bg_color @surface_light;
+@define-color toolbarview_fg_color @on_surface_light;
+@define-color toolbarview_top_bar_style_default @surface_container_high_light;
+@define-color toolbarview_top_bar_style_translucent transparent;
+@define-color toolbarview_top_bar_style_raised @surface_container_highest_light;
+@define-color toolbarview_bottom_bar_style_default @surface_container_high_light;
+@define-color toolbarview_bottom_bar_style_translucent transparent;
+
+/* GTK5 scrolledwindow */
+@define-color scrolledwindow_bg_color transparent;
+@define-color scrolledwindow_fg_color @on_surface_light;
+@define-color scrolledwindow_scrollbars_overlay true;
+
+/* GTK5 viewport */
+@define-color viewport_bg_color transparent;
+@define-color viewport_fg_color @on_surface_light;
+
+/* GTK5 listbox */
+@define-color listbox_bg_color transparent;
+@define-color listbox_fg_color @on_surface_light;
+@define-color listbox_row_bg_color transparent;
+@define-color listbox_row_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+@define-color listbox_row_active_bg_color alpha(@on_surface_light, @state_pressed_light);
+@define-color listbox_row_selected_bg_color alpha(@primary_90, 0.2);
+@define-color listbox_row_selected_fg_color @on_surface_light;
+
+/* GTK5 box */
+@define-color box_bg_color transparent;
+@define-color box_fg_color @on_surface_light;
+
+/* GTK5 grid */
+@define-color grid_bg_color transparent;
+@define-color grid_fg_color @on_surface_light;
+
+/* GTK5 fixed */
+@define-color fixed_bg_color transparent;
+@define-color fixed_fg_color @on_surface_light;
+
+/* GTK5 overlay */
+@define-color overlay_child_bg_color transparent;
+@define-color overlay_child_fg_color @on_surface_light;
+
+/* GTK5 revealer */
+@define-color revealer_bg_color transparent;
+@define-color revealer_fg_color @on_surface_light;
+
+/* GTK5 stack */
+@define-color stack_bg_color transparent;
+@define-color stack_fg_color @on_surface_light;
+
+/* GTK5 aspectframe */
+@define-color aspectframe_bg_color transparent;
+@define-color aspectframe_fg_color @on_surface_light;
+
+/* GTK5 frame */
+@define-color frame_bg_color transparent;
+@define-color frame_fg_color @on_surface_light;
+@define-color frame_border_color @outline_variant_light;
+@define-color frame_border_width 1px;
+
+/* GTK5 picture */
+@define-color picture_bg_color transparent;
+@define-color picture_fg_color @on_surface_light;
+
+/* GTK5 video */
+@define-color video_bg_color @surface_light;
+@define-color video_fg_color @on_surface_light;
+@define-color video_controls_bg_color alpha(@surface_dark, 0.8);
+@define-color video_controls_fg_color @on_surface_light;
+
+/* GTK5 mediacontrols */
+@define-color mediacontrols_bg_color transparent;
+@define-color mediacontrols_fg_color @on_surface_light;
+@define-color mediacontrols_button_bg_color transparent;
+@define-color mediacontrols_button_hover_bg_color alpha(@on_surface_light, @state_hover_light);
+
+/* GTK5 texture */
+@define-color texture_bg_color transparent;
+@define-color texture_fg_color @on_surface_light;
+
+/* GTK5 glarea */
+@define-color glarea_bg_color transparent;
+@define-color glarea_fg_color @on_surface_light;
+
+/* GTK5 drawingarea */
+@define-color drawingarea_bg_color transparent;
+@define-color drawingarea_fg_color @on_surface_light;
+
+/* GTK5 widget */
+@define-color widget_bg_color transparent;
+@define-color widget_fg_color @on_surface_light;
+
+/* GTK5 custom */
+@define-color custom_bg_color transparent;
+@define-color custom_fg_color @on_surface_light;
+
+/* -----------------------------------------------------------------------------
+   FINAL CONFIGURATION
+   Activar tema Material 3 Expressive
+   -------------------------------------------------------------------------- */
+
+/* Forzar uso de colores definidos */
+@define-color theme_fg_color @on_surface_light;
+@define-color theme_bg_color @surface_light;
+@define-color theme_base_color @surface_light;
+@define-color theme_selected_bg_color @primary_90;
+@define-color theme_selected_fg_color @on_primary_90;
+@define-color insensitive_fg_color alpha(@on_surface_light, 0.38);
+@define-color insensitive_bg_color @surface_container_highest_light;
+@define-color insensitive_base_color @surface_container_light;
+@define-color theme_unfocused_fg_color @on_surface_light;
+@define-color theme_unfocused_bg_color @surface_light;
+@define-color theme_unfocused_base_color @surface_light;
+@define-color theme_unfocused_selected_bg_color @primary_90;
+@define-color theme_unfocused_selected_fg_color @on_primary_90;
+@define-color unfocused_insensitive_color alpha(@on_surface_light, 0.38);
+@define-color borders @outline_variant_light;
+@define-color unfocused_borders @outline_variant_light;
+@define-color warning_color @warning_bg_color;
+@define-color error_color @error_40;
+@define-color success_color @success_bg_color;
+@define-color placeholder_text_color alpha(@on_surface_light, 0.6);
+@define-color content_view_bg @surface_light;
+@define-color text_view_border @outline_light;
+@define-color gtk_primary_button_border @outline_light;
+@define-color gtk_secondary_button_border @outline_light;
+@define-color gtk_link_color @link_color;
+@define-color gtk_visited_color @link_visited_color;
+
+/* Exportar variables para uso en aplicaciones */
+/* NOTA: Estas variables se exportan automáticamente a través de libadwaita */
